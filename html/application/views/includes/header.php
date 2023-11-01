@@ -7,5 +7,5 @@
 	<link href='<?=base_url('/static/css/bootstrap.min.css')?>' rel='stylesheet'>
 </head>
 <body>
-<?php $this->load->view('partials/navbar')?>
-<main class="container">
+
+
