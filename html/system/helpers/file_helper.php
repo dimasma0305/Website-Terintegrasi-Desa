@@ -171,7 +171,7 @@ if ( ! function_exists('get_filenames'))
 	 * Any sub-folders contained within the specified path are read as well.
 	 *
 	 * @param	string	path to source
-	 * @param	bool	whether to includes the path as part of the filename
+	 * @param	bool	whether to include the path as part of the filename
 	 * @param	bool	internal variable to determine recursion status - do not use in calls
 	 * @return	array
 	 */

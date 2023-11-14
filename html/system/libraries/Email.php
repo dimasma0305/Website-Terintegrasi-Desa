@@ -2351,7 +2351,7 @@ class CI_Email {
 	/**
 	 * Get Debug Message
 	 *
-	 * @param	array	$include	List of raw data chunks to includes in the output
+	 * @param	array	$include	List of raw data chunks to include in the output
 	 *					Valid options are: 'headers', 'subject', 'body'
 	 * @return	string
 	 */

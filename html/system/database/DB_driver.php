@@ -1800,7 +1800,7 @@ abstract class CI_DB_driver {
 	 * a couple functions in this class.
 	 * It takes a column or table name (optionally with an alias) and inserts
 	 * the table prefix onto it. Some logic is necessary in order to deal with
-	 * column names that includes the path. Consider a query like this:
+	 * column names that include the path. Consider a query like this:
 	 *
 	 * SELECT hostname.database.table.column AS c FROM hostname.database.table
 	 *
@@ -1808,7 +1808,7 @@ abstract class CI_DB_driver {
 	 *
 	 * SELECT m.member_id, m.member_name FROM members AS m
 	 *
-	 * Since the column name can includes up to four segments (host, DB, table, column)
+	 * Since the column name can include up to four segments (host, DB, table, column)
 	 * or also have an alias prefix, we need to do a bit of work to figure this out and
 	 * insert the table prefix (if it exists) in the proper position, and escape only
 	 * the correct identifiers.

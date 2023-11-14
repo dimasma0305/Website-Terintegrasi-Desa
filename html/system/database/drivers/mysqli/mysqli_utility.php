@@ -91,7 +91,7 @@ class CI_DB_mysqli_utility extends CI_DB_utility {
 		// Build the output
 		$output = '';
 
-		// Do we need to includes a statement to disable foreign key checks?
+		// Do we need to include a statement to disable foreign key checks?
 		if ($foreign_key_checks === FALSE)
 		{
 			$output .= 'SET foreign_key_checks = 0;'.$newline;
@@ -200,7 +200,7 @@ class CI_DB_mysqli_utility extends CI_DB_utility {
 			$output .= $newline.$newline;
 		}
 
-		// Do we need to includes a statement to re-enable foreign key checks?
+		// Do we need to include a statement to re-enable foreign key checks?
 		if ($foreign_key_checks === FALSE)
 		{
 			$output .= 'SET foreign_key_checks = 1;'.$newline;

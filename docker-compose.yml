@@ -32,7 +32,6 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
     environment:
       PMA_HOST: db
       PMA_PORT: 3306

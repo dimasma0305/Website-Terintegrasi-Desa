@@ -564,7 +564,7 @@ class CI_FTP {
 	 * recreated on the server.
 	 *
 	 * @param	string	$locpath	Path to source with trailing slash
-	 * @param	string	$rempath	Path to destination - includes the base folder with trailing slash
+	 * @param	string	$rempath	Path to destination - include the base folder with trailing slash
 	 * @return	bool
 	 */
 	public function mirror($locpath, $rempath)
