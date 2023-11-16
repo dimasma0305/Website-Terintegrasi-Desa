@@ -24,8 +24,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-
+// Punya Dimad
 // $config['base_url'] = 'http://localhost/';
+
+// Punya guntr
 $config['base_url'] = 'http://localhost/website-terintegrasi-desa/html/';
 
 
