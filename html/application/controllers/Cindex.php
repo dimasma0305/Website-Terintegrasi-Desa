@@ -15,6 +15,14 @@ class Cindex  extends CI_Controller
 	    $this->load->view("index");
 		$this->load->view('includes/footer');
 	}
+
+	// Test template
+	function login_template() {
+		$this->load->view('includes/header_template');
+		$this->load->view('login_template');
+		$this->load->view('includes/footer_template');
+	}
+
 	function  login() {
 		if ($this->input->method() === "get"){
 			$this->load->view('includes/header');
