@@ -18,8 +18,18 @@
 				</li>
 			</ul>
 			<div class='d-flex gap-2'>
-				<a class='btn btn-outline-primary' href="<?=base_url("cindex/login")?>">Login</a>
-				<a class='btn btn-outline-secondary' href="<?=base_url("cindex/register")?>">Register</a>
+				<?php
+				if ($this->session->id){
+					?>
+					<a class='btn btn-outline-danger' href='<?= base_url('cindex/logout') ?>'>Logout</a>
+					<?php
+				} else {
+					?>
+					<a class='btn btn-outline-primary' href="<?=base_url("cindex/login")?>">Login</a>
+					<a class='btn btn-outline-secondary' href="<?=base_url("cindex/register")?>">Register</a>
+					<?php
+				}
+				?>
 			</div>
 		</div>
 	</div>

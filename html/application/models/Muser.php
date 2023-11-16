@@ -17,12 +17,16 @@ class Muser extends CI_Model
 			'password' => $encryptedPassword
 		);
 		$this->db->insert('users', $data);
-		return $this->getUserByUsername($data["username"]);
+		return $this->getUserByUsername($username);
 	}
 	public function getUserByUsername($username) {
 		$this->db->where('username', $username);
 		$query = $this->db->get('users');
-		return $query->result_array()[0];
+		if ($result = $query->result_array()){
+			return $result[0];
+		}else{
+			return false;
+		}
 	}
 	public function verifyUser($username, $password) {
 		$user = $this->getUserByUsername($username);

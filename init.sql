@@ -7,3 +7,10 @@ CREATE TABLE IF NOT EXISTS users (
    username VARCHAR(255) NOT NULL UNIQUE,
    password CHAR(60) NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS surat(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    owner INT NOT NULL,
+    filename VARCHAR(60),
+    FOREIGN KEY (owner) REFERENCES users(id)
+);
