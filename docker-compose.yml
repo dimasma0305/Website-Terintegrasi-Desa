@@ -8,7 +8,7 @@ services:
     networks:
       - internal
     volumes:
-      - ./html:/var/www/html
+      - ./html:/var/www/html:rw
     depends_on:
       - db
     environment:

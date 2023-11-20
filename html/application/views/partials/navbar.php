@@ -11,7 +11,10 @@
 					<a class='nav-link active' aria-current='page' href='<?=base_url('/')?>'>Home</a>
 				</li>
 				<li class='nav-item'>
-					<a class='nav-link' href='#'>Link</a>
+					<a class='nav-link' href='<?=base_url("csurat/")?>'>Surat</a>
+				</li>
+				<li class='nav-item'>
+					<a class='nav-link' href='<?=base_url("csurat/surat")?>'>View Surat</a>
 				</li>
 				<li class='nav-item'>
 					<a class='nav-link disabled' aria-disabled='true'>Disabled</a>

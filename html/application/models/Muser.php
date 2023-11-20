@@ -2,10 +2,6 @@
 
 class Muser extends CI_Model
 {
-	public function __construct() {
-	    parent::__construct();
-		$this->load->library('encryption');
-	}
 	public function createUser($username, $password) {
 		$user = $this->getUserByUsername($username);
 		if ($user){
