@@ -3,6 +3,7 @@
 
 class Cindex  extends CI_Controller
 {
+	public Muser $muser;
 	public function __construct()
 	{
 		parent::__construct();
