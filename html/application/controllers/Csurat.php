@@ -13,63 +13,63 @@ class Csurat extends CI_Controller
 		$this->load->model('msurat');
 	}
 
+	private function loadViewWithFooterAndHeader($name, $vars = [])
+	{
+		$this->load->view('includes/header');
+		$this->load->view('partials/navbar');
+		$this->load->view($name, $vars);
+		$this->load->view('includes/footer');
+	}
+
 	function index()
 	{
 		$jenisSurat = $this->msurat->getJenisSurat();
-		$this->load->view('includes/header');
-		$this->load->view('partials/navbar');
-		$this->load->view('formSurat', array('jenisSurat' => $jenisSurat));
-		$this->load->view('includes/footer');
+		$this->loadViewWithFooterAndHeader('formSurat', ['jenisSurat' => $jenisSurat]);
+	}
+	private function createFile($files, $filename)
+	{
+		$tmpname = $files["tmp_name"];
+		$finfo = new finfo(FILEINFO_MIME_TYPE);
+		$fileMimeType = $finfo->file($tmpname);
+		if ($fileMimeType !== 'application/pdf') {
+			$this->session->set_flashdata('error', 'Invalid file format. Please upload a PDF file.');
+			return false;
+		}
+		$uploadDir = './uploads/surat/';
+		$uploadPath = $uploadDir . $filename;
+		if (!move_uploaded_file($tmpname, $uploadPath)) {
+			$this->session->set_flashdata('error', 'Surat gagal disimpan');
+			return false;
+		}
+		return true;
 	}
 	function surat()
 	{
 		switch ($this->input->method()) {
 			case 'get':
 				$suratData = $this->msurat->getSuratByOwner($this->session->userdata('id'));
-				$this->load->view('includes/header');
-				$this->load->view('partials/navbar');
-				$this->load->view('viewSurat', array('suratData' => $suratData));
-				$this->load->view('includes/footer');
+				$this->loadViewWithFooterAndHeader('viewSurat', ['suratData' => $suratData]);
 				break;
 			case 'post':
 				$jenisSuratId = $this->input->post('jenisSuratId');
-				$fileData = $_FILES['surat'];
-				$tmpname = $fileData['tmp_name'];
-				$title = pathinfo($fileData['name'])['filename'];
+				$files = $_FILES['surat'];
+				$title = pathinfo($files['name'])['filename'];
 				$deskripsi = $this->input->post('deskripsi');
 				$keperluan = $this->input->post('keperluan');
-
-				// Check if the file is a PDF using finfo
-				$finfo = new finfo(FILEINFO_MIME_TYPE);
-				$fileMimeType = $finfo->file($tmpname);
-				if ($fileMimeType !== 'application/pdf') {
-					$this->session->set_flashdata('error', 'Invalid file format. Please upload a PDF file.');
+				$filename = $this->generateRandomPdfFilename();
+				if (!$this->createFile($files, $filename)) {
 					redirect(base_url('csurat'), 'refresh');
 					return;
 				}
-
-				$randomFilename = $this->generateRandomPdfFilename();
-
-				$uploadDir = './uploads/surat/';
-				$uploadPath = $uploadDir . $randomFilename;
-
-				if (!move_uploaded_file($tmpname, $uploadPath)) {
-					$this->session->set_flashdata('error', 'Surat gagal disimpan');
-					redirect(base_url('csurat'), 'refresh');
-					return;
-				}
-
-				$suratData = array(
+				$this->msurat->addSurat([
 					'owner' => $this->session->userdata('id'),
 					'title' => $title,
-					'filename' => $randomFilename,
+					'filename' => $filename,
 					'jenisSuratId' => $jenisSuratId,
 					'deskripsi' => $deskripsi,
 					'keperluan' => $keperluan,
 					'status' => "pending"
-				);
-
-				$this->msurat->addSurat($suratData);
+				]);
 				$this->session->set_flashdata('message', 'Surat added successfully!');
 				redirect(base_url('csurat'), 'refresh');
 				break;
@@ -79,10 +79,48 @@ class Csurat extends CI_Controller
 				break;
 		}
 	}
-	function edit($id){
-		$surat = $this->msurat->getSuratByIdAndOwnerId($id, $this->session->get_userdata()['id']);
-		if (!$surat){
-			return;
+	function edit($id)
+	{
+		switch ($this->input->method()) {
+			case "get":
+				$surat = $this->msurat->getSuratByIdAndOwnerId($id, $this->session->get_userdata()['id']);
+				if (!$surat) {
+					$this->output->set_status_header(404);
+					$this->load->view("errors/html/error_404", array("heading" => "404", "message" => "Surat not found!"));
+					return;
+				}
+				$jenisSurat = $this->msurat->getJenisSurat();
+				$this->loadViewWithFooterAndHeader('editSurat', ['surat' => $surat, 'jenisSurat' => $jenisSurat]);
+				break;
+			case "post":
+				$jenisSuratId = $this->input->post('jenisSuratId');
+				$deskripsi = $this->input->post('deskripsi');
+				$keperluan = $this->input->post('keperluan');
+				$updateData = array();
+
+				if (!empty($_FILES['surat']['tmp_name'])) {
+					$files = $_FILES['surat'];
+					$title = pathinfo($files['name'])['filename'];
+
+					$filename = $this->generateRandomPdfFilename();
+					if (!$this->createFile($files, $filename)) {
+						redirect(base_url('csurat/edit/' . $id), 'refresh');
+						return;
+					}
+					$updateData = array(
+						'filename' => $filename,
+						'title' => $title
+					);
+				}
+				$updateData += array(
+					'jenisSuratId' => $jenisSuratId,
+					'deskripsi' => $deskripsi,
+					'keperluan' => $keperluan,
+				);
+				$this->msurat->updateSurat($id, $updateData);
+				$this->session->set_flashdata('message', 'Surat updated successfully!');
+				redirect(base_url('csurat/edit/' . $id), 'refresh');
+				break;
 		}
 	}
 	private function generateRandomPdfFilename()

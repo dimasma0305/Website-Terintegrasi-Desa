@@ -21,9 +21,19 @@ class Msurat extends CI_Model
 
     public function getSuratById($suratId)
     {
-        $this->db->where('id', $suratId);
-        $query = $this->db->get('surat');
-        return $query->row();
+        $this->db->select('surat.*, jenisSurat.name as jenisSuratName');
+        $this->db->from('surat');
+        $this->db->join('jenisSurat', 'surat.jenisSuratId = jenisSurat.id', 'left');
+        $this->db->where('surat.id', $suratId);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function updateSurat($id, $data)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('surat', $data);
     }
 
     public function addSurat($data)
@@ -37,5 +47,4 @@ class Msurat extends CI_Model
         $query = $this->db->get('surat');
         return $query->row();
     }
-
 }

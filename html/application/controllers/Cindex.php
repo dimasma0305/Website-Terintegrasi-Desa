@@ -1,6 +1,5 @@
 <?php
 
-
 class Cindex  extends CI_Controller
 {
 	public Muser $muser;
@@ -17,7 +16,6 @@ class Cindex  extends CI_Controller
 		$this->load->view('includes/footer');
 	}
 
-	// Test template
 	function login_template() {
 		$this->load->view('includes/header_template');
 		$this->load->view('login_template');
