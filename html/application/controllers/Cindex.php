@@ -17,9 +17,17 @@ class Cindex  extends CI_Controller
 	}
 
 	function login_template() {
-		$this->load->view('includes/header_template');
-		$this->load->view('login_template');
-		$this->load->view('includes/footer_template');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+
+		if ($this->form_validation->run() == FALSE) {
+			$data['title'] = 'Login';
+			$this->load->view('includes/header_template', $data);
+			$this->load->view('login_template');
+			$this->load->view('includes/footer_template');
+		} else {
+			echo "nice";
+		}
 	}
 
 	function  login() {
