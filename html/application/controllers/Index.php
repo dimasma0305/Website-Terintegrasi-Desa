@@ -28,11 +28,21 @@ class Index  extends CI_Controller
 		if ($this->form_validation->run() == FALSE) {
 			$data['title'] = 'Login';
 			$this->load->view('includes/header_template', $data);
+			$this->load->view('partials/navbar_template', $data);
 			$this->load->view('login_template');
 			$this->load->view('includes/footer_template');
 		} else {
 			echo "nice";
 		}
+	}
+
+	function register_template() {
+		$data['title'] = 'Register';
+		$this->load->view('includes/header_template', $data);
+		$this->load->view('partials/navbar_template', $data);
+		$this->load->view('register_template');
+		$this->load->view('includes/footer_template');
+
 	}
 
 	function  login() {
@@ -72,7 +82,7 @@ class Index  extends CI_Controller
 			}
 		}
 	}
-	
+
 	function logout(){
 		$this->session->sess_destroy();
 		redirect(base_url("/"), "refresh");
