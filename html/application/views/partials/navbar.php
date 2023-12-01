@@ -11,10 +11,10 @@
 					<a class='nav-link active' aria-current='page' href='<?=base_url('/')?>'>Home</a>
 				</li>
 				<li class='nav-item'>
-					<a class='nav-link' href='<?=base_url("csurat/")?>'>Surat</a>
+					<a class='nav-link' href='<?=base_url("surat/")?>'>Surat</a>
 				</li>
 				<li class='nav-item'>
-					<a class='nav-link' href='<?=base_url("csurat/surat")?>'>View Surat</a>
+					<a class='nav-link' href='<?=base_url("surat/list")?>'>View Surat</a>
 				</li>
 				<li class='nav-item'>
 					<a class='nav-link disabled' aria-disabled='true'>Disabled</a>
@@ -24,12 +24,12 @@
 				<?php
 				if ($this->session->id){
 					?>
-					<a class='btn btn-outline-danger' href='<?= base_url('cindex/logout') ?>'>Logout</a>
+					<a class='btn btn-outline-danger' href='<?= base_url('index/logout') ?>'>Logout</a>
 					<?php
 				} else {
 					?>
-					<a class='btn btn-outline-primary' href="<?=base_url("cindex/login")?>">Login</a>
-					<a class='btn btn-outline-secondary' href="<?=base_url("cindex/register")?>">Register</a>
+					<a class='btn btn-outline-primary' href="<?=base_url("index/login")?>">Login</a>
+					<a class='btn btn-outline-secondary' href="<?=base_url("index/register")?>">Register</a>
 					<?php
 				}
 				?>

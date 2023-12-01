@@ -1,6 +1,6 @@
 <?php
 
-class Cindex  extends CI_Controller
+class Index  extends CI_Controller
 {
 	public Muser $muser;
 	public function __construct()
@@ -9,11 +9,16 @@ class Cindex  extends CI_Controller
 		$this->load->model("muser");
 	}
 
-	function index() {
+	private function loadViewWithFooterAndHeader($name, $vars = [])
+	{
 		$this->load->view('includes/header');
 		$this->load->view('partials/navbar');
-	    $this->load->view("index");
+		$this->load->view($name, $vars);
 		$this->load->view('includes/footer');
+	}
+
+	function index() {
+		$this->loadViewWithFooterAndHeader('index');
 	}
 
 	function login_template() {
@@ -24,17 +29,18 @@ class Cindex  extends CI_Controller
 
 	function  login() {
 		if ($this->input->method() === "get"){
-			$this->load->view('includes/header');
-			$this->load->view('partials/navbar');
-			$this->load->view('login');
-			$this->load->view('includes/footer');
+			$this->loadViewWithFooterAndHeader('login');
 		} elseif ($this->input->method() === 'post'){
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
 			try {
 				$user = $this->muser->verifyUser($username, $password);
 				$this->session->set_userdata($user);
-				redirect(base_url('/'), 'refresh');
+				if ($r = $this->input->post('redirect')){
+					redirect(base_url($r));
+				}else {
+					redirect(base_url('/'));
+				}
 			} catch (Throwable $err){
 				$this->session->set_flashdata('error', $err->getMessage());
 				redirect(base_url('cindex/login'), 'refresh');
@@ -43,10 +49,7 @@ class Cindex  extends CI_Controller
 	}
 	function register() {
 		if ($this->input->method() === "get"){
-			$this->load->view('includes/header');
-			$this->load->view('partials/navbar');
-			$this->load->view('register');
-			$this->load->view('includes/footer');
+			$this->loadViewWithFooterAndHeader('register');
 		} elseif ($this->input->method() === 'post'){
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');

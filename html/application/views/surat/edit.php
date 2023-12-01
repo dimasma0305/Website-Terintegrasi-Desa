@@ -1,7 +1,7 @@
 <main class='container'>
 	<div class='d-flex flex-column'>
 		<h1>Data Pengajuan Surat</h1>
-		<form action='<?= base_url('/csurat/edit/'.$surat->id) ?>' method='post' class='d-flex flex-column gap-2'
+		<form action='<?= base_url('/surat/edit/'.$surat->id) ?>' method='post' class='d-flex flex-column gap-2'
 			  enctype='multipart/form-data'>
 			<label for='jenisSuratId'>Jenis Surat</label>
 			<select id='jenisSuratId' name='jenisSuratId'>
