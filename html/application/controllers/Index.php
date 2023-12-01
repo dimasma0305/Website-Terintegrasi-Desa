@@ -42,7 +42,16 @@ class Index  extends CI_Controller
 		$this->load->view('partials/navbar_template', $data);
 		$this->load->view('register_template');
 		$this->load->view('includes/footer_template');
-
+	}
+	
+	public function dashboard_template()
+	{
+		$data['title'] = 'Dashboard';
+		$this->load->view('includes/header_template', $data);
+		$this->load->view('partials/sidebar_template');
+		$this->load->view('partials/navbar_template');
+		$this->load->view('dashboard_template');
+		$this->load->view('includes/footer_template');
 	}
 
 	function  login() {
