@@ -8,6 +8,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+						<th>Owner</th>
                         <th>Title</th>
                         <th>Jenis Surat</th>
                         <th>Status</th>
@@ -20,12 +21,13 @@
                     foreach ($suratData as $surat) : ?>
                         <tr>
                             <td><?= html_escape($count) ?></td>
+                            <td><?= html_escape($surat->ownerUsername) ?></td>
                             <td><?= html_escape($surat->title) ?></td>
                             <td><?= html_escape($surat->jenisSuratName) ?></td>
                             <td><?= html_escape($surat->status) ?></td>
                             <td>
                                 <a class="btn btn-primary" href="<?=html_escape(base_url("uploads/surat/".$surat->filename))?>">view</a>
-                                <a class="btn btn-secondary" href="<?=html_escape(base_url("csurat/edit/".$surat->id))?>">edit</a>
+                                <a class="btn btn-secondary" href="<?=html_escape(base_url("surat/edit/".$surat->id))?>">edit</a>
                             </td>
                         </tr>
                     <?php
@@ -35,6 +37,6 @@
                 </tbody>
             </table>
         <?php endif; ?>
-        <a href="<?= base_url('csurat') ?>" class="btn btn-primary">Back to Surat Form</a>
+        <a href="<?= base_url('surat') ?>" class="btn btn-primary">Back to Surat Form</a>
     </div>
 </main>

@@ -1,13 +1,13 @@
 <?php
 
-class Csurat extends CI_Controller
+class Surat extends CI_Controller
 {
 	public Msurat $msurat;
 	function __construct()
 	{
 		parent::__construct();
 		if (!isset($this->session->get_userdata()['id'])) {
-			redirect(base_url('cindex/login'), 'refresh');
+            redirect(base_url('index/login?r='.$this->uri->uri_string()));
 			exit();
 		}
 		$this->load->model('msurat');
@@ -24,7 +24,7 @@ class Csurat extends CI_Controller
 	function index()
 	{
 		$jenisSurat = $this->msurat->getJenisSurat();
-		$this->loadViewWithFooterAndHeader('formSurat', ['jenisSurat' => $jenisSurat]);
+		$this->loadViewWithFooterAndHeader('surat/form', ['jenisSurat' => $jenisSurat]);
 	}
 	private function createFile($files, $filename)
 	{
@@ -43,12 +43,12 @@ class Csurat extends CI_Controller
 		}
 		return true;
 	}
-	function surat()
+	function list()
 	{
 		switch ($this->input->method()) {
 			case 'get':
 				$suratData = $this->msurat->getSuratByOwner($this->session->userdata('id'));
-				$this->loadViewWithFooterAndHeader('viewSurat', ['suratData' => $suratData]);
+				$this->loadViewWithFooterAndHeader('surat/list', ['suratData' => $suratData]);
 				break;
 			case 'post':
 				$jenisSuratId = $this->input->post('jenisSuratId');
@@ -58,7 +58,7 @@ class Csurat extends CI_Controller
 				$keperluan = $this->input->post('keperluan');
 				$filename = $this->generateRandomPdfFilename();
 				if (!$this->createFile($files, $filename)) {
-					redirect(base_url('csurat'), 'refresh');
+					redirect(base_url('surat'), 'refresh');
 					return;
 				}
 				$this->msurat->addSurat([
@@ -71,7 +71,7 @@ class Csurat extends CI_Controller
 					'status' => "pending"
 				]);
 				$this->session->set_flashdata('message', 'Surat added successfully!');
-				redirect(base_url('csurat'), 'refresh');
+				redirect(base_url('surat'), 'refresh');
 				break;
 			default:
 				$this->output->set_status_header(405);
@@ -90,7 +90,7 @@ class Csurat extends CI_Controller
 					return;
 				}
 				$jenisSurat = $this->msurat->getJenisSurat();
-				$this->loadViewWithFooterAndHeader('editSurat', ['surat' => $surat, 'jenisSurat' => $jenisSurat]);
+				$this->loadViewWithFooterAndHeader('surat/edit', ['surat' => $surat, 'jenisSurat' => $jenisSurat]);
 				break;
 			case "post":
 				$jenisSuratId = $this->input->post('jenisSuratId');
@@ -104,7 +104,7 @@ class Csurat extends CI_Controller
 
 					$filename = $this->generateRandomPdfFilename();
 					if (!$this->createFile($files, $filename)) {
-						redirect(base_url('csurat/edit/' . $id), 'refresh');
+						redirect(base_url('surat/edit/' . $id), 'refresh');
 						return;
 					}
 					$updateData = array(
@@ -119,7 +119,7 @@ class Csurat extends CI_Controller
 				);
 				$this->msurat->updateSurat($id, $updateData);
 				$this->session->set_flashdata('message', 'Surat updated successfully!');
-				redirect(base_url('csurat/edit/' . $id), 'refresh');
+				redirect(base_url('surat/edit/' . $id), 'refresh');
 				break;
 		}
 	}

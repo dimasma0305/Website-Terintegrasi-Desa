@@ -8,6 +8,15 @@ class Msurat extends CI_Model
         return $query->result();
     }
 
+	public function getSuratAndOwner(){
+		$this->db->select('surat.*, jenisSurat.name as jenisSuratName, users.username as ownerUsername');
+        $this->db->from('surat');
+        $this->db->join('jenisSurat', 'surat.jenisSuratId = jenisSurat.id', 'left');
+        $this->db->join('users', 'surat.owner = users.id', 'left');
+        $query = $this->db->get();
+        return $query->result();
+	}
+
     public function getSuratByOwner($ownerId)
     {
         $this->db->select('surat.*, jenisSurat.name as jenisSuratName');
