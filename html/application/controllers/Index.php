@@ -27,10 +27,10 @@ class Index  extends CI_Controller
 
 		if ($this->form_validation->run() == FALSE) {
 			$data['title'] = 'Login';
-			$this->load->view('includes/header_template', $data);
-			$this->load->view('partials/navbar_template', $data);
+			$this->load->view('partials_template/auth_header', $data);
+			$this->load->view('partials_template/navbar_template', $data);
 			$this->load->view('login_template');
-			$this->load->view('includes/footer_template');
+			$this->load->view('partials_template/auth_footer');
 		} else {
 			echo "nice";
 		}
@@ -38,20 +38,30 @@ class Index  extends CI_Controller
 
 	function register_template() {
 		$data['title'] = 'Register';
-		$this->load->view('includes/header_template', $data);
-		$this->load->view('partials/navbar_template', $data);
+		$this->load->view('partials_template/auth_header', $data);
+		$this->load->view('partials_template/navbar_template', $data);
 		$this->load->view('register_template');
-		$this->load->view('includes/footer_template');
+		$this->load->view('partials_template/auth_footer');
 	}
 	
 	public function dashboard_template()
 	{
 		$data['title'] = 'Dashboard';
-		$this->load->view('includes/header_template', $data);
-		$this->load->view('partials/sidebar_template');
-		$this->load->view('partials/navbar_template');
+		$this->load->view('partials_template/header', $data);
+		$this->load->view('partials_template/sidebar_template');
+		$this->load->view('partials_template/navbar_template');
 		$this->load->view('dashboard_template');
-		$this->load->view('includes/footer_template');
+		$this->load->view('partials_template/footer');
+	}
+
+	public function formsurat_template()
+	{
+		$data['title'] = 'Dashboard';
+		$this->load->view('partials_template/header', $data);
+		$this->load->view('partials_template/sidebar_template');
+		$this->load->view('partials_template/navbar_template');
+		$this->load->view('surat/form');
+		$this->load->view('partials_template/footer');
 	}
 
 	function  login() {
