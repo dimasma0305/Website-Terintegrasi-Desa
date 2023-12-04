@@ -21,27 +21,45 @@ class Index  extends CI_Controller
 		$this->loadViewWithFooterAndHeader('index');
 	}
 
-	function login_template() {
-		$this->form_validation->set_rules('username', 'Username', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
+	function login() 
+	{
+		$this->form_validation->set_rules('username', 'Username', 'required|trim');
+		$this->form_validation->set_rules('password', 'Password', 'required|trim');
 
-		if ($this->form_validation->run() == FALSE) {
+		if ($this->form_validation->run() == FALSE) 
+		{
 			$data['title'] = 'Login';
 			$this->load->view('partials_template/auth_header', $data);
 			$this->load->view('partials_template/navbar_template', $data);
 			$this->load->view('login_template');
 			$this->load->view('partials_template/auth_footer');
-		} else {
-			echo "nice";
+		} 
+		else 
+		{
+			$this->_login();
 		}
 	}
 
-	function register_template() {
-		$data['title'] = 'Register';
-		$this->load->view('partials_template/auth_header', $data);
-		$this->load->view('partials_template/navbar_template', $data);
-		$this->load->view('register_template');
-		$this->load->view('partials_template/auth_footer');
+	public function register() 
+	{
+		$this->form_validation->set_rules('username', 'Username', 'required|trim');
+		$this->form_validation->set_rules('email', 'email', 'required|trim|valid_email');
+		$this->form_validation->set_rules('password1', 'Password', 'required|trim');
+		$this->form_validation->set_rules('password2', 'Password', 'required|trim'); //edit nanti
+
+		if ($this->form_validation->run() == FALSE) 
+		{
+			$data['title'] = 'Register';
+			$this->load->view('partials_template/auth_header', $data);
+			$this->load->view('partials_template/navbar_template', $data);
+			$this->load->view('register_template');
+			$this->load->view('partials_template/auth_footer');
+		}
+		else
+		{
+			$this->_register();
+		}
+
 	}
 	
 	public function dashboard_template()
@@ -64,44 +82,37 @@ class Index  extends CI_Controller
 		$this->load->view('partials_template/footer');
 	}
 
-	function  login() {
-		if ($this->input->method() === "get"){
-			$this->loadViewWithFooterAndHeader('login');
-		} elseif ($this->input->method() === 'post'){
-			$username = $this->input->post('username');
-			$password = $this->input->post('password');
-			try {
-				$user = $this->muser->verifyUser($username, $password);
-				$this->session->set_userdata($user);
-				if ($r = $this->input->post('redirect')){
-					redirect(base_url($r));
-				}else {
-					redirect(base_url('/'));
-				}
-			} catch (Throwable $err){
-				$this->session->set_flashdata('error', $err->getMessage());
-				redirect(base_url('cindex/login'), 'refresh');
+	private function _login() {
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		try {
+			$user = $this->muser->verifyUser($username, $password);
+			$this->session->set_userdata($user);
+			if ($r = $this->input->post('redirect')){
+				redirect(base_url($r));
+			}else {
+				redirect(base_url('/'));
 			}
+		} catch (Throwable $err){
+			$this->session->set_flashdata('error', $err->getMessage());
+			redirect(base_url('index/login'), 'refresh');
 		}
 	}
 
-	function register() {
-		if ($this->input->method() === "get"){
-			$this->loadViewWithFooterAndHeader('register');
-		} elseif ($this->input->method() === 'post'){
-			$username = $this->input->post('username');
-			$password = $this->input->post('password');
-			try {
-				$user = $this->muser->createUser($username, $password);
-				$this->session->set_userdata($user);
-				redirect(base_url('/'), 'refresh');
-			} catch (Throwable $err){
-				$this->session->set_flashdata('error', $err->getMessage());
-				redirect(base_url('cindex/register'), 'refresh');
-			}
+	private function _register() {
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$email = $this->input->post('email');
+		try {
+			$user = $this->muser->createUser($username, $password);
+			$this->session->set_userdata($user);
+			redirect(base_url('/'), 'refresh');
+		} catch (Throwable $err){
+			$this->session->set_flashdata('error', $err->getMessage());
+			redirect(base_url('index/register'), 'refresh');
 		}
 	}
-
+	
 	function logout(){
 		$this->session->sess_destroy();
 		redirect(base_url("/"), "refresh");

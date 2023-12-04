@@ -5,7 +5,7 @@ class Muser extends CI_Model
 	public function createUser($username, $password) {
 		$user = $this->getUserByUsername($username);
 		if ($user){
-			throw new Error("username already exist");
+			throw new Error("Username already exist");
 		}
 		$encryptedPassword = password_hash($password, PASSWORD_BCRYPT);
 		$data = array(
@@ -29,7 +29,7 @@ class Muser extends CI_Model
 		if ($user && password_verify($password, $user["password"])) {
 			return $user;
 		} else {
-			throw new Error("username or password doesn't match");
+			throw new Error("Username or password doesn't match");
 		}
 	}
 }
