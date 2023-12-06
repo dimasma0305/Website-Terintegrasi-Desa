@@ -8,7 +8,6 @@ class User extends CI_Controller{
             redirect(base_url('index/login?r='.$this->uri->uri_string()));
 			exit();
 		}
-        $this->load->model("muser");
     }
 
     public function dashboard()

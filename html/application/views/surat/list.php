@@ -35,6 +35,6 @@
                 </tbody>
             </table>
         <?php endif; ?>
-        <a href="<?= base_url('surat') ?>" class="btn btn-primary">Back to Surat Form</a>
+        <a href="<?= base_url('form_surat') ?>" class="btn btn-primary">Back to Surat Form</a>
     </div>
 </main>

@@ -24,8 +24,18 @@ class Surat extends CI_Controller
 	function index()
 	{
 		$jenisSurat = $this->msurat->getJenisSurat();
-		$this->loadViewWithFooterAndHeader('surat/form', ['jenisSurat' => $jenisSurat]);
+
+        $data['title'] = 'Form Surat';
+        $data['jenisSurat'] = $jenisSurat;
+		$this->load->view('partials_template/header', $data);
+		$this->load->view('partials_template/sidebar_template');
+		$this->load->view('partials_template/navbar_template');
+		$this->load->view('surat/form', $data);
+		$this->load->view('partials_template/footer');
+
+		// $this->loadViewWithFooterAndHeader('surat/form', ['jenisSurat' => $jenisSurat]);
 	}
+
 	private function createFile($files, $filename)
 	{
 		$tmpname = $files["tmp_name"];
@@ -43,12 +53,22 @@ class Surat extends CI_Controller
 		}
 		return true;
 	}
+
 	function list()
 	{
 		switch ($this->input->method()) {
 			case 'get':
 				$suratData = $this->msurat->getSuratByOwner($this->session->userdata('id'));
-				$this->loadViewWithFooterAndHeader('surat/list', ['suratData' => $suratData]);
+
+				$data['title'] = 'Daftar Surat';
+				$data['suratData'] = $suratData;
+				$this->load->view('partials_template/header', $data);
+				$this->load->view('partials_template/sidebar_template');
+				$this->load->view('partials_template/navbar_template');
+				$this->load->view('surat/list', $data);
+				$this->load->view('partials_template/footer');
+
+				// $this->loadViewWithFooterAndHeader('surat/list', ['suratData' => $suratData]);
 				break;
 			case 'post':
 				$jenisSuratId = $this->input->post('jenisSuratId');
