@@ -1,8 +1,4 @@
-
-
-    <div class="container">
-    
-
+    <div class="container">    
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
@@ -22,7 +18,7 @@
                                     <form class="user" method="post" action="<?= base_url('index/login') ?>">
                                         <div class="form-group">
                                             <input name="username" type="text" class="form-control form-control-user"
-                                                placeholder="Username">
+                                                placeholder="Username" value="<?= set_value('username') ?>">
                                             <?= form_error('username', '<small class="p-3 text-danger">', '</small>') ?>
                                         </div>
                                         <div class="form-group">

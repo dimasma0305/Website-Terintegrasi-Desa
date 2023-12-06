@@ -13,12 +13,12 @@
                             <form class="user" method="post" action="<?= base_url('index/register') ?>">
                                 <div class="form-group">
                                     <input name="username" type="text" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Username">
+                                        placeholder="Username" value="<?= set_value('username') ?>">
                                         <?= form_error('username', '<small class="p-3 text-danger">', '</small>') ?>
                                 </div>
                                 <div class="form-group">
                                     <input name="email" type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                        placeholder="Email Address" value="<?= set_value('email') ?>">
                                         <?= form_error('email', '<small class="p-3 text-danger">', '</small>') ?>
                                 </div>
                                 <div class="form-group row">

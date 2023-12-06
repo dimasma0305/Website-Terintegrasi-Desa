@@ -43,9 +43,9 @@ class Index  extends CI_Controller
 	public function register() 
 	{
 		$this->form_validation->set_rules('username', 'Username', 'required|trim');
-		$this->form_validation->set_rules('email', 'email', 'required|trim|valid_email');
-		$this->form_validation->set_rules('password1', 'Password', 'required|trim');
-		$this->form_validation->set_rules('password2', 'Password', 'required|trim'); //edit nanti
+		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+		$this->form_validation->set_rules('password1', 'Password', 'required|trim|matches[password2]');
+		$this->form_validation->set_rules('password2', 'Repeat Password', 'required|trim|matches[password1]'); //edit nanti
 
 		if ($this->form_validation->run() == FALSE) 
 		{
