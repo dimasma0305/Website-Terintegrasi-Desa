@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS users (
     role ENUM("user", "admin") DEFAULT "user"
 );
 
-INSERT INTO users (username, password, role)
-VALUES ("admin", "$2y$10$W2Nk5p1hL1jraYSPkESaN.01Rai//bWmgoQRluWRrys4DsoOD0JDC", "admin");
+INSERT INTO users (username, email,password, role)
+VALUES ("admin", "admin@admin.com","$2y$10$W2Nk5p1hL1jraYSPkESaN.01Rai//bWmgoQRluWRrys4DsoOD0JDC", "admin");
 
 CREATE TABLE IF NOT EXISTS jenisSurat(
     id INT AUTO_INCREMENT PRIMARY KEY,
