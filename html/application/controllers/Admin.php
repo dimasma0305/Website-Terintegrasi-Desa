@@ -27,16 +27,20 @@ class Admin extends CI_Controller
 
     }
 
-	function surat(){
-		switch ($this->input->method()) {
-			case 'get':
-				$suratData = $this->msurat->getSuratAndOwner();
-				$this->loadViewWithFooterAndHeader('admin/list', ['suratData' => $suratData]);
-				break;
-			default:
-				$this->output->set_status_header(405);
-				echo 'Method not allowed';
-				break;
-		}
+	function surat_list(){
+		$suratData = $this->msurat->getSuratAndOwner();
+		$this->loadViewWithFooterAndHeader('admin/surat_list', ['suratData' => $suratData]);
 	}
+
+    function surat_update_status($id)
+    {
+        $status = $this->input->post('status');
+        $result = $this->msurat->updateSurat($id, ['status' => $status]);
+        if ($result) {
+            $response = ['status' => 'ok', 'message' => 'Status updated successfully.'];
+        } else {
+            $response = ['status' => 'error', 'message' => 'Error updating status.'];
+        }
+        $this->output->set_content_type('application/json')->set_output(json_encode($response));
+    }
 }

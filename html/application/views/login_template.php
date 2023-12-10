@@ -1,4 +1,8 @@
-    <div class="container">    
+
+
+    <div class="container">
+
+
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
@@ -26,11 +30,12 @@
                                                  placeholder="Password">
                                             <?= form_error('password', '<small class="p-3 text-danger">', '</small>') ?>
                                         </div>
-                                
+										<input type="hidden" name="redirect" value="<?= isset($_GET['r']) ? html_escape($_GET['r']) : '' ?>">
+
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
-    
+
                                     </form>
                                     <hr>
                                     <div class="text-center">

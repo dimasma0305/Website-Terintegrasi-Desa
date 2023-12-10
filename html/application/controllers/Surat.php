@@ -59,16 +59,7 @@ class Surat extends CI_Controller
 		switch ($this->input->method()) {
 			case 'get':
 				$suratData = $this->msurat->getSuratByOwner($this->session->userdata('id'));
-
-				$data['title'] = 'Daftar Surat';
-				$data['suratData'] = $suratData;
-				$this->load->view('partials_template/header', $data);
-				$this->load->view('partials_template/sidebar_template');
-				$this->load->view('partials_template/navbar_template');
-				$this->load->view('surat/list', $data);
-				$this->load->view('partials_template/footer');
-
-				// $this->loadViewWithFooterAndHeader('surat/list', ['suratData' => $suratData]);
+				$this->loadViewWithFooterAndHeader('surat/list', ['suratData' => $suratData]);
 				break;
 			case 'post':
 				$jenisSuratId = $this->input->post('jenisSuratId');
