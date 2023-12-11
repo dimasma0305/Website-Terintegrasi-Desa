@@ -35,8 +35,8 @@
 
                     <!-- Nav Item - User Information -->
                     <div class="mx-1">
-                        <a href="" class="btn btn-outline-primary">Login</a>
-                        <a href="" class="btn btn-outline-primary">Register</a>
+                        <a href="<?=base_url('/index/login')?>" class="btn btn-outline-primary">Login</a>
+                        <a href="<?=base_url('/index/register')?>" class="btn btn-outline-primary">Register</a>
                     </div>
 
                 </div>

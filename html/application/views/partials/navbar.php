@@ -17,7 +17,7 @@
 					<a class='nav-link' href='<?=base_url("surat/list")?>'>View Surat</a>
 				</li>
 				<li class='nav-item'>
-					<a class='nav-link disabled' aria-disabled='true'>Disabled</a>
+					<a class='nav-link' href='<?=base_url("admin/surat_list")?>'>Admin View Surat</a>
 				</li>
 			</ul>
 			<div class='d-flex gap-2'>

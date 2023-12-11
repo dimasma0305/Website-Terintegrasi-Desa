@@ -67,8 +67,6 @@ class Surat extends CI_Controller
 				$this->load->view('partials_template/navbar_template');
 				$this->load->view('surat/list', $data);
 				$this->load->view('partials_template/footer');
-
-				// $this->loadViewWithFooterAndHeader('surat/list', ['suratData' => $suratData]);
 				break;
 			case 'post':
 				$jenisSuratId = $this->input->post('jenisSuratId');

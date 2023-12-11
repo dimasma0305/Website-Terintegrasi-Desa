@@ -2,58 +2,64 @@
 
 class Msurat extends CI_Model
 {
-    public function getJenisSurat()
-    {
-        $query = $this->db->get('jenisSurat');
-        return $query->result();
-    }
-
-	public function getSuratAndOwner(){
-		$this->db->select('surat.*, jenisSurat.name as jenisSuratName, users.username as ownerUsername');
-        $this->db->from('surat');
-        $this->db->join('jenisSurat', 'surat.jenisSuratId = jenisSurat.id', 'left');
-        $this->db->join('users', 'surat.owner = users.id', 'left');
-        $query = $this->db->get();
-        return $query->result();
+	public function getJenisSurat()
+	{
+		$query = $this->db->get('jenisSurat');
+		return $query->result();
 	}
 
-    public function getSuratByOwner($ownerId)
-    {
-        $this->db->select('surat.*, jenisSurat.name as jenisSuratName');
-        $this->db->from('surat');
-        $this->db->join('jenisSurat', 'surat.jenisSuratId = jenisSurat.id', 'left');
-        $this->db->where('surat.owner', $ownerId);
-        $query = $this->db->get();
+	public function getSuratAndOwner()
+	{
+		$this->db->select('surat.*, jenisSurat.name as jenisSuratName, users.username as ownerUsername');
+		$this->db->from('surat');
+		$this->db->join('jenisSurat', 'surat.jenisSuratId = jenisSurat.id', 'left');
+		$this->db->join('users', 'surat.owner = users.id', 'left');
+		$query = $this->db->get();
+		return $query->result();
+	}
 
-        return $query->result();
-    }
+	public function getSuratByOwner($ownerId)
+	{
+		$this->db->select('surat.*, jenisSurat.name as jenisSuratName');
+		$this->db->from('surat');
+		$this->db->join('jenisSurat', 'surat.jenisSuratId = jenisSurat.id', 'left');
+		$this->db->where('surat.owner', $ownerId);
+		$query = $this->db->get();
 
-    public function getSuratById($suratId)
-    {
-        $this->db->select('surat.*, jenisSurat.name as jenisSuratName');
-        $this->db->from('surat');
-        $this->db->join('jenisSurat', 'surat.jenisSuratId = jenisSurat.id', 'left');
-        $this->db->where('surat.id', $suratId);
-        $query = $this->db->get();
+		return $query->result();
+	}
 
-        return $query->result();
-    }
+	public function getSuratById($suratId)
+	{
+		$this->db->select('surat.*, jenisSurat.name as jenisSuratName');
+		$this->db->from('surat');
+		$this->db->join('jenisSurat', 'surat.jenisSuratId = jenisSurat.id', 'left');
+		$this->db->where('surat.id', $suratId);
+		$query = $this->db->get();
 
-    public function updateSurat($id, $data)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('surat', $data);
-    }
+		return $query->result();
+	}
 
-    public function addSurat($data)
-    {
-        $this->db->insert('surat', $data);
-    }
-    public function getSuratByIdAndOwnerId($id, $ownerId)
-    {
-        $this->db->where('id', $id);
-        $this->db->where('owner', $ownerId);
-        $query = $this->db->get('surat');
-        return $query->row();
-    }
+	public function updateSurat($id, $data)
+	{
+		try {
+			$this->db->where('id', $id);
+			$this->db->update('surat', $data);
+			return true;
+		} catch (Exception $_e) {
+			return false;
+		}
+	}
+
+	public function addSurat($data)
+	{
+		$this->db->insert('surat', $data);
+	}
+	public function getSuratByIdAndOwnerId($id, $ownerId)
+	{
+		$this->db->where('id', $id);
+		$this->db->where('owner', $ownerId);
+		$query = $this->db->get('surat');
+		return $query->row();
+	}
 }
