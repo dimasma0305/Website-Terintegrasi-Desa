@@ -1,6 +1,6 @@
 <main class='container'>
 	<div class="row">
-		<iframe class="col-lg-6 col-sm-12" src="<?= base_url("uploads/surat/" . $surat->filename) ?>" frameborder="0"></iframe>
+		<iframe class="col-lg-6 col-sm-12" src="<?= base_url("dashboard") ?>" frameborder="0"></iframe>
 		<div class='col-lg-6 col-sm-12 d-flex flex-column'>
 			<h1>Data Pengajuan Surat</h1>
 			<form action='<?= base_url('/surat/edit/' . $surat->id) ?>' method='post' class='d-flex flex-column gap-2' enctype='multipart/form-data'>
