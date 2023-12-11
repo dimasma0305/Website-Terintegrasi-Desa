@@ -91,7 +91,7 @@ class Index  extends CI_Controller
 			if ($r = $this->input->post('redirect')){
 				redirect(base_url($r));
 			}else {
-				redirect(base_url('/'));
+				redirect(base_url('dashboard'));
 			}
 		} catch (Throwable $err){
 			$this->session->set_flashdata('error', $err->getMessage());

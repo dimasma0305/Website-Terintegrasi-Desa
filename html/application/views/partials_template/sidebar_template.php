@@ -87,7 +87,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item <?= activeLink('logout') ?>">
-                <a class="nav-link" href="<?= base_url('logout') ?>">
+                <a class="nav-link" href="<?= base_url('logout') ?>" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-fw fa-sign-out-alt"></i>
                     <span>Logout</span></a>
             </li>

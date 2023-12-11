@@ -13,7 +13,7 @@
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label" for='jenisSuratId'>Jenis Surat</label>
 						<div class="col-sm">
-							<select class="form-control" id='jenisSuratId' name='jenisSuratId'>
+							<select class="form-control " id='jenisSuratId' name='jenisSuratId'>
 							<?php foreach ($jenisSurat as $jenis): ?>
 								<option value="<?= $jenis->id ?>"><?= $jenis->name ?></option>
 							<?php endforeach; ?>
