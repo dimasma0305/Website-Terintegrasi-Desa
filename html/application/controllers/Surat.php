@@ -62,11 +62,13 @@ class Surat extends CI_Controller
 
 				$data['title'] = 'Daftar Surat';
 				$data['suratData'] = $suratData;
+
 				$this->load->view('partials_template/header', $data);
 				$this->load->view('partials_template/sidebar_template');
 				$this->load->view('partials_template/navbar_template');
 				$this->load->view('surat/list', $data);
 				$this->load->view('partials_template/footer');
+
 				break;
 			case 'post':
 				$jenisSuratId = $this->input->post('jenisSuratId');
@@ -108,7 +110,18 @@ class Surat extends CI_Controller
 					return;
 				}
 				$jenisSurat = $this->msurat->getJenisSurat();
-				$this->loadViewWithFooterAndHeader('surat/edit', ['surat' => $surat, 'jenisSurat' => $jenisSurat]);
+
+				$data['title'] = 'Edit Surat';
+				$data['surat'] = $surat;
+				$data['jenisSurat'] = $jenisSurat;
+
+				$this->load->view('partials_template/header', $data);
+				$this->load->view('partials_template/sidebar_template');
+				$this->load->view('partials_template/navbar_template');
+				$this->load->view('surat/edit', $data);
+				$this->load->view('partials_template/footer');
+
+				// $this->loadViewWithFooterAndHeader('surat/edit', ['surat' => $surat, 'jenisSurat' => $jenisSurat]);
 				break;
 			case "post":
 				$jenisSuratId = $this->input->post('jenisSuratId');
