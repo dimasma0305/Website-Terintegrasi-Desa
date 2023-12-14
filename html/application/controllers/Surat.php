@@ -3,13 +3,12 @@
 class Surat extends CI_Controller
 {
 	public Msurat $msurat;
+	public Auth $auth;
 	function __construct()
 	{
 		parent::__construct();
-		if (!isset($this->session->get_userdata()['id'])) {
-            redirect(base_url('index/login?r='.$this->uri->uri_string()));
-			exit();
-		}
+		$this->load->library('auth');
+		$this->auth->must_login();
 		$this->load->model('msurat');
 	}
 

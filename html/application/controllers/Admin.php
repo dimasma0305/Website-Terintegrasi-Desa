@@ -3,14 +3,12 @@
 class Admin extends CI_Controller
 {
     public Msurat $msurat;
+	public Auth $auth;
     function __construct()
     {
         parent::__construct();
-        $userdata = $this->session->get_userdata();
-        if (!isset($userdata['id']) || $userdata['role'] != "admin") {
-            redirect(base_url('index/login?r='.$this->uri->uri_string()));
-            exit();
-        }
+		$this->load->library('auth');
+		$this->auth->must_admin();
         $this->load->model('msurat');
     }
 
@@ -43,4 +41,5 @@ class Admin extends CI_Controller
         }
         $this->output->set_content_type('application/json')->set_output(json_encode($response));
     }
+
 }
