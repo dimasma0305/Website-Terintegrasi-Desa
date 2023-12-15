@@ -14,7 +14,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            
+
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -22,10 +22,10 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
             </a>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider">
-            
+
             <!-- Heading -->
             <div class="sidebar-heading">
                 Dashboard
@@ -69,15 +69,15 @@
             </div>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item <?= activeLink('profil') ?>">
-                <a class="nav-link" href="<?= base_url('profil') ?>">
+            <li class="nav-item <?= activeLink('user/profile') ?>">
+                <a class="nav-link" href="<?= base_url('user/profile') ?>">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Profil</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item <?= activeLink('edit_profil') ?>">
-                <a class="nav-link" href="<?= base_url('edit_profil') ?>">
+            <li class="nav-item <?= activeLink('user/editProfile') ?>">
+                <a class="nav-link" href="<?= base_url('user/editProfile') ?>">
                     <i class="fas fa-fw fa-user-edit"></i>
                     <span>Edit Profil</span></a>
             </li>

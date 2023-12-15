@@ -11,15 +11,6 @@ class Surat extends CI_Controller
 		$this->auth->must_login();
 		$this->load->model('msurat');
 	}
-
-	private function loadViewWithFooterAndHeader($name, $vars = [])
-	{
-		$this->load->view('includes/header');
-		$this->load->view('partials/navbar');
-		$this->load->view($name, $vars);
-		$this->load->view('includes/footer');
-	}
-
 	function index()
 	{
 		$jenisSurat = $this->msurat->getJenisSurat();
@@ -31,8 +22,6 @@ class Surat extends CI_Controller
 		$this->load->view('partials_template/navbar_template');
 		$this->load->view('surat/form', $data);
 		$this->load->view('partials_template/footer');
-
-		// $this->loadViewWithFooterAndHeader('surat/form', ['jenisSurat' => $jenisSurat]);
 	}
 
 	private function createFile($files, $filename)
@@ -120,7 +109,6 @@ class Surat extends CI_Controller
 				$this->load->view('surat/edit', $data);
 				$this->load->view('partials_template/footer');
 
-				// $this->loadViewWithFooterAndHeader('surat/edit', ['surat' => $surat, 'jenisSurat' => $jenisSurat]);
 				break;
 			case "post":
 				$jenisSuratId = $this->input->post('jenisSuratId');

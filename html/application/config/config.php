@@ -30,6 +30,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // Punya guntr
 $config['base_url'] = 'http://localhost/html/';
 
+if (getenv("DEV")){
+	$config['base_url'] = 'http://localhost/';
+}
 
 /*
 |--------------------------------------------------------------------------
