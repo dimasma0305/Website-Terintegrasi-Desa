@@ -24,7 +24,7 @@ VALUES ('Surat Keterangan Domisili'),
     ('Surat Keterangan Kelahiran'),
     ('Surat Keterangan Kematian');
 
-CREATE TABLE IF NOT EXISTS surat(
+CREATE TABLE IF NOT EXISTS surat (
     id INT AUTO_INCREMENT PRIMARY KEY,
     owner INT NOT NULL,
     filename VARCHAR(60) NOT NULL,
@@ -33,6 +33,19 @@ CREATE TABLE IF NOT EXISTS surat(
     deskripsi TEXT NOT NULL,
     keperluan TEXT NOT NULL,
     status ENUM("pending", "diterima", "ditolak") NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (owner) REFERENCES users(id),
     FOREIGN KEY (jenisSuratId) REFERENCES jenisSurat(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS artikel (
+    id CHAR(24) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    author_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (author_id) REFERENCES users(id)
 );
