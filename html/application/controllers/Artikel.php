@@ -3,14 +3,13 @@
 class Artikel extends CI_Controller
 {
 	public Auth $auth;
-	public Martikel $martikel;
+	// public Martikel $martikel;
 
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->library('auth');
 		$this->load->model('martikel'); // Load the Martikel model
-		$this->load->library('session'); // Load the session library
 	}
 
 	public function add()
@@ -89,6 +88,7 @@ class Artikel extends CI_Controller
 		$this->load->view('artikel/list_artikel', $data); // Create a new view file (e.g., list_articles.php)
 		$this->load->view('partials_template/footer');
 	}
+
 	public function delete(){
 		$id = $this->input->get("id");
 		if ($_SERVER['REQUEST_METHOD'] == "DELETE"){

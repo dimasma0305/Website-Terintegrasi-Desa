@@ -84,21 +84,38 @@ function activeLink($menu)
 	<?php
 	if ($this->session->userdata('role') == 'admin') {
 	?>
+		<!-- Divider -->
+		<hr class="sidebar-divider">
+
+		<!-- Heading -->
+		<div class="sidebar-heading">
+			Artikel
+		</div>
+
 		<li class="nav-item <?= activeLink('artikel/add') ?>">
 			<a class="nav-link" href="<?= base_url('artikel/add') ?>">
 				<i class="fas fa-fw fa-user-edit"></i>
 				<span>Artikel Add</span></a>
-		</li>
-		<li class="nav-item <?= activeLink('admin/surat_list') ?>">
-			<a class="nav-link" href="<?= base_url('admin/surat_list') ?>">
-				<i class="fas fa-fw fa-user-edit"></i>
-				<span>Admin list surat</span></a>
-		</li>
+			</li>
 
 		<li class="nav-item <?= activeLink('artikel/list') ?>">
 			<a class="nav-link" href="<?= base_url('artikel/list') ?>">
 				<i class="fas fa-fw fa-user-edit"></i>
 				<span>List Artikel</span></a>
+		</li>
+
+		<!-- Divider -->
+		<hr class="sidebar-divider">
+
+		<!-- Heading -->
+		<div class="sidebar-heading">
+			List
+		</div>
+
+		<li class="nav-item <?= activeLink('admin/surat_list') ?>">
+			<a class="nav-link" href="<?= base_url('admin/surat_list') ?>">
+				<i class="fas fa-fw fa-user-edit"></i>
+				<span>Admin list surat</span></a>
 		</li>
 
 		<li class="nav-item <?= activeLink('admin/penduduk_list') ?>">
