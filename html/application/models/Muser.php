@@ -17,6 +17,15 @@ class Muser extends CI_Model
 		$this->db->insert('users', $data);
 		return $this->getUserByUsername($username);
 	}
+
+	public function checkNikExist($nik)
+	{
+		$this->db->where('nik', $nik);
+		$query = $this->db->get('penduduk');
+
+		return ($query->num_rows() > 0);
+	}
+
 	public function getUserByUsername($username)
 	{
 		$this->db->where('username', $username);
@@ -41,15 +50,20 @@ class Muser extends CI_Model
 
 	public function getUserById($userId)
 	{
-		$this->db->where('id', $userId);
-		$query = $this->db->get('users');
+		$this->db->select('users.*, penduduk.*');
+		$this->db->from('users');
+		$this->db->join('penduduk', 'users.nik = penduduk.nik', 'left');
+		$this->db->where('users.id', $userId);
 
-		if ($result = $query->result_array()) {
-			return $result[0];
+		$query = $this->db->get();
+
+		if ($result = $query->row_array()) {
+			return $result;
 		} else {
 			return false;
 		}
 	}
+
 	public function verifyUser($username, $password)
 	{
 		$user = $this->getUserByUsername($username);

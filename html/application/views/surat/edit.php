@@ -1,7 +1,7 @@
 <main class='container-fluid'>
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800"><?= $title?></h1>
+	<h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>
 
 	<div class="row">
 
@@ -15,21 +15,20 @@
 				</div>
 				<div class="card-body">
 					<?php $this->load->view('partials/flash_block') ?>
-					<form action='<?= base_url('surat/list') ?>' method='post' class='d-flex flex-column gap-2'
-							enctype='multipart/form-data'>
+					<form action='<?= base_url('surat/edit/' . $surat->id) ?>' method='post' class='d-flex flex-column gap-2' enctype='multipart/form-data'>
 
 						<div class="form-group row mx-1">
 							<label class="col-form-label" for='jenisSuratId'>Jenis Surat</label>
 							<select class=" form-control " id='jenisSuratId' name='jenisSuratId'>
-							<?php foreach ($jenisSurat as $jenis): ?>
-								<option value="<?= $jenis->id ?>"><?= $jenis->name ?></option>
-							<?php endforeach; ?>
+								<?php foreach ($jenisSurat as $jenis) : ?>
+									<option value="<?= $jenis->id ?>" <?= $jenis->id == $surat->jenisSuratId ? 'selected' : '' ?>><?= $jenis->name ?></option>
+								<?php endforeach; ?>
 							</select>
 						</div>
 
 						<div class="form-group row mx-1">
 							<div class="mb-1">Surat</div>
-							<div class="custom-file ">
+							<div class="custom-file">
 								<input type="file" class="custom-file-input" id="surat" name="surat">
 								<label class="custom-file-label" for="surat">Surat</label>
 							</div>
@@ -37,12 +36,12 @@
 
 						<div class="form-group row mx-1">
 							<label class="col-form-label" for="deskripsi">Deskripsi</label>
-							<textarea class="form-control " id="deskripsi" name="deskripsi" rows="4"></textarea>
+							<textarea class="form-control " id="deskripsi" name="deskripsi" rows="4"><?= html_escape($surat->deskripsi) ?></textarea>
 						</div>
 
 						<div class="form-group row mx-1">
 							<label class="col-form-label" for="keperluan">Keperluan</label>
-							<textarea class="form-control " id="keperluan" name="keperluan" rows="4"></textarea>
+							<textarea class="form-control" id="keperluan" name="keperluan" rows="4"><?= html_escape($surat->keperluan) ?></textarea>
 						</div>
 
 						<div class="form-group row mx-1">

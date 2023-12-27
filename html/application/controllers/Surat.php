@@ -15,8 +15,8 @@ class Surat extends CI_Controller
 	{
 		$jenisSurat = $this->msurat->getJenisSurat();
 
-        $data['title'] = 'Form Surat';
-        $data['jenisSurat'] = $jenisSurat;
+		$data['title'] = 'Form Surat';
+		$data['jenisSurat'] = $jenisSurat;
 		$this->load->view('partials_template/header', $data);
 		$this->load->view('partials_template/sidebar_template');
 		$this->load->view('partials_template/navbar_template');
