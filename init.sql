@@ -48,11 +48,14 @@ CREATE TABLE IF NOT EXISTS surat (
     FOREIGN KEY (owner) REFERENCES users(id),
     FOREIGN KEY (jenisSuratId) REFERENCES jenisSurat(id)
 );
+
 CREATE TABLE IF NOT EXISTS artikel (
     id CHAR(24) PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE, -- Adding the slug column
     content TEXT NOT NULL,
     author_id INT NOT NULL,
+    image_url VARCHAR(255), -- Adding the image_url column
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (author_id) REFERENCES users(id)

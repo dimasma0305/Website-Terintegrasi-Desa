@@ -5,12 +5,22 @@
 	<?php $this->load->view('partials/flash_block') ?>
 
 	<!-- Article Form -->
-	<form method="post" action="<?= base_url('artikel/add'); ?>">
+	<form method="post" action="<?= base_url('artikel/add'); ?>"  enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="title">Title:</label>
 			<input type="text" class="form-control" id="title" name="title" value="<?= set_value('title'); ?>">
 			<?= form_error('title', '<small class="text-danger">', '</small>'); ?>
 		</div>
+
+		<!-- TODO : Add img thumbnail -->
+		<div class="form-group row">
+			<div class="col-sm-2 mb-1">Image</div>
+			<div class="custom-file mx-2">
+				<input type="file" class="custom-file-input" id="Image" name="image">
+				<label class="custom-file-label" for="Image">Image</label>
+			</div>
+		</div>
+
 		<div class="form-group">
 			<label for="content">Content:</label>
 			<textarea class="form-control" id="content" name="content"><?= set_value('content'); ?></textarea>
@@ -27,7 +37,7 @@
 			selector: 'textarea[name="content"]',
 			height: 300, // Set the height of the editor
 			plugins: 'autolink lists link image charmap print preview anchor',
-			toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | link image'
+			toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | link',
 		});
 	</script>
 </div>

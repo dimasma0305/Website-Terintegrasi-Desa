@@ -15,44 +15,62 @@ class Artikel extends CI_Controller
 	public function add()
 	{
 		$this->auth->must_admin();
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			$this->form_validation->set_rules('title', 'Title', 'required');
-			$this->form_validation->set_rules('content', 'Content', 'required');
 
-			if ($this->form_validation->run() == false) {
-				// Validation failed, set an error flash message
-				$this->session->set_flashdata('error', 'Please fill in all required fields.');
-				$this->load->view('add_article');
-			} else {
-				// Validation passed, add the article to the database
-				$title = $this->input->post('title');
-				$content = $this->input->post('content');
-				$authorId = $this->session->userdata('id'); // Assuming user ID is stored in the session
+		$this->form_validation->set_rules('title', 'Title', 'required');
+		$this->form_validation->set_rules('content', 'Content', 'required');
 
-				$articleId = $this->martikel->createArtikel($title, $content, $authorId);
-
-				if ($articleId) {
-					// Article added successfully, redirect to the article detail page
-					redirect('artikel/detail/' . $articleId);
-				} else {
-					// Failed to add article, set an error flash message
-					$this->session->set_flashdata('error', 'Failed to add the article.');
-					$data['title'] = 'Tambah Artikel';
-					$this->load->view('partials_template/header', $data);
-					$this->load->view('partials_template/sidebar_template');
-					$this->load->view('partials_template/navbar_template');
-					$this->load->view('artikel/add_article', $data);
-					$this->load->view('partials_template/footer');
-				}
-			}
-		} else {
+		if ($this->form_validation->run() == FALSE) 
+		{
 			$data['title'] = 'Tambah Artikel';
 			$this->load->view('partials_template/header', $data);
 			$this->load->view('partials_template/sidebar_template');
 			$this->load->view('partials_template/navbar_template');
-			$this->load->view('artikel/add_article', $data);
+			$this->load->view('artikel/form_artikel', $data);
 			$this->load->view('partials_template/footer');
 		}
+		else 
+		{
+			$payload = [
+				'id' => uniqid($this->session->userdata('id')),
+				'title' => $this->input->post('title'),
+				'slug' => url_title($this->input->post('title'), '-', TRUE),
+				'content' => $this->input->post('content'),
+				'author_id' => $this->session->userdata('id'),
+				'image_url' => 'poto_gussugi.jpg' // Default image URL if upload fails
+			];
+		
+			$image = $_FILES;
+		
+			if ($image) {
+				$config['upload_path'] = './uploads/artikel';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['max_size'] = 2000;
+				// $config['max_width'] = 1024;
+				// $config['max_height'] = 768;
+		
+				$this->load->library('upload', $config);
+		
+				if (!$this->upload->do_upload('image')) {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('error', $error);
+				} else {
+					$payload['image_url'] = $this->upload->data()['file_name'];
+					if ($this->martikel->createArtikel($payload)) {
+						$this->session->set_flashdata('message', 'Article added successfully.');
+					} else {
+						$this->session->set_flashdata('error', 'Failed to add the article.');
+					}
+				}
+			} else {
+				if ($this->martikel->createArtikel($payload)) {
+					$this->session->set_flashdata('message', 'Article added successfully.');
+				} else {
+					$this->session->set_flashdata('error', 'Failed to add the article.');
+				}
+			}
+			redirect('artikel/add');
+		}
+		
 	}
 
 	// Add this method to your Artikel controller
@@ -78,6 +96,7 @@ class Artikel extends CI_Controller
 			redirect('artikel/add'); // Redirect to a default page or handle as needed
 		}
 	}
+	
 	public function list()
 	{
 		$data['title'] = 'List Artikel';
