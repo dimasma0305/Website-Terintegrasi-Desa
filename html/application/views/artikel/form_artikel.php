@@ -1,33 +1,38 @@
-<div class="container mt-5">
-	<h2>Add New Article</h2>
+<div class="container-fluid">
+	<!-- Page Heading -->
+	<h1 class="h3 mb-4 text-gray-800"><?= $title?></h1>
 
-	<!-- Display error flash message if set -->
-	<?php $this->load->view('partials/flash_block') ?>
+	<div class="card shadow mb-4">
+        <div class="card-body">
 
-	<!-- Article Form -->
-	<form method="post" action="<?= base_url('artikel/add'); ?>"  enctype="multipart/form-data">
-		<div class="form-group">
-			<label for="title">Title:</label>
-			<input type="text" class="form-control" id="title" name="title" value="<?= set_value('title'); ?>">
-			<?= form_error('title', '<small class="text-danger">', '</small>'); ?>
+			<?php $this->load->view('partials/flash_block') ?>
+			<!-- Article Form -->
+			<form method="post" action="<?= base_url('artikel/add'); ?>"  enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="title">Title:</label>
+					<input type="text" class="form-control" id="title" name="title" value="<?= set_value('title'); ?>">
+					<?= form_error('title', '<small class="text-danger">', '</small>'); ?>
+				</div>
+
+				<!-- TODO : Add img thumbnail -->
+				<div class="form-group row">
+					<div class="col-sm-2 mb-1">Image</div>
+					<div class="custom-file mx-2">
+						<input type="file" class="custom-file-input" id="Image" name="image">
+						<label class="custom-file-label" for="Image">Image</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="content">Content:</label>
+					<textarea class="form-control" id="content" name="content"><?= set_value('content'); ?></textarea>
+					<?= form_error('content', '<small class="text-danger">', '</small>'); ?>
+				</div>
+				<button type="submit" class="btn btn-primary">Add Article</button>
+			</form>
+
 		</div>
-
-		<!-- TODO : Add img thumbnail -->
-		<div class="form-group row">
-			<div class="col-sm-2 mb-1">Image</div>
-			<div class="custom-file mx-2">
-				<input type="file" class="custom-file-input" id="Image" name="image">
-				<label class="custom-file-label" for="Image">Image</label>
-			</div>
-		</div>
-
-		<div class="form-group">
-			<label for="content">Content:</label>
-			<textarea class="form-control" id="content" name="content"><?= set_value('content'); ?></textarea>
-			<?= form_error('content', '<small class="text-danger">', '</small>'); ?>
-		</div>
-		<button type="submit" class="btn btn-primary">Add Article</button>
-	</form>
+	</div>
 
 	<!-- TinyMCE Script -->
 	<script src="<?=base_url("/static/js/tinymce/tinymce.min.js")?>"></script>

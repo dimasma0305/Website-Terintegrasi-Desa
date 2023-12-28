@@ -51,7 +51,7 @@ class Artikel extends CI_Controller
 				$this->load->library('upload', $config);
 		
 				if (!$this->upload->do_upload('image')) {
-					$error = $this->upload->display_errors();
+					$error = $this->upload->display_errors('<p class="m-0 p-0">', '</p>');
 					$this->session->set_flashdata('error', $error);
 				} else {
 					$payload['image_url'] = $this->upload->data()['file_name'];

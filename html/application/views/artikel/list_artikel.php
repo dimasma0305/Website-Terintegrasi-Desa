@@ -5,10 +5,9 @@
 
 	<?php if (!empty($artikel)) : ?>
 	<div class="card shadow mb-4">
-       
         <div class="card-body">
         	<div class="table-responsive">
-				<table class="table table-bordered" id="artikelTable" width="100%" cellspacing="0">
+				<table id="artikelTable" class="table table-bordered" width="100%" cellspacing="0">
 					<thead>
 						<tr>
 							<th>#</th>
@@ -16,6 +15,13 @@
 							<th>Action</th>
 						</tr>
 					</thead>
+					<tfoot>
+                        <tr>
+                            <th>#</th>
+							<th>Title</th>
+							<th>Action</th>
+                        </tr>
+                    </tfoot>
 					<tbody>
 						<?php 
 						$i=1;
