@@ -9,13 +9,9 @@ class Martikel extends CI_Model
 		return $query->result();
 	}
 
-	public function getArtikelById($artikelId)
+	public function getArtikelWhere($where=[])
 	{
-		// Fetch a specific article by ID from the 'articles' table
-		$this->db->where('id', $artikelId);
-		$query = $this->db->get('artikel');
-
-		return $query->row();
+		return $this->db->get_where('artikel', $where);
 	}
 
 	public function getAllArtikel()
@@ -28,22 +24,24 @@ class Martikel extends CI_Model
 		return $this->db->insert('artikel', $data);
 	}
 
-	public function updateArtikel($artikelId, $title, $content)
+	public function updateArtikel( $payload=[] ,$id)
 	{
 		// Update an existing article in the 'articles' table
-		$data = array(
-			'title' => $title,
-			'content' => $content
-		);
+		// $data = array(
+		// 	'title' => $title,
+		// 	'content' => $content
+		// );
 
-		$this->db->where('id', $artikelId);
-		$this->db->update('artikel', $data);
+		// $this->db->where('id', $artikelId);
+		// $this->db->update('artikel', $data);
+
+		return $this->db->update('artikel', $payload, ['id']);
 	}
 
 	public function deleteArtikel($artikelId)
 	{
 		// Delete an article from the 'articles' table
 		$this->db->where('id', $artikelId);
-		$this->db->delete('artikel');
+		return $this->db->delete('artikel');
 	}
 }
