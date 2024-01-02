@@ -96,12 +96,6 @@
 					<a class="nav-link" href="<?= base_url('artikel	') ?>">
 						<i class="fas fa-fw fa-user-edit"></i>
 						<span>Artikel</span></a>
-					</li>
-
-				<li class="nav-item <?= activeLink('artikel/list') ?>">
-					<a class="nav-link" href="<?= base_url('artikel/list') ?>">
-						<i class="fas fa-fw fa-user-edit"></i>
-						<span>List Artikel</span></a>
 				</li>
 
 				<!-- Divider -->

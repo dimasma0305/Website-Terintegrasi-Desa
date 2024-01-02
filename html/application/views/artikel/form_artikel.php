@@ -13,7 +13,7 @@
         <div class="card-body">
 
 			
-			<!-- Article Form -->
+			<!-- Artikel Form -->
 			<form method="post" action="<?= base_url('artikel'); ?>"  enctype="multipart/form-data">
 				<input type="hidden" name="id" id="id" value="">
 				<div class="row">
@@ -59,11 +59,18 @@
 		</div>
 	</div>
 
-
+	<!--Artikel Table -->
 	<div class="card shadow mb-4">
 		<!-- Card title -->
-		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Daftar Artikel</h6>
+		<div class="card-header py-3 d-flex align-items-center justify-content-between">
+			<h6 class="my-auto font-weight-bold text-primary">Daftar Artikel</h6>
+			
+			<a href="<?= base_url('artikel/print') ?>" target="_blank" class="btn btn-primary btn-icon-split">
+				<span class="icon text-white-50">
+					<i class="fas fa-fw fa-print"></i>
+				</span>
+				<span class="text">Print PDF</span>
+			</a>
 		</div>
 		<!-- Card body -->
         <div class="card-body">
@@ -89,7 +96,6 @@
                     </tfoot>
 					<tbody>
 						<?php 
-						// var_dump(	$artikel);die;
 						$i=1;
 						foreach ($artikel as $artikel) : ?>
 							<tr>
@@ -98,7 +104,6 @@
 								<td><?= $artikel->username; ?></td>
 								<td><?= $artikel->created_at; ?></td>
 								<td>
-									<!-- <button class="btn btn-sm btn-danger" data-id="<?= $artikel->id; ?>"><i class="fas fa-fw fa-trash"></i></button> -->
 									<button class="btn btn-sm btn-primary" onclick="detailArtikel('<?= $artikel->slug; ?>')"><i class="fas fa-fw fa-eye"></i></button>
 									<button class="btn btn-sm btn-warning" onclick="editArtikel('<?= $artikel->id; ?>')"><i class="fas fa-fw fa-pen"></i></button>
 									<button class="btn btn-sm btn-danger" onclick="deleteArtikel('<?= $artikel->id; ?>')"><i class="fas fa-fw fa-trash"></i></button>
@@ -122,7 +127,7 @@
 	// Initialize TinyMCE
 	tinymce.init({
 		selector: 'textarea[id="content"]',
-		height: 340, // Set the height of the editor
+		height: 340,
 		plugins: 'autolink lists link image charmap print preview anchor',
 		toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | link',
 	});
@@ -147,7 +152,7 @@
 			// Clear the file input if the selected file is not an image
 			$('#image').val('');
 			$('#image-label').append('Image');
-			// $('#image-placeholder').attr('src', '#');
+			$('#image-placeholder').attr('src', '#');
 		}
 	});
 
@@ -160,7 +165,7 @@
 	});
 
 	function detailArtikel(slug) {
-		window.open("<?= base_url('artikel/detail/') ?>"+slug,"_blank");
+		window.open("<?= base_url('home/artikel/') ?>"+slug,"_blank");
 	}
 
 	function editArtikel(idArtikel) {

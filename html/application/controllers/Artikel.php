@@ -36,19 +36,18 @@ class Artikel extends CI_Controller
 				'slug' => url_title($this->input->post('title'), '-', TRUE),
 				'content' => $this->input->post('content'),
 				'author_id' => $this->session->userdata('id'),
-				// 'image_url' => 'poto_gussugi.jpg' // Default image URL if upload fails
 			];
 
-			($this->input->post('id')) ? $this->_update($payload) : $this->_add($payload);
+			// ($this->input->post('id')) ? $this->_update($payload) : $this->_add($payload);
 
-			// if ($this->input->post('id')) 
-			// {
-			// 	$this->_update($payload);
-			// }
-			// else 
-			// {
-			// 	$this->_add($payload);
-			// }
+			if ($this->input->post('id')) 
+			{
+				$this->_update($payload);
+			}
+			else 
+			{
+				$this->_add($payload);
+			}
 			redirect('artikel');
 		}
 	}
@@ -113,7 +112,7 @@ class Artikel extends CI_Controller
 	private function _uploadImage()
 	{
 		$config['upload_path'] = './uploads/artikel';
-		$config['allowed_types'] = 'gif|jpg|png';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 		$config['max_size'] = 2000;
 		// $config['max_width'] = 1024;
 		// $config['max_height'] = 768;
@@ -160,7 +159,6 @@ class Artikel extends CI_Controller
 
 	public function delete($id){
 		$artikel = $this->martikel->getArtikelWhere(['id' => $id])->row_array();
-		
 		unlink(FCPATH.'./uploads/artikel/'.$artikel['image_url']);
 		
 		if ($this->martikel->deleteArtikel($id)) 
@@ -169,29 +167,24 @@ class Artikel extends CI_Controller
 		} 
 		else 
 		{
-			$this->session->set_flashdata('error', 'Faled to delete the article.');
+			$this->session->set_flashdata('error', 'Failed to delete the article.');
 		}
 
 		redirect('artikel');
 	}
 
-	// Gk kepake
-	public function list()
-	{
-		$data['title'] = 'List Artikel';
-		$data['artikel'] = $this->martikel->getAllArtikel(); // Assuming you have a method to get all articles
-		$this->load->view('partials_template/header', $data);
-		$this->load->view('partials_template/sidebar_template');
-		$this->load->view('partials_template/navbar_template');
-		$this->load->view('artikel/list_artikel', $data); // Create a new view file (e.g., list_articles.php)
-		$this->load->view('partials_template/footer');
-	}
-
-	// public function delete(){
-	// 	$id = $this->input->get("id");
-	// 	if ($_SERVER['REQUEST_METHOD'] == "DELETE"){
-	// 		$this->martikel->deleteArtikel($id);
-	// 	}
-	// 	$this->output->set_content_type('application/json')->set_output(json_encode(['message'=>'ok']));
-	// }
+	function print()
+    {
+        $data['artikel']=$this->martikel->getAllArtikel();
+        require_once(APPPATH . 'libraries/dompdf/autoload.inc.php');
+        $pdf = new Dompdf\Dompdf();
+        $pdf->setPaper('A4', 'potrait');
+        $pdf->set_option('isRemoteEnabled', TRUE);
+        $pdf->set_option('isHtml5ParserEnabled', true);
+        $pdf->set_option('isPhpEnabled', true);
+        $pdf->set_option('isFontSubsettingEnabled', true);
+        $pdf->loadHtml($this->load->view('artikel/print_artikel',$data, true));
+        $pdf->render();
+        $pdf->stream('NamaFile', ['Attachment' => false]);	
+    }
 }
