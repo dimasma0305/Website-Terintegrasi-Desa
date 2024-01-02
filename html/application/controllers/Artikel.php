@@ -19,7 +19,7 @@ class Artikel extends CI_Controller
 		$this->form_validation->set_rules('title', 'Title', 'required');
 		$this->form_validation->set_rules('content', 'Content', 'required');
 
-		if ($this->form_validation->run() == FALSE) 
+		if ($this->form_validation->run() == FALSE)
 		{
 			$data['title'] = 'Artikel';
 			$data['artikel'] = $this->martikel->getAllArtikel();
@@ -29,7 +29,7 @@ class Artikel extends CI_Controller
 			$this->load->view('artikel/form_artikel', $data);
 			$this->load->view('partials_template/footer');
 		}
-		else 
+		else
 		{
 			$payload = [
 				'title' => $this->input->post('title'),
@@ -38,6 +38,7 @@ class Artikel extends CI_Controller
 				'author_id' => $this->session->userdata('id'),
 			];
 
+<<<<<<< HEAD
 			// ($this->input->post('id')) ? $this->_update($payload) : $this->_add($payload);
 
 			if ($this->input->post('id')) 
@@ -48,6 +49,9 @@ class Artikel extends CI_Controller
 			{
 				$this->_add($payload);
 			}
+=======
+			$this->input->post('id') ? $this->_update($payload) : $this->_add($payload);
+>>>>>>> 8cda13a (x)
 			redirect('artikel');
 		}
 	}
@@ -56,19 +60,19 @@ class Artikel extends CI_Controller
 	{
 		$payload['id'] = uniqid($this->session->userdata('id'));
 
-		if (!$this->_uploadImage()) 
+		if (!$this->_uploadImage())
 		{
 			$error = $this->upload->display_errors('<p class="m-0 p-0">', '</p>');
 			$this->session->set_flashdata('error', $error);
 			return;
-		} 
+		}
 
 		$payload['image_url'] = $this->upload->data()['file_name'];
-		if ($this->martikel->createArtikel($payload)) 
+		if ($this->martikel->createArtikel($payload))
 		{
 			$this->session->set_flashdata('message', 'Article added successfully.');
-		} 
-		else 
+		}
+		else
 		{
 			$this->session->set_flashdata('error', 'Failed to add the article.');
 		}
@@ -79,7 +83,7 @@ class Artikel extends CI_Controller
 		$id = $this->input->post('id');
 
 		// Check image
-		if ($_FILES['image']['name']) 
+		if ($_FILES['image']['name'])
 		{
 			if ($this->_uploadImage())
 			{
@@ -97,12 +101,18 @@ class Artikel extends CI_Controller
 				return;
 			}
 		}
+<<<<<<< HEAD
 		
 		if ($this->martikel->updateArtikel($id, $payload)) 
+=======
+
+
+		if ($this->martikel->updateArtikel($payload, $id))
+>>>>>>> 8cda13a (x)
 		{
 			$this->session->set_flashdata('message', 'Article updated successfully.');
-		} 
-		else 
+		}
+		else
 		{
 			$this->session->set_flashdata('error', 'Failed to update the article.');
 		}
@@ -134,13 +144,17 @@ class Artikel extends CI_Controller
 
 	public function delete($id){
 		$artikel = $this->martikel->getArtikelWhere(['id' => $id])->row_array();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8cda13a (x)
 		unlink(FCPATH.'./uploads/artikel/'.$artikel['image_url']);
-		
-		if ($this->martikel->deleteArtikel($id)) 
+
+		if ($this->martikel->deleteArtikel($id))
 		{
 			$this->session->set_flashdata('message', 'Article deleted successfully.');
-		} 
-		else 
+		}
+		else
 		{
 			$this->session->set_flashdata('error', 'Failed to delete the article.');
 		}
