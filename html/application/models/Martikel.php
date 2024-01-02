@@ -32,7 +32,7 @@ class Martikel extends CI_Model
 		return $this->db->insert('artikel', $data);
 	}
 
-	public function updateArtikel( $payload=[] ,$id)
+	public function updateArtikel($id, $payload=[])
 	{
 		return $this->db->update('artikel', $payload, ['id' => $id]);
 	}
