@@ -129,6 +129,8 @@ class Artikel extends CI_Controller
 
 		$data= $this->martikel->getArtikelWhere(['id'=>$id])->result_array();
 
+		// var_dump($data);die;
+
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 	}
 

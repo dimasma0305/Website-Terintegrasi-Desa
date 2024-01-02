@@ -74,6 +74,7 @@
 							<th>#</th>
 							<th>Title</th>
 							<th>Author</th>
+							<th>Created at</th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -82,17 +83,20 @@
                             <th>#</th>
 							<th>Title</th>
 							<th>Author</th>
+							<th>Created at</th>
 							<th>Action</th>
                         </tr>
                     </tfoot>
 					<tbody>
 						<?php 
+						// var_dump(	$artikel);die;
 						$i=1;
 						foreach ($artikel as $artikel) : ?>
 							<tr>
 								<th><?= $i ?></th>
 								<td><?= $artikel->title; ?></td>
-								<td><?= $artikel->author_id; ?></td>
+								<td><?= $artikel->username; ?></td>
+								<td><?= $artikel->created_at; ?></td>
 								<td>
 									<!-- <button class="btn btn-sm btn-danger" data-id="<?= $artikel->id; ?>"><i class="fas fa-fw fa-trash"></i></button> -->
 									<button class="btn btn-sm btn-primary" onclick="detailArtikel('<?= $artikel->slug; ?>')"><i class="fas fa-fw fa-eye"></i></button>
@@ -160,6 +164,7 @@
 	}
 
 	function editArtikel(idArtikel) {
+		console.log(idArtikel);
 		$.ajax({
 			type: "post",
 			url: baseUrl+"artikel/edit/",

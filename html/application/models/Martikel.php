@@ -6,7 +6,7 @@ class Martikel extends CI_Model
 	{
 		// Fetch all articles from the 'articles' table
 		$query = $this->db->get('artikel');
-		return $query->result();
+		return $query->row();
 	}
 
 	public function getArtikelWhere($where=[])
@@ -14,9 +14,17 @@ class Martikel extends CI_Model
 		return $this->db->get_where('artikel', $where);
 	}
 
-	public function getAllArtikel()
+	public function getAllArtikel($limit=null)
 	{
-		return $this->db->get('artikel')->result();
+		$this->db->select('artikel.*, users.username AS username');
+		$this->db->from('artikel');
+		$this->db->join('users', 'artikel.author_id = users.id');
+
+		if ($limit !== null) {
+			$this->db->limit($limit);
+		}
+
+		return $this->db->get()->result();
 	}
 
 	public function createArtikel($data)
@@ -26,16 +34,7 @@ class Martikel extends CI_Model
 
 	public function updateArtikel( $payload=[] ,$id)
 	{
-		// Update an existing article in the 'articles' table
-		// $data = array(
-		// 	'title' => $title,
-		// 	'content' => $content
-		// );
-
-		// $this->db->where('id', $artikelId);
-		// $this->db->update('artikel', $data);
-
-		return $this->db->update('artikel', $payload, ['id']);
+		return $this->db->update('artikel', $payload, ['id' => $id]);
 	}
 
 	public function deleteArtikel($artikelId)
