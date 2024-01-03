@@ -3,7 +3,7 @@
 class Artikel extends CI_Controller
 {
 	public Auth $auth;
-	// public Martikel $martikel;
+	public Martikel $martikel;
 
 	function __construct()
 	{
@@ -98,7 +98,7 @@ class Artikel extends CI_Controller
 			}
 		}
 		
-		if ($this->martikel->updateArtikel($id, $payload)) 
+		if ($this->martikel->updateArtikel($id, $pay)) 
 		{
 			$this->session->set_flashdata('message', 'Article updated successfully.');
 		} 
