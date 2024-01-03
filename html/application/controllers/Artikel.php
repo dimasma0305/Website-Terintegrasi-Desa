@@ -98,7 +98,7 @@ class Artikel extends CI_Controller
 			}
 		}
 		
-		if ($this->martikel->updateArtikel($id, $pay)) 
+		if ($this->martikel->updateArtikel($id, $payload)) 
 		{
 			$this->session->set_flashdata('message', 'Article updated successfully.');
 		} 
