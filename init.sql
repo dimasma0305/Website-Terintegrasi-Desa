@@ -1,9 +1,29 @@
 CREATE DATABASE IF NOT EXISTS dbdesa;
 use dbdesa;
+
+CREATE TABLE IF NOT EXISTS pendidikan (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pendidikan VARCHAR(100) UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS pekerjaan (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pekerjaan VARCHAR(100) UNIQUE
+);
+
+-- Tambah kolom pendidikan/pekerjaan/agama/tanggal lahir/jenis kelamin  
 CREATE TABLE IF NOT EXISTS penduduk (
     nik CHAR(16) PRIMARY KEY,
-    nama VARCHAR(255)
+    nama VARCHAR(255),
+    pendidikan_id INT,
+    pekerjaan_id INT,
+    tanggal_lahir DATE,
+    jenis_kelamin ENUM("Laki-laki", "Perempuan"),
+    alamat VARCHAR(255),
+    FOREIGN KEY (pendidikan_id) REFERENCES pendidikan(id),
+    FOREIGN KEY (pekerjaan_id) REFERENCES pekerjaan(id)
 );
+
 INSERT INTO penduduk (nik, nama)
 VALUES ("1111111111111111", "Dimas Maulana"),
     ("2222222222222222", "Patrick"),
