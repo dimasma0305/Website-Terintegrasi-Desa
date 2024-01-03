@@ -6,10 +6,21 @@ CREATE TABLE IF NOT EXISTS pendidikan (
     pendidikan VARCHAR(100) UNIQUE
 );
 
+INSERT INTO pendidikan (pendidikan)
+VALUES ('SD'),
+    ('SMP'),
+    ('SMA'),
+    ('S1');
+
 CREATE TABLE IF NOT EXISTS pekerjaan (
     id INT AUTO_INCREMENT PRIMARY KEY,
     pekerjaan VARCHAR(100) UNIQUE
 );
+
+INSERT INTO pekerjaan (pekerjaan)
+VALUES ('PNS'),
+    ('Swasta'),
+    ('-');
 
 -- Tambah kolom pendidikan/pekerjaan/agama/tanggal lahir/jenis kelamin  
 CREATE TABLE IF NOT EXISTS penduduk (
