@@ -2,12 +2,12 @@
 
 class Martikel extends CI_Model
 {
-	public function getArtikel()
-	{
-		// Fetch all articles from the 'articles' table
-		$query = $this->db->get('artikel');
-		return $query->row();
-	}
+	// public function getArtikel()
+	// {
+	// 	// Fetch all articles from the 'articles' table
+	// 	$query = $this->db->get('artikel');
+	// 	return $query->row();
+	// }
 
 	public function getArtikelWhere($where=[])
 	{

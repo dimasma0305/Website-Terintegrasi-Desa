@@ -7,6 +7,10 @@
                 <tr>
                     <th>NIK</th>
                     <th>Nama</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Alamat</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>

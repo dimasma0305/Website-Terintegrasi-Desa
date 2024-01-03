@@ -9,7 +9,7 @@ class Artikel extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('auth');
-		$this->load->model('martikel'); // Load the Martikel model
+		$this->load->model('martikel');
 	}
 
 	public function index()
@@ -98,8 +98,7 @@ class Artikel extends CI_Controller
 			}
 		}
 		
-
-		if ($this->martikel->updateArtikel($payload, $id)) 
+		if ($this->martikel->updateArtikel($id, $payload)) 
 		{
 			$this->session->set_flashdata('message', 'Article updated successfully.');
 		} 
@@ -133,30 +132,6 @@ class Artikel extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 	}
 
-	// Add this method to your Artikel controller
-	public function detail($slug)
-	{
-		// Load the article details from the model based on the $slug
-		$article = $this->martikel->getArtikelWhere(['slug' => $slug])->row();
-
-		// Check if the article exists
-		if ($article) {
-			$data['article'] = $article;
-			$data['title'] = $article->title;
-
-			// Load your views
-			$this->load->view('partials_template/header', $data);
-			$this->load->view('partials_template/sidebar_template');
-			$this->load->view('partials_template/navbar_template');
-			$this->load->view('artikel/detail', $data); // Create a new view file (e.g., detail.php)
-			$this->load->view('partials_template/footer');
-		} else {
-			// Article not found, handle appropriately (e.g., show an error message)
-			$this->session->set_flashdata('error', 'Article not found.');
-			redirect('artikel/add'); // Redirect to a default page or handle as needed
-		}
-	}
-
 	public function delete($id){
 		$artikel = $this->martikel->getArtikelWhere(['id' => $id])->row_array();
 		unlink(FCPATH.'./uploads/artikel/'.$artikel['image_url']);
@@ -173,7 +148,7 @@ class Artikel extends CI_Controller
 		redirect('artikel');
 	}
 
-	function print()
+	public function print()
     {
         $data['artikel']=$this->martikel->getAllArtikel();
         require_once(APPPATH . 'libraries/dompdf/autoload.inc.php');
