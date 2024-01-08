@@ -82,13 +82,11 @@ class Artikel extends CI_Controller
 	{
 		$id = $this->input->post('id');
 
-		// Check image
 		if ($_FILES['image']['name'])
 		{
 			if ($this->_uploadImage())
 			{
 				$artikel = $this->martikel->getArtikelWhere(['id'=>$id])->row_array();
-				// Delete old image
 				$oldImage = $artikel['image_url'];
 				unlink(FCPATH. './uploads/artikel/'.$oldImage);
 
@@ -137,11 +135,30 @@ class Artikel extends CI_Controller
 
 		$data= $this->martikel->getArtikelWhere(['id'=>$id])->result_array();
 
-		// var_dump($data);die;
-
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 	}
 
+<<<<<<< HEAD
+=======
+	public function detail($slug)
+	{
+		$article = $this->martikel->getArtikelWhere(['slug' => $slug])->row();
+		if ($article) {
+			$data['article'] = $article;
+			$data['title'] = $article->title;
+
+			$this->load->view('partials_template/header', $data);
+			$this->load->view('partials_template/sidebar_template');
+			$this->load->view('partials_template/navbar_template');
+			$this->load->view('artikel/detail', $data);
+			$this->load->view('partials_template/footer');
+		} else {
+			$this->session->set_flashdata('error', 'Article not found.');
+			redirect('artikel/add');
+		}
+	}
+
+>>>>>>> 2698755 (feat: add improvment to jspdf)
 	public function delete($id){
 		$artikel = $this->martikel->getArtikelWhere(['id' => $id])->row_array();
 <<<<<<< HEAD
@@ -161,6 +178,7 @@ class Artikel extends CI_Controller
 
 		redirect('artikel');
 	}
+<<<<<<< HEAD
 
 	public function print()
     {
@@ -176,4 +194,6 @@ class Artikel extends CI_Controller
         $pdf->render();
         $pdf->stream('NamaFile', ['Attachment' => false]);	
     }
+=======
+>>>>>>> 2698755 (feat: add improvment to jspdf)
 }

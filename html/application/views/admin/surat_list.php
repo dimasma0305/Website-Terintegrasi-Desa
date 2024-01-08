@@ -25,16 +25,18 @@
 							<td><?= html_escape($surat->title) ?></td>
 							<td><?= html_escape($surat->jenisSuratName) ?></td>
 							<td>
-								<select id="status-<?= html_escape($surat->id) ?>" name="status">
-									<?php
-									$status = ['pending', 'diterima', 'ditolak'];
-									foreach ($status as $stat) {
-									?>
-										<option value="<?= $stat ?>" <?= $surat->status == $stat ? 'selected' : '' ?>><?= $stat ?></option>
-									<?php
-									}
-									?>
-								</select>
+								<form class="form-floating">
+									<select class="form-select" id="status-<?= html_escape($surat->id) ?>" name="status">
+										<?php
+										$status = ['pending', 'diterima', 'ditolak'];
+										foreach ($status as $stat) {
+										?>
+											<option value="<?= $stat ?>" <?= $surat->status == $stat ? 'selected' : '' ?>><?= $stat ?></option>
+										<?php
+										}
+										?>
+									</select>
+								</div>
 							</td>
 							<td>
 								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal-<?= html_escape($surat->id) ?>">
@@ -97,7 +99,7 @@
 							<td><?= html_escape($surat->ownerUsername) ?></td>
 							<td><?= html_escape($surat->title) ?></td>
 							<td><?= html_escape($surat->jenisSuratName) ?></td>
-							<td><?=$surat->status?></td>
+							<td id="status-pdf-<?= html_escape($surat->id) ?>"><?= $surat->status ?></td>
 						</tr>
 					<?php
 						$count++;
@@ -107,12 +109,13 @@
 			</table>
 		<?php endif; ?>
 		<a href="<?= base_url('surat') ?>" class="btn btn-primary">Back to Surat Form</a>
-		<button id="saveAsPdf">Save as PDF</button>
+		<div id="pdf" class="mt-3"></div>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.1/jspdf.plugin.autotable.min.js" integrity="sha512-8+n4PSpp8TLHbSf28qpjRfu51IuWuJZdemtTC1EKCHsZmWi2O821UEdt6S3l4+cHyUQhU8uiAAUeVI1MUiFATA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="<?= base_url('static/js/jspdf.umd.min.js') ?>"></script>
+	<script src="<?= base_url('static/js/jspdf.plugin.autotable.min.js') ?>"></script>
 	<script>
 		$(document).ready(function() {
+			renderPDF()
 			$('select[id^="status-"]').change(function() {
 				var selectedValue = $(this).val();
 				var suratId = this.id.split("-")[1];
@@ -131,6 +134,8 @@
 						success: function(data) {
 							if (data.status === 'ok') {
 								alert('Status updated successfully.');
+								$('#status-pdf-' + suratId).text(selectedValue)
+								renderPDF()
 							} else {
 								alert('Error updating status.');
 							}
@@ -143,13 +148,13 @@
 				}
 			});
 		});
-		$('#saveAsPdf').click(function() {
+
+		function renderPDF() {
 			const pdf = new jspdf.jsPDF();
 
-			// Add table to PDF
 			pdf.autoTable({
 				html: '#contentToPdf',
-				theme: 'striped', // Optional: add a theme to the table
+				theme: 'striped',
 				styles: {
 					cellPadding: 0.2,
 					fontSize: 8
@@ -166,9 +171,11 @@
 					bottom: 1
 				}
 			});
-
-			// Save the PDF
-			pdf.save('surat_table.pdf');
-		});
+			const frame = document.createElement("iframe")
+			frame.width = "100%"
+			frame.src = pdf.output('datauristring')
+			$("#pdf").html("")
+			$("#pdf").append(frame)
+		}
 	</script>
 </main>

@@ -24,11 +24,6 @@ class Admin extends CI_Controller
 		$this->load->view('partials_template/footer');
     }
 
-    function index()
-    {
-        // Your index method logic here
-    }
-
     function surat_list()
     {
         $suratData = $this->msurat->getSuratAndOwner();
