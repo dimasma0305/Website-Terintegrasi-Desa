@@ -11,11 +11,16 @@ class User extends CI_Controller
 		$this->load->library('auth');
 		$this->auth->must_login();
 		$this->load->model('muser');
+		$this->load->model('msurat');
 	}
 
 	public function dashboard()
 	{
 		$data['title'] = 'Dashboard';
+		$data['diterima'] = $this->msurat->getSuratByStatus('diterima')->num_rows();
+		$data['pending'] = $this->msurat->getSuratByStatus('pending')->num_rows();
+		$data['ditolak'] = $this->msurat->getSuratByStatus('ditolak')->num_rows();
+
 		$this->load->view('partials_template/header', $data);
 		$this->load->view('partials_template/sidebar_template');
 		$this->load->view('partials_template/navbar_template');

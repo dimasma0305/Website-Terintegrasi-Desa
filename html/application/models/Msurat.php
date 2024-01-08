@@ -62,4 +62,10 @@ class Msurat extends CI_Model
 		$query = $this->db->get('surat');
 		return $query->row();
 	}
+
+	// Nyoba buat dasbod
+	public function getSuratByStatus($status)
+	{
+		return $this->db->get_where('surat', ['status' => $status]);
+	}
 }

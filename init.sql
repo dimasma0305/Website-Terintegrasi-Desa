@@ -24,7 +24,7 @@ VALUES ('PNS'),
 
 -- Tambah kolom pendidikan/pekerjaan/agama/tanggal lahir/jenis kelamin  
 CREATE TABLE IF NOT EXISTS penduduk (
-    nik CHAR(16) PRIMARY KEY,
+    nik CHAR(16) PRIMARY KEY UNIQUE,
     nama VARCHAR(255),
     pendidikan_id INT,
     pekerjaan_id INT,
@@ -40,21 +40,30 @@ VALUES ("1111111111111111", "Dimas Maulana"),
     ("2222222222222222", "Patrick"),
     ("3333333333333333", "Spongebob"),
     ("4444444444444444", "Yujin");
+    
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL,
     password CHAR(60) NOT NULL,
     role ENUM("user", "admin") DEFAULT "user",
-    nik CHAR(16) DEFAULT NULL,
+    nik CHAR(16) NOT NULL,
     FOREIGN KEY (nik) REFERENCES penduduk(nik)
 );
-INSERT INTO users (username, email, password, role)
+INSERT INTO users (username, email, password, role, nik)
 VALUES (
         "admin",
         "admin@admin.com",
         "$2y$10$W2Nk5p1hL1jraYSPkESaN.01Rai//bWmgoQRluWRrys4DsoOD0JDC",
-        "admin"
+        "admin",
+        '1111111111111111'
+    ),
+    (
+        "user",
+        "user@user.com",
+        "$2a$12$2hFpzhuPqj.SnHHUQHMmf.rLt/e3z/wS.da4EDGvnuEaGHTsQm/ZK",
+        "user",
+        '1111111111111111'
     );
 CREATE TABLE IF NOT EXISTS jenisSurat(
     id INT AUTO_INCREMENT PRIMARY KEY,
