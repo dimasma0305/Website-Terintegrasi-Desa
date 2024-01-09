@@ -92,8 +92,8 @@
 					Artikel
 				</div>
 
-				<li class="nav-item <?= activeLink('artikel	') ?>">
-					<a class="nav-link" href="<?= base_url('artikel	') ?>">
+				<li class="nav-item <?= activeLink('artikel') ?>">
+					<a class="nav-link" href="<?= base_url('artikel') ?>">
 						<i class="fas fa-fw fa-user-edit"></i>
 						<span>Artikel</span></a>
 				</li>

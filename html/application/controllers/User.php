@@ -17,15 +17,17 @@ class User extends CI_Controller
 	public function dashboard()
 	{
 		$data['title'] = 'Dashboard';
-		$data['diterima'] = $this->msurat->getSuratByStatus('diterima')->num_rows();
-		$data['pending'] = $this->msurat->getSuratByStatus('pending')->num_rows();
-		$data['ditolak'] = $this->msurat->getSuratByStatus('ditolak')->num_rows();
+		$data['surat'] = [
+			'diterima'=> $this->msurat->getSuratByStatus('diterima')->num_rows(),
+			'pending' => $this->msurat->getSuratByStatus('pending')->num_rows(),
+			'ditolak' => $this->msurat->getSuratByStatus('ditolak')->num_rows()
+		];
 
 		$this->load->view('partials_template/header', $data);
 		$this->load->view('partials_template/sidebar_template');
 		$this->load->view('partials_template/navbar_template');
 		$this->load->view('dashboard_template', $data);
-		$this->load->view('partials_template/footer');
+		$this->load->view('partials_template/footer', $data);
 	}
 
 	public function profile()
@@ -91,4 +93,32 @@ class User extends CI_Controller
 
 		redirect('user/profile');
 	}
+
+	// Fungsi Chat gpt dibawah
+	public function pieChart()
+	{
+		$data = [
+			'Diterima'=> $this->msurat->getSuratByStatus('diterima')->num_rows(),
+			'Pending' => $this->msurat->getSuratByStatus('pending')->num_rows(),
+			'Ditolak' => $this->msurat->getSuratByStatus('ditolak')->num_rows()
+		];
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	}
+
+	public function barChart()
+	{
+		$data = [
+			'-'=> $this->_getPendudukByPekerjaan(1)->num_rows(),
+			'PNS' => $this->_getPendudukByPekerjaan(2)->num_rows(),
+			'Swasta' => $this->_getPendudukByPekerjaan(3)->num_rows()
+		];
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	}
+
+	// Taro dimodel nanti
+	private function _getPendudukByPekerjaan($pekerjaan) {
+		return $this->db->get_where('penduduk', ['pekerjaan_id' => $pekerjaan]);
+    }
 }

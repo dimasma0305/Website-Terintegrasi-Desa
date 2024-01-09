@@ -38,20 +38,7 @@ class Artikel extends CI_Controller
 				'author_id' => $this->session->userdata('id'),
 			];
 
-<<<<<<< HEAD
-			// ($this->input->post('id')) ? $this->_update($payload) : $this->_add($payload);
-
-			if ($this->input->post('id')) 
-			{
-				$this->_update($payload);
-			}
-			else 
-			{
-				$this->_add($payload);
-			}
-=======
 			$this->input->post('id') ? $this->_update($payload) : $this->_add($payload);
->>>>>>> 8cda13a (x)
 			redirect('artikel');
 		}
 	}
@@ -99,14 +86,9 @@ class Artikel extends CI_Controller
 				return;
 			}
 		}
-<<<<<<< HEAD
-		
-		if ($this->martikel->updateArtikel($id, $payload)) 
-=======
 
 
 		if ($this->martikel->updateArtikel($payload, $id))
->>>>>>> 8cda13a (x)
 		{
 			$this->session->set_flashdata('message', 'Article updated successfully.');
 		}
@@ -138,8 +120,6 @@ class Artikel extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 	}
 
-<<<<<<< HEAD
-=======
 	public function detail($slug)
 	{
 		$article = $this->martikel->getArtikelWhere(['slug' => $slug])->row();
@@ -158,13 +138,8 @@ class Artikel extends CI_Controller
 		}
 	}
 
->>>>>>> 2698755 (feat: add improvment to jspdf)
 	public function delete($id){
 		$artikel = $this->martikel->getArtikelWhere(['id' => $id])->row_array();
-<<<<<<< HEAD
-=======
-
->>>>>>> 8cda13a (x)
 		unlink(FCPATH.'./uploads/artikel/'.$artikel['image_url']);
 
 		if ($this->martikel->deleteArtikel($id))
@@ -178,7 +153,6 @@ class Artikel extends CI_Controller
 
 		redirect('artikel');
 	}
-<<<<<<< HEAD
 
 	public function print()
     {
@@ -194,6 +168,4 @@ class Artikel extends CI_Controller
         $pdf->render();
         $pdf->stream('NamaFile', ['Attachment' => false]);	
     }
-=======
->>>>>>> 2698755 (feat: add improvment to jspdf)
 }
