@@ -13,7 +13,7 @@
 		?>
 
 		<!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -84,39 +84,61 @@
 			<?php
 			if ($this->session->userdata('role') == 'admin') {
 			?>
-				<!-- Divider -->
-				<hr class="sidebar-divider">
+			<!-- Divider -->
+			<hr class="sidebar-divider">
 
-				<!-- Heading -->
-				<div class="sidebar-heading">
-					Artikel
-				</div>
+			<!-- Heading -->
+			<div class="sidebar-heading">
+				Artikel
+			</div>
 
-				<li class="nav-item <?= activeLink('artikel') ?>">
-					<a class="nav-link" href="<?= base_url('artikel') ?>">
-						<i class="fas fa-fw fa-user-edit"></i>
-						<span>Artikel</span></a>
-				</li>
+			<li class="nav-item <?= activeLink('artikel') ?>">
+				<a class="nav-link" href="<?= base_url('artikel') ?>">
+					<i class="fas fa-fw fa-user-edit"></i>
+					<span>Artikel</span></a>
+			</li>
 
-				<!-- Divider -->
-				<hr class="sidebar-divider">
+			<!-- Divider -->
+			<hr class="sidebar-divider">
 
-				<!-- Heading -->
-				<div class="sidebar-heading">
-					List
-				</div>
+			<!-- Heading -->
+			<div class="sidebar-heading">
+				List
+			</div>
 
-				<li class="nav-item <?= activeLink('admin/surat_list') ?>">
-					<a class="nav-link" href="<?= base_url('admin/surat_list') ?>">
-						<i class="fas fa-fw fa-user-edit"></i>
-						<span>Admin list surat</span></a>
-				</li>
+			<li class="nav-item <?= activeLink('admin/surat_list') ?>">
+				<a class="nav-link" href="<?= base_url('admin/surat_list') ?>">
+					<i class="fas fa-fw fa-user-edit"></i>
+					<span>Admin list surat</span></a>
+			</li>
 
-				<li class="nav-item <?= activeLink('admin/penduduk_list') ?>">
-					<a class="nav-link" href="<?= base_url('admin/penduduk_list') ?>">
-						<i class="fas fa-fw fa-user-edit"></i>
-						<span>List Penduduk</span></a>
-				</li>
+			<!-- Divider -->
+			<hr class="sidebar-divider">
+
+			<!-- Heading -->
+			<div class="sidebar-heading">
+				Penduduk
+			</div>
+
+			<!-- Nav Item - Dashboard -->
+			<li class="nav-item <?= activeLink('penduduk/tambah') ?>">
+				<a class="nav-link" href="<?= base_url('penduduk/tambah') ?>">
+					<i class="fas fas-fw fa-envelope-open-text"></i>
+					<span>Form Penduduk</span></a>
+			</li>
+
+			<!-- Nav Item - Dashboard -->
+			<li class="nav-item <?= activeLink('penduduk/list_penduduk') ?>">
+				<a class="nav-link" href="<?= base_url('penduduk/list_penduduk') ?>">
+					<i class="fas fa-fw fa-mail-bulk"></i>
+					<span>Daftar Penduduk</span></a>
+			</li>
+
+			<li class="nav-item <?= activeLink('admin/penduduk_list') ?>">
+				<a class="nav-link" href="<?= base_url('admin/penduduk_list') ?>">
+					<i class="fas fa-fw fa-user-edit"></i>
+					<span>List Penduduk</span></a>
+			</li>
 			<?php
 			}
 			?>

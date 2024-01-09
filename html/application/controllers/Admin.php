@@ -44,7 +44,7 @@ class Admin extends CI_Controller
 
     function penduduk_list()
     {
-        $pendudukData = $this->mpenduduk->getAllPenduduk();
+        $pendudukData = $this->mpenduduk->getAllPendudukWithDetails();
         $this->loadViewWithFooterAndHeader('admin/penduduk_list', ['title'=>'list penduduk','pendudukData' => $pendudukData]);
     }
 }

@@ -57,6 +57,8 @@ $route['logout'] = 'index/logout';
 $route['dashboard'] = 'user/dashboard';
 $route['form_surat'] = 'surat';
 $route['daftar_surat'] = 'surat/list';
+$route['form_penduduk'] = 'penduduk/form_penduduk';
+$route['penduduk/edit/(:any)'] = 'penduduk/editPenduduk/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
