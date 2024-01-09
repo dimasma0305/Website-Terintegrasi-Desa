@@ -96,7 +96,7 @@ class Penduduk extends CI_Controller
             $this->mpenduduk->updatePenduduk($nik, $formData);
         
             // Redirect ke halaman index
-            redirect('penduduk');
+            redirect('penduduk/list_penduduk');
         }
     }    
 
