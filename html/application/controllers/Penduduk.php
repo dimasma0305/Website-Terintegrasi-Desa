@@ -67,6 +67,8 @@ class Penduduk extends CI_Controller
     {
         $data['title'] = 'Edit Penduduk';
         $data['penduduk'] = $this->mpenduduk->getPendudukByNik($nik);
+        $data['pendidikan'] = $this->mpenduduk->getPendidikan();
+        $data['pekerjaan'] = $this->mpenduduk->getPekerjaan();
     
         $formData = array(
             'nama' => $this->input->post('nama'),
@@ -109,7 +111,7 @@ class Penduduk extends CI_Controller
 
     private function loadViewWithFooterAndHeader($view, $pendudukData = array())
     {
-        $this->load->view('partials_template/header');
+        $this->load->view('partials_template/header', $pendudukData);
         $this->load->view('partials_template/sidebar_template');
         $this->load->view('partials_template/navbar_template');
         $this->load->view($view, $pendudukData);

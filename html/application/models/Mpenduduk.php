@@ -48,7 +48,7 @@ class Mpenduduk extends CI_Model
     {
         $this->db->where('nik', $nik);
     
-        if ($this->db->update('penduduk', $data)) {
+        if ($this->db->update('penduduk', $formData)) {
             // Update berhasil
             return true;
         } else {
