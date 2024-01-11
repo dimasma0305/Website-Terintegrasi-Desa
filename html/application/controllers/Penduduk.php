@@ -2,7 +2,7 @@
 
 class Penduduk extends CI_Controller
 {
-    
+
     function __construct()
     {
         parent::__construct();
@@ -30,7 +30,7 @@ class Penduduk extends CI_Controller
         $data['pekerjaan'] = $this->mpenduduk->getPekerjaan();
 
         // Validasi Form
-        $this->form_validation->set_rules('nik', 'NIK', 'required');
+        $this->form_validation->set_rules('nik', 'NIK', 'required|numeric');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('pendidikan_id', 'Pendidikan', 'required');
         $this->form_validation->set_rules('pekerjaan_id', 'Pekerjaan', 'required');
@@ -38,7 +38,7 @@ class Penduduk extends CI_Controller
         $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
         // Tambahkan validasi untuk kolom lain sesuai kebutuhan
-    
+
         if ($this->form_validation->run() == FALSE) {
             // Jika validasi gagal, tampilkan kembali form dengan pesan error
             $this->loadViewWithFooterAndHeader('penduduk/form_penduduk', $data);
@@ -54,9 +54,9 @@ class Penduduk extends CI_Controller
                 'alamat' => $this->input->post('alamat')
                 // Tambahkan kolom lain sesuai kebutuhan
             );
-    
+
             $this->mpenduduk->tambahPenduduk($data_penduduk);
-    
+
             // Redirect ke halaman index
             redirect('penduduk');
         }
@@ -69,7 +69,7 @@ class Penduduk extends CI_Controller
         $data['penduduk'] = $this->mpenduduk->getPendudukByNik($nik);
         $data['pendidikan'] = $this->mpenduduk->getPendidikan();
         $data['pekerjaan'] = $this->mpenduduk->getPekerjaan();
-    
+
         $formData = array(
             'nama' => $this->input->post('nama'),
             'pendidikan_id' => $this->input->post('pendidikan_id'),
@@ -79,7 +79,7 @@ class Penduduk extends CI_Controller
             'alamat' => $this->input->post('alamat')
             // Tambahkan kolom lain sesuai kebutuhan
         );
-    
+
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('pendidikan_id', 'Pendidikan', 'required');
         $this->form_validation->set_rules('pekerjaan_id', 'Pekerjaan', 'required');
@@ -87,18 +87,19 @@ class Penduduk extends CI_Controller
         $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
         // Tambahkan validasi untuk kolom lain sesuai kebutuhan
-    
+
         if ($this->form_validation->run() == FALSE) {
             // Jika validasi gagal, tampilkan kembali form dengan pesan error
+			$this->session->set_flashdata('error', validation_errors());
             $this->loadViewWithFooterAndHeader('penduduk/edit_penduduk', $data);
         } else {
             // Jika validasi sukses, update data ke database
             $this->mpenduduk->updatePenduduk($nik, $formData);
-        
+
             // Redirect ke halaman index
-            redirect('penduduk');
+            redirect('penduduk/list_penduduk');
         }
-    }    
+    }
 
     public function hapus($nik)
     {
@@ -123,5 +124,5 @@ class Penduduk extends CI_Controller
         $pendudukData = $this->mpenduduk->getAllPendudukWithDetails();
         $data = ['title' => 'List Penduduk', 'pendudukData' => $pendudukData];
         $this->loadViewWithFooterAndHeader('penduduk/list_penduduk', $data);
-    }    
+    }
 }
