@@ -22,7 +22,6 @@ VALUES ('PNS'),
     ('Swasta'),
     ('-');
 
--- Tambah kolom pendidikan/pekerjaan/agama/tanggal lahir/jenis kelamin  
 CREATE TABLE IF NOT EXISTS penduduk (
     nik CHAR(16) PRIMARY KEY UNIQUE,
     nama VARCHAR(255),
@@ -48,8 +47,9 @@ CREATE TABLE IF NOT EXISTS users (
     password CHAR(60) NOT NULL,
     role ENUM("user", "admin") DEFAULT "user",
     nik CHAR(16) NOT NULL,
-    FOREIGN KEY (nik) REFERENCES penduduk(nik)
+    FOREIGN KEY (nik) REFERENCES penduduk(nik) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 INSERT INTO users (username, email, password, role, nik)
 VALUES (
         "admin",
@@ -63,17 +63,20 @@ VALUES (
         "user@user.com",
         "$2a$12$2hFpzhuPqj.SnHHUQHMmf.rLt/e3z/wS.da4EDGvnuEaGHTsQm/ZK",
         "user",
-        '1111111111111111'
+        '2222222222222222'
     );
+
 CREATE TABLE IF NOT EXISTS jenisSurat(
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(60)
 );
+
 INSERT INTO jenisSurat (name)
 VALUES ('Surat Keterangan Domisili'),
     ('Surat Keterangan Usaha'),
     ('Surat Keterangan Kelahiran'),
     ('Surat Keterangan Kematian');
+
 CREATE TABLE IF NOT EXISTS surat (
     id INT AUTO_INCREMENT PRIMARY KEY,
     owner INT NOT NULL,

@@ -5,13 +5,12 @@
             <!-- Main Content -->
             <div id="content">
 
+            
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand-lg p-3 navbar-light bg-white mb-5 static-top shadow">
-                      <!-- Sidebar Toggle (Topbar) -->
-                      <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    <div class='container-fluid'>
+                    
+                    
+                    <div class='container'>
                         <a class='navbar-brand' href='<?=base_url('/')?>'>Hidden brand</a>
 
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,25 +22,44 @@
                             <!-- Topbar Navbar -->
                             <ul class="navbar-nav ml-auto">
 
-
-                                <!-- Nav Item  -->
-                                <li class="nav-item mx-1">
-                                    <a href="" class="nav-link text-dark">Contact</a>
-                                </li>
-
                                 <!-- Nav Item -->
                                 <li class="nav-item mx-1">
                                     <a href="" class="nav-link text-dark">Home</a>
                                 </li>
+
+                                <!-- Nav Item  -->
+                                <li class="nav-item mx-1">
+                                    <a href="" class="nav-link text-dark">Artikel</a>
+                                </li>
+
+                                <!-- Nav Item  -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   Data Desa
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </li>
+
+                                <!-- Nav Item  -->
+                                <li class="nav-item mx-1">
+                                    <a href="" class="nav-link text-dark">Login</a>
+                                </li>
+
+                                
+
                             </ul>
 
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->
-                            <div class="mx-1">
+                            <!-- <div class="mx-1">
                                 <a href="<?=base_url('/index/login')?>" class="btn btn-outline-primary">Login</a>
                                 <a href="<?=base_url('/index/register')?>" class="btn btn-outline-primary">Register</a>
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>

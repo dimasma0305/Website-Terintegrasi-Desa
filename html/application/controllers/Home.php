@@ -12,7 +12,7 @@ Class Home extends CI_Controller{
         $data['title'] = "Home"; 
         $data['artikel'] = $this->martikel->getAllArtikel(6);
         $this->load->view('partials_template/header', $data);
-        $this->load->view('partials_template/navbar_template');
+        $this->load->view('partials_template/navbar_public');
         $this->load->view('home/home');
         $this->load->view('partials_template/footer');
     }
