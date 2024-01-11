@@ -166,6 +166,6 @@ class Artikel extends CI_Controller
         $pdf->set_option('isFontSubsettingEnabled', true);
         $pdf->loadHtml($this->load->view('artikel/print_artikel',$data, true));
         $pdf->render();
-        $pdf->stream('NamaFile', ['Attachment' => false]);	
+        $pdf->stream('NamaFile', ['Attachment' => false]);
     }
 }
