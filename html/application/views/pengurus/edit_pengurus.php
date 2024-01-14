@@ -10,12 +10,12 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <?php $this->load->view('partials/flash_block') ?>
-            <form action='<?= base_url('pengurus/edit/' . $pengurus['idpengurus']) ?>' method='post' class='d-flex flex-column gap-2'>
+            <form action='<?= base_url('pengurus/edit/' . $pengurus['nip']) ?>' method='post' class='d-flex flex-column gap-2'>
                 <div class="row">
                     <div class="col-xl-2 mt-2">
                         <div class="row">
                             <div class="col-sm-2 mb-1">
-                                <img id="image-placeholder" class="rounded" src="https://placehold.co/280x330"
+                                <img id="image-placeholder" class="rounded" src="<?= base_url('uploads/pengurus/').$pengurus['fotoprofil']?>"
                                     width="280" height="330">
                             </div>
                         </div>

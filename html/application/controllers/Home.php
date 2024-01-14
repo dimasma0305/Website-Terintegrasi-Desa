@@ -5,15 +5,17 @@ Class Home extends CI_Controller{
     {
         parent::__construct();
         $this->load->model('martikel');
+        $this->load->model('mpengurus');
     }
 
     public function index()
     {
         $data['title'] = "Home"; 
         $data['artikel'] = $this->martikel->getAllArtikel(6);
+				$data['pengurus'] = $this->mpengurus->getAllPengurusWithDetails();
         $this->load->view('partials_template/header', $data);
         $this->load->view('partials_template/navbar_template');
-        $this->load->view('home/home');
+        $this->load->view('home/home', $data);
         $this->load->view('partials_template/footer');
     }
 

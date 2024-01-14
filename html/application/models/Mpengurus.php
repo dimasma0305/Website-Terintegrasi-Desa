@@ -2,12 +2,12 @@
 
 class Mpengurus extends CI_Model
 {
-    public function getPengurusById($idpengurus)
+    public function getPengurusById($id)
 {
     $this->db->select('pengurus.*, penduduk.nama');
     $this->db->from('pengurus');
     $this->db->join('penduduk', 'pengurus.nik = penduduk.nik');
-    $this->db->where('pengurus.idpengurus', $idpengurus);
+    $this->db->where('pengurus.id', $id);
     $query = $this->db->get();
 
     if ($query->num_rows() > 0) {
@@ -42,9 +42,9 @@ class Mpengurus extends CI_Model
         return $this->db->insert('pengurus', $pengurusData);
     }
 
-        public function updatePengurus($idpengurus, $formData)
+        public function updatePengurus($id, $formData)
     {
-        $this->db->where('idpengurus', $idpengurus);
+        $this->db->where('id', $id);
 
         if ($this->db->update('pengurus', $formData)) {
             // Update berhasil
@@ -57,9 +57,9 @@ class Mpengurus extends CI_Model
 
     
 
-    public function hapusPengurus($idpengurus)
+    public function hapusPengurus($id)
     {
-        $this->db->where('idpengurus', $idpengurus);
+        $this->db->where('id', $id);
         return $this->db->delete('pengurus');
     }
 }
