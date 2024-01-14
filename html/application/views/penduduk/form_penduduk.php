@@ -2,11 +2,15 @@
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800"><?= $title?></h1>
+	<h1 class="h3 mb-4 text-gray-800">
+		<?= $title ?>
+	</h1>
 
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary"><?= $title ?></h6>
+			<h6 class="m-0 font-weight-bold text-primary">
+				<?= $title ?>
+			</h6>
 		</div>
 		<div class="card-body">
 			<?php $this->load->view('partials/flash_block') ?>
@@ -26,7 +30,9 @@
 					<label class="col-sm-2 col-form-label" for='pendidikan_id'>Pendidikan</label>
 					<select class="mx-2 form-control" id='pendidikan_id' name='pendidikan_id' required>
 						<?php foreach ($pendidikan as $pendidikan): ?>
-							<option value="<?= $pendidikan['id'] ?>"><?= $pendidikan['pendidikan'] ?></option>
+							<option value="<?= $pendidikan['id'] ?>">
+								<?= $pendidikan['pendidikan'] ?>
+							</option>
 						<?php endforeach; ?>
 					</select>
 				</div>
@@ -35,7 +41,9 @@
 					<label class="col-sm-2 col-form-label" for='pekerjaan_id'>Pekerjaan</label>
 					<select class="mx-2 form-control" id='pekerjaan_id' name='pekerjaan_id' required>
 						<?php foreach ($pekerjaan as $pekerjaan): ?>
-							<option value="<?= $pekerjaan['id'] ?>"><?= $pekerjaan['pekerjaan'] ?></option>
+							<option value="<?= $pekerjaan['id'] ?>">
+								<?= $pekerjaan['pekerjaan'] ?>
+							</option>
 						<?php endforeach; ?>
 					</select>
 				</div>
@@ -67,4 +75,3 @@
 		</div>
 	</div>
 </div>
-

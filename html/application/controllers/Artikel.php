@@ -19,8 +19,7 @@ class Artikel extends CI_Controller
 		$this->form_validation->set_rules('title', 'Title', 'required');
 		$this->form_validation->set_rules('content', 'Content', 'required');
 
-		if ($this->form_validation->run() == FALSE)
-		{
+		if ($this->form_validation->run() == FALSE) {
 			$data['title'] = 'Artikel';
 			$data['artikel'] = $this->martikel->getAllArtikel();
 			$this->load->view('partials_template/header', $data);
@@ -28,9 +27,7 @@ class Artikel extends CI_Controller
 			$this->load->view('partials_template/navbar_template');
 			$this->load->view('artikel/form_artikel', $data);
 			$this->load->view('partials_template/footer');
-		}
-		else
-		{
+		} else {
 			$payload = [
 				'title' => $this->input->post('title'),
 				'slug' => url_title($this->input->post('title'), '-', TRUE),
@@ -47,20 +44,16 @@ class Artikel extends CI_Controller
 	{
 		$payload['id'] = uniqid($this->session->userdata('id'));
 
-		if (!$this->_uploadImage())
-		{
+		if (!$this->_uploadImage()) {
 			$error = $this->upload->display_errors('<p class="m-0 p-0">', '</p>');
 			$this->session->set_flashdata('error', $error);
 			return;
 		}
 
 		$payload['image_url'] = $this->upload->data()['file_name'];
-		if ($this->martikel->createArtikel($payload))
-		{
+		if ($this->martikel->createArtikel($payload)) {
 			$this->session->set_flashdata('message', 'Article added successfully.');
-		}
-		else
-		{
+		} else {
 			$this->session->set_flashdata('error', 'Failed to add the article.');
 		}
 	}
@@ -69,18 +62,14 @@ class Artikel extends CI_Controller
 	{
 		$id = $this->input->post('id');
 
-		if ($_FILES['image']['name'])
-		{
-			if ($this->_uploadImage())
-			{
-				$artikel = $this->martikel->getArtikelWhere(['id'=>$id])->row_array();
+		if ($_FILES['image']['name']) {
+			if ($this->_uploadImage()) {
+				$artikel = $this->martikel->getArtikelWhere(['id' => $id])->row_array();
 				$oldImage = $artikel['image_url'];
-				unlink(FCPATH. './uploads/artikel/'.$oldImage);
+				unlink(FCPATH . './uploads/artikel/' . $oldImage);
 
 				$payload['image_url'] = $this->upload->data()['file_name'];
-			}
-			else
-			{
+			} else {
 				$error = $this->upload->display_errors('<p class="m-0 p-0">', '</p>');
 				$this->session->set_flashdata('error', $error);
 				return;
@@ -88,12 +77,9 @@ class Artikel extends CI_Controller
 		}
 
 
-		if ($this->martikel->updateArtikel($id, $payload))
-		{
+		if ($this->martikel->updateArtikel($id, $payload)) {
 			$this->session->set_flashdata('message', 'Article updated successfully.');
-		}
-		else
-		{
+		} else {
 			$this->session->set_flashdata('error', 'Failed to update the article.');
 		}
 	}
@@ -115,7 +101,7 @@ class Artikel extends CI_Controller
 	{
 		$id = $this->input->post("id");
 
-		$data= $this->martikel->getArtikelWhere(['id'=>$id])->result_array();
+		$data = $this->martikel->getArtikelWhere(['id' => $id])->result_array();
 
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 	}
@@ -138,16 +124,14 @@ class Artikel extends CI_Controller
 		}
 	}
 
-	public function delete($id){
+	public function delete($id)
+	{
 		$artikel = $this->martikel->getArtikelWhere(['id' => $id])->row_array();
-		unlink(FCPATH.'./uploads/artikel/'.$artikel['image_url']);
+		unlink(FCPATH . './uploads/artikel/' . $artikel['image_url']);
 
-		if ($this->martikel->deleteArtikel($id))
-		{
+		if ($this->martikel->deleteArtikel($id)) {
 			$this->session->set_flashdata('message', 'Article deleted successfully.');
-		}
-		else
-		{
+		} else {
 			$this->session->set_flashdata('error', 'Failed to delete the article.');
 		}
 
@@ -155,17 +139,17 @@ class Artikel extends CI_Controller
 	}
 
 	public function print()
-    {
-        $data['artikel']=$this->martikel->getAllArtikel();
-        require_once(APPPATH . 'libraries/dompdf/autoload.inc.php');
-        $pdf = new Dompdf\Dompdf();
-        $pdf->setPaper('A4', 'potrait');
-        $pdf->set_option('isRemoteEnabled', TRUE);
-        $pdf->set_option('isHtml5ParserEnabled', true);
-        $pdf->set_option('isPhpEnabled', true);
-        $pdf->set_option('isFontSubsettingEnabled', true);
-        $pdf->loadHtml($this->load->view('artikel/print_artikel',$data, true));
-        $pdf->render();
-        $pdf->stream('NamaFile', ['Attachment' => false]);	
-    }
+	{
+		$data['artikel'] = $this->martikel->getAllArtikel();
+		require_once(APPPATH . 'libraries/dompdf/autoload.inc.php');
+		$pdf = new Dompdf\Dompdf();
+		$pdf->setPaper('A4', 'potrait');
+		$pdf->set_option('isRemoteEnabled', TRUE);
+		$pdf->set_option('isHtml5ParserEnabled', true);
+		$pdf->set_option('isPhpEnabled', true);
+		$pdf->set_option('isFontSubsettingEnabled', true);
+		$pdf->loadHtml($this->load->view('artikel/print_artikel', $data, true));
+		$pdf->render();
+		$pdf->stream('NamaFile', ['Attachment' => false]);
+	}
 }
