@@ -103,3 +103,13 @@ CREATE TABLE IF NOT EXISTS artikel (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (author_id) REFERENCES users(id)
 );
+
+CREATE TABLE `pengurus` (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+  `nip` char(16) NOT NULL,
+  `nik` char(16) NOT NULL,
+  `jabatan` varchar(100) NOT NULL,
+  `fotoprofil` varchar(100) NOT NULL,
+     FOREIGN KEY (nik) REFERENCES penduduk(nik)
+) 
+

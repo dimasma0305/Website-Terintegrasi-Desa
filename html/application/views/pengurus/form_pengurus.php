@@ -15,6 +15,7 @@
 			<?php $this->load->view('partials/flash_block') ?>
 			<form action='<?= base_url('pengurus/tambah') ?>' method='post' class='d-flex flex-column gap-2'
 				enctype="multipart/form-data">
+				<input type="hidden" name="id" id="id">
 				<div class="row">
 					<div class="col-xl-2 mt-2">
 						<div class="row">
@@ -72,39 +73,32 @@
 				<table id="artikelTable" class="table table-bordered" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th>#</th>
-							<th>Title</th>
-							<th>Author</th>
-							<th>Created at</th>
-							<th>Action</th>
+						<tr>
+                    <th>Nama</th>
+                    <th>Jabatan</th>
+                    <th>Nip</th>
+                    <th>Pendidikan</th>
+                    <th>Tanggal Lahir</th>
+                    <th class="text-center">Aksi</th>
+                </tr>
 						</tr>
 					</thead>
-					<tfoot>
-                        <tr>
-                            <th>#</th>
-							<th>Title</th>
-							<th>Author</th>
-							<th>Created at</th>
-							<th>Action</th>
-                        </tr>
-                    </tfoot>
 					<tbody>
-						<?php 
-						$i=1;
-						foreach ($artikel as $artikel) : ?>
+					<?php 
+						foreach ($pengurus as $pengurus) : ?>
 							<tr>
-								<th><?= $i ?></th>
-								<td><?= $artikel->title; ?></td>
-								<td><?= $artikel->username; ?></td>
-								<td><?= $artikel->created_at; ?></td>
-								<td>
-									<button class="btn btn-sm btn-primary" onclick="detailArtikel('<?= $artikel->slug; ?>')"><i class="fas fa-fw fa-eye"></i></button>
-									<button class="btn btn-sm btn-warning" onclick="editArtikel('<?= $artikel->id; ?>')"><i class="fas fa-fw fa-pen"></i></button>
-									<button class="btn btn-sm btn-danger" onclick="deleteArtikel('<?= $artikel->id; ?>')"><i class="fas fa-fw fa-trash"></i></button>
+								<td><?= $pengurus['nama'] ?></td>
+								<td><?= $pengurus['jabatan'] ?></td>
+								<td><?= $pengurus['nip'] ?></td>
+								<td><?= $pengurus['pendidikan'] ?></td>
+								<td><?= $pengurus['tanggal_lahir'] ?></td>
+								
+								<td align="center">
+									<button class="btn btn-sm btn-warning" onclick="editPengurus('<?= $pengurus['id'] ?>')"><i class="fas fa-fw fa-pen"></i></button>
+									<button class="btn btn-sm btn-danger" onclick="deletePengurus('<?= $pengurus['id'] ?>', '<?= $pengurus['nip'] ?>')"><i class="fas fa-fw fa-trash"></i></button>
 								</td>
 							</tr>
 						<?php 
-						$i++;
 						endforeach; ?>
 					</tbody>
 				</table>
@@ -113,6 +107,52 @@
 </div>
 
 <script>
+    function editPengurus(id) {
+			// alert(id);
+        // window.location.href = '<?= base_url('pengurus/edit/') ?>' + id;
+				$.ajax({
+					type: "post",
+					url: "<?= base_url() ?>"+"pengurus/edit/",
+					data: {id : id},
+					dataType: 'json', // Assuming the response is in JSON format
+					success: function(response) {
+						console.log(response);
+						// Assuming the response has a 'data' field you want to populate in the input
+						$('#id').val(response.id); 
+						$('#nik').val(response.nik); 
+						$('#nip').val(response.nip); 
+						$('#jabatan').val(response.jabatan); 
+						$('#image-label').html(response.fotoprofil); 
+						$('#image-placeholder').attr('src', '<?= base_url() ?>'+'uploads/pengurus/'+response.fotoprofil); 
+
+						 // Make the 'nik' field readonly
+						 $('#nik').prop('disabled', true);
+					},
+					error: function(xhr, status, error) {
+						console.error('Error:', error);
+					}
+			});
+
+    }
+    function deletePengurus(id, nip) {
+        // Tambahkan logika konfirmasi dan penghapusan Pengurus di sini
+        if (confirm('Apakah Anda yakin ingin menghapus pengurus dengan nip ' + nip + '?')) {
+            // Jika konfirmasi di-setuju, kirim permintaan penghapusan ke server
+            var deleteUrl = '<?= base_url('pengurus/hapus/') ?>' + id;
+            // Redirect ke halaman hapus
+            window.location.href = deleteUrl;
+            // Tampilkan pesan berhasil menggunakan alert atau modal
+        }
+    }
+</script>
+
+<script>
+	
+	$(document).ready(function() {
+		// Call the dataTables jQuery plugin
+		$('#artikelTable').DataTable();
+	});
+
 	// Function to handle file input change event
 	$('#Image').on('change', function (e) {
 		var file = e.target.files[0]; // Get the uploaded file

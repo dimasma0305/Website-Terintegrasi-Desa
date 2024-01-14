@@ -139,21 +139,6 @@ class Artikel extends CI_Controller
 	}
 
 	public function print()
-<<<<<<< HEAD
-	{
-		$data['artikel'] = $this->martikel->getAllArtikel();
-		require_once(APPPATH . 'libraries/dompdf/autoload.inc.php');
-		$pdf = new Dompdf\Dompdf();
-		$pdf->setPaper('A4', 'potrait');
-		$pdf->set_option('isRemoteEnabled', TRUE);
-		$pdf->set_option('isHtml5ParserEnabled', true);
-		$pdf->set_option('isPhpEnabled', true);
-		$pdf->set_option('isFontSubsettingEnabled', true);
-		$pdf->loadHtml($this->load->view('artikel/print_artikel', $data, true));
-		$pdf->render();
-		$pdf->stream('NamaFile', ['Attachment' => false]);
-	}
-=======
     {
         $data['artikel']=$this->martikel->getAllArtikel();
         require_once(APPPATH . 'libraries/dompdf/autoload.inc.php');
@@ -167,5 +152,4 @@ class Artikel extends CI_Controller
         $pdf->render();
         $pdf->stream('NamaFile', ['Attachment' => false]);
     }
->>>>>>> ff19c4be921ec0161ce7337aea9abd8dfb3aa28f
 }

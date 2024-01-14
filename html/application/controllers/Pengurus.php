@@ -41,6 +41,7 @@ class Pengurus extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = 'Form pengurus';
             $data['data'] = $this->mpengurus->getNik();
+            $data['pengurus'] = $this->mpengurus->getAllPengurusWithDetails();
             // Jika validasi gagal, tampilkan kembali form dengan pesan error
             $this->loadViewWithFooterAndHeader('pengurus/form_pengurus', $data);
         } else {
@@ -51,57 +52,77 @@ class Pengurus extends CI_Controller
                 'jabatan' => $this->input->post('jabatan'),
                 // Tambahkan kolom lain sesuai kebutuhan
             );
-            $this->_add($pengurusData);
+
+            if ($this->input->post('id')) {
+                $this->_update($pengurusData);
+            } else {
+                $this->_add($pengurusData);
+            }
             // Redirect ke halaman index
             redirect('pengurus/tambah');
         }
     }
 
 
-    public function edit($idpengurus)
+//     public function edit($nip)
+// {
+//     $data = array(
+//         'title' => 'Edit Pengurus',
+//         'pengurus' => $this->mpengurus->getPengurusById($nip)
+//         // ... tambahkan item lain ke $data sesuai kebutuhan
+//     );
+//     // Validasi data formulir
+//     $this->form_validation->set_rules('nip', 'NIP', 'required');
+
+//     if ($this->form_validation->run() == FALSE) {
+//         // Jika validasi gagal, muat ulang formulir pengeditan dengan pesan kesalahan
+//         $this->loadViewWithFooterAndHeader('pengurus/edit_pengurus', $data);
+//     } else {
+//         // Jika validasi berhasil, perbarui data pengurus
+//         $updateData = array(
+//             'nip' => $this->input->post('nip'),
+//             'jabatan' => $this->input->post('jabatan'),
+//             // Tambahkan kolom lain sesuai kebutuhan
+//         );
+
+//         if ($this->mpengurus->updatePengurus($nip, $updateData)) {
+//             // Update berhasil
+//             redirect('pengurus/list_pengurus');
+//         } else {
+//             // Update gagal
+//             echo "Update gagal.";
+//         }
+//     }
+// }
+
+public function edit ()
 {
-    $data = array(
-        'title' => 'Edit Pengurus',
-        'pengurus' => $this->mpengurus->getPengurusById($idpengurus)
-        // ... tambahkan item lain ke $data sesuai kebutuhan
-    );
-    // Validasi data formulir
-    $this->form_validation->set_rules('nip', 'NIP', 'required');
+    $id = $this->input->post('id');
 
-    if ($this->form_validation->run() == FALSE) {
-        // Jika validasi gagal, muat ulang formulir pengeditan dengan pesan kesalahan
-        $this->load->view('edit_pengurus', $data);
-    } else {
-        // Jika validasi berhasil, perbarui data pengurus
-        $updateData = array(
-            'nip' => $this->input->post('nip'),
-            'jabatan' => $this->input->post('jabatan'),
-            // Tambahkan kolom lain sesuai kebutuhan
-        );
-
-        if ($this->mpengurus->updatePengurus($idpengurus, $updateData)) {
-            // Update berhasil
-            redirect('pengurus/list_pengurus');
-        } else {
-            // Update gagal
-            echo "Update gagal.";
-        }
-    }
+    $data = $this->mpengurus->getPengurusById($id);
+    
+    $this->output->set_content_type('application/json')->set_output(json_encode($data));
 }
 
 
-    public function hapus($idpengurus)
+    public function hapus($id)
     {
-        // Hapus data dari database
-        $this->mpengurus->hapusPengurus($idpengurus);
+        $pengurus = $this->mpengurus->getPengurusById($id);
+		unlink(FCPATH . './uploads/pengurus/' . $pengurus['fotoprofil']);
+
+		if ($this->mpengurus->hapusPengurus($id)) {
+			$this->session->set_flashdata('message', 'Article deleted successfully.');
+		} else {
+			$this->session->set_flashdata('error', 'Failed to delete the article.');
+		}
 
         // Redirect ke halaman index
-        redirect('pengurus/list_pengurus');
+        redirect('pengurus/tambah');
     }
 
     private function loadViewWithFooterAndHeader($view, $pengurusData = array())
     {
-        $this->load->view('partials_template/header');
+        $this->load->view('partials_template/header', $pengurusData);
         $this->load->view('partials_template/sidebar_template');
         $this->load->view('partials_template/navbar_template');
         $this->load->view($view, $pengurusData);
@@ -118,9 +139,9 @@ class Pengurus extends CI_Controller
     // Gambar
     private function _uploadImage()
     {
-        $config['upload_path'] = './uploads/artikel';
+        $config['upload_path'] = './uploads/pengurus';
         $config['allowed_types'] = 'jpg|png|jpeg';
-        $config['max_size'] = 1000;
+        $config['max_size'] = 2000;
         // $config['max_width'] = 1024;
         // $config['max_height'] = 768;
 
@@ -150,11 +171,11 @@ class Pengurus extends CI_Controller
 
         if ($_FILES['image']['name']) {
             if ($this->_uploadImage()) {
-                $artikel = $this->martikel->getArtikelWhere(['id' => $id])->row_array();
-                $oldImage = $artikel['image_url'];
-                unlink(FCPATH . './uploads/artikel/' . $oldImage);
+                $pengurus = $this->mpengurus->getPengurusById($id);
+                $oldImage = $pengurus['fotoprofil'];
+                unlink(FCPATH . './uploads/pengurus/' . $oldImage);
 
-                $pengurusData['image_url'] = $this->upload->data()['file_name'];
+                $pengurusData['fotoprofil'] = $this->upload->data()['file_name'];
             } else {
                 $error = $this->upload->display_errors('<p class="m-0 p-0">', '</p>');
                 $this->session->set_flashdata('error', $error);
@@ -163,7 +184,7 @@ class Pengurus extends CI_Controller
         }
 
 
-        if ($this->martikel->updateArtikel($id, $pengurusData)) {
+        if ($this->mpengurus->updatePengurus($id, $pengurusData)) {
             $this->session->set_flashdata('message', 'Article updated successfully.');
         } else {
             $this->session->set_flashdata('error', 'Failed to update the article.');
