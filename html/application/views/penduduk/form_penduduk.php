@@ -6,7 +6,9 @@
 
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary"><?= $title ?></h6>
+			<h6 class="m-0 font-weight-bold text-primary">
+				<?= $title ?>
+			</h6>
 		</div>
 		<div class="card-body">
 			<form action='<?= base_url('penduduk/tambah') ?>' method='post' class='d-flex flex-column gap-2'>
@@ -26,8 +28,15 @@
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label" for='pendidikan_id'>Pendidikan</label>
 					<select class="mx-2 form-control" id='pendidikan_id' name='pendidikan_id' required>
+<<<<<<< HEAD
+						<?php foreach ($pendidikan as $pendidikan): ?>
+							<option value="<?= $pendidikan['id'] ?>">
+								<?= $pendidikan['pendidikan'] ?>
+							</option>
+=======
 						<?php foreach ($pendidikan as $pendidikan) : ?>
 							<option value="<?= $pendidikan['id'] ?>"><?= $pendidikan['pendidikan'] ?></option>
+>>>>>>> ff19c4be921ec0161ce7337aea9abd8dfb3aa28f
 						<?php endforeach; ?>
 					</select>
 					<?= form_error('pendidikan_id', '<small class="text-danger">', '</small>'); ?>
