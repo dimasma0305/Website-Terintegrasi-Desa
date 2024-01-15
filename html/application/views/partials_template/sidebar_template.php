@@ -20,7 +20,7 @@
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+				<div class="sidebar-brand-text mx-3">Admin <sup></sup></div>
 			</a>
 
 			<!-- Divider -->
@@ -131,13 +131,7 @@
 			<li class="nav-item <?= activeLink('penduduk/list_penduduk') ?>">
 				<a class="nav-link" href="<?= base_url('penduduk/list_penduduk') ?>">
 					<i class="fas fa-fw fa-mail-bulk"></i>
-					<span>Daftar Penduduk</span></a>
-			</li>
-
-			<li class="nav-item <?= activeLink('admin/penduduk_list') ?>">
-				<a class="nav-link" href="<?= base_url('admin/penduduk_list') ?>">
-					<i class="fas fa-fw fa-user-edit"></i>
-					<span>List Penduduk</span></a>
+					<span>Data Penduduk</span></a>
 			</li>
 			<?php
 			}
