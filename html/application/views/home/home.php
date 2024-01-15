@@ -37,28 +37,54 @@
                         <!-- Artikel -->
                         <div class="col-12 mb-3">
                             
-                        <div class="card shadow mb-4">
-                            <!-- Card body -->
-                            <div class="card-body">
-                                <h1 class="h3 mb-4 text-gray-800">Informasi Terbaru</h1>
+                            <div class="card shadow mb-4">
+                                <!-- Card body -->
+                                <div class="card-body">
+                                    <h1 class="h3 mb-4 text-gray-800">Informasi Terbaru</h1>
 
-                                <div class="row">
-                                    <?php foreach ($artikel as $a) : ?>
-                                        <div class="col-md-4 mb-4">
-                                            <div class="card">
-                                                <img src="<?= base_url('uploads/artikel/') . $a->image_url ?>" class="card-img-top" height="200" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><?= $a->title ?></h5>
-                                                    <p class="card-text"><?= substr($a->content, 0, 100) ?>...</p>
-                                                    <a href="<?= base_url('home/artikel/') . $a->slug ?>" class="btn btn-primary">Read More</a>
+                                    <div class="row">
+                                        <?php foreach ($artikel as $a) : ?>
+                                            <div class="col-md-4 mb-4">
+                                                <div class="card">
+                                                    <img src="<?= base_url('uploads/artikel/') . $a->image_url ?>" class="card-img-top" height="200" alt="...">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><?= $a->title ?></h5>
+                                                        <p class="card-text"><?= substr($a->content, 0, 100) ?>...</p>
+                                                        <a href="<?= base_url('home/artikel/') . $a->slug ?>" class="btn btn-primary">Read More</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <?php endforeach ?>
+                                        <?php endforeach ?>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
 
+                         <!-- Pengurus -->
+                         <div class="col-12 mb-3">
+                            
+                            <div class="card shadow mb-4">
+                                <!-- Card body -->
+                                <div class="card-body">
+                                    <h1 class="h3 mb-4 text-gray-800">Pengurus Desa</h1>
+
+                                    <div class="row">
+                                        <?php foreach ($pengurus as $p) : ?>
+                                            <div class="col-md-4 mb-4">
+                                                <div class="card">
+                                                    <img src="<?= base_url('uploads/pengurus/') . $p['fotoprofil'] ?>" class="card-img-top" height="200" alt="...">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><?= $p['nama'] ?></h5>
+                                                        <p class="card-text"><?= $p['jabatan'] ?></p>
+                                                        <p class="card-text"><?= $p['nip'] ?></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach ?>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
 
