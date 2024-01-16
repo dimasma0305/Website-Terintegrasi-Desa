@@ -7,17 +7,17 @@
                             <!-- Page Heading -->
                             <h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>      
                                 
-                            <?php foreach ($artikel as $a) : ?>
+                            <?php foreach ($pengurus as $p) : ?>
                                 <div class="card mb-3">
                                     <div class="row no-gutters">
                                         <div class="col-sm-3">
-                                            <img src="<?= base_url('uploads/artikel/').$a->image_url ?>" class="h-100 card-img" alt="...">
+                                            <img src="<?= base_url('uploads/pengurus/').$p['fotoprofil'] ?>" class="h-100 card-img" alt="...">
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="card-body">
-                                                <h5 class="card-title"><?= $a->title ?></h5>
-                                                <p class="card-text"><?= substr($a->content, 0, 100) ?>...</p>
-                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                <h5 class="card-title"><?= $p['nama'] ?></h5>
+                                                <p class="card-text">NIP : <?= $p['nip'] ?></p>
+                                                <p class="card-text">Jabatan : <?= $p['jabatan'] ?></p>
                                             </div>
                                         </div>
                                     </div>

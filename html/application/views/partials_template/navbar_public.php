@@ -11,7 +11,7 @@
                     
                     
                     <div class='container'>
-                        <a class='navbar-brand text-gray-800' href='<?=base_url('/')?>'>Website Desa</a>
+                        <a class='navbar-brand text-gray-800' href='<?=base_url('home')?>'>Website Desa</a>
 
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -42,9 +42,9 @@
                                     <i class="fas fa-database fa-sm fa-fw text-gray-400"></i>
                                     Data Desa</a>
                                     <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Data Penduduk</a>
+                                        <a class="dropdown-item" href="<?= base_url('home/datapenduduk') ?>">Data Penduduk</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Data Pengurus Desa</a>
+                                        <a class="dropdown-item" href="<?= base_url('home/datapengurus') ?>">Data Pengurus Desa</a>
                                     </div>
                                 </li>
 
