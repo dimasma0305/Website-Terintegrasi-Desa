@@ -94,7 +94,7 @@ function activeLink($menu)
 
 		<li class="nav-item <?= activeLink('artikel') ?>">
 			<a class="nav-link" href="<?= base_url('artikel') ?>">
-				<i class="fas fa-fw fa-user-edit"></i>
+				<i class="fas fa-fw fa-newspaper"></i>
 				<span>Artikel</span></a>
 		</li>
 
