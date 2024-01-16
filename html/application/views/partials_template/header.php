@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Desa Sibetan | <?= $title ?></title>
+	<title>Website Desa | <?= $title ?></title>
 
 	<!-- Bootstrap core JavaScript-->
 	<script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>

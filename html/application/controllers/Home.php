@@ -14,7 +14,7 @@ Class Home extends CI_Controller{
         $data['artikel'] = $this->martikel->getAllArtikel(6);
 				$data['pengurus'] = $this->mpengurus->getAllPengurusWithDetails();
         $this->load->view('partials_template/header', $data);
-        $this->load->view('partials_template/navbar_template');
+        $this->load->view('partials_template/navbar_public');
         $this->load->view('home/home', $data);
         $this->load->view('partials_template/footer');
     }
@@ -39,5 +39,17 @@ Class Home extends CI_Controller{
 			$this->session->set_flashdata('error', 'Article not found.');
 			redirect('home'); // Redirect to a default page or handle as needed
 		}
+	}
+
+	public function listArtikel()
+	{
+		$data['artikel'] = $this->martikel->getAllArtikel();
+		$data['title'] = 'Artikel';
+
+		// Load your views
+		$this->load->view('partials_template/header', $data);
+		$this->load->view('partials_template/navbar_public');
+		$this->load->view('home/list_artikel', $data); // Create a new view file (e.g., detail.php)
+		$this->load->view('partials_template/footer');
 	}
 }

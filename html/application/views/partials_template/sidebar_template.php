@@ -20,7 +20,7 @@ function activeLink($menu)
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3">Admin</div>
+				<div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
 			</a>
 
 	<!-- Divider -->
@@ -28,8 +28,15 @@ function activeLink($menu)
 
 	<!-- Heading -->
 	<div class="sidebar-heading">
-		Dashboard
+		Home
 	</div>
+
+	<!-- Nav Item - Dashboard -->
+	<li class="nav-item <?= activeLink('home') ?>">
+		<a class="nav-link" href="<?= base_url('home') ?>">
+			<i class="fas fa-fw fa-home"></i>
+			<span>Home</span></a>
+	</li>
 
 	<!-- Nav Item - Dashboard -->
 	<li class="nav-item <?= activeLink('dashboard') ?>">
@@ -37,6 +44,7 @@ function activeLink($menu)
 			<i class="fas fa-fw fa-tachometer-alt"></i>
 			<span>Dashboard</span></a>
 	</li>
+
 
 	<!-- Divider -->
 	<hr class="sidebar-divider">
@@ -94,7 +102,7 @@ function activeLink($menu)
 
 		<li class="nav-item <?= activeLink('artikel') ?>">
 			<a class="nav-link" href="<?= base_url('artikel') ?>">
-				<i class="fas fa-fw fa-user-edit"></i>
+				<i class="fas fa-fw fa-newspaper"></i>
 				<span>Artikel</span></a>
 		</li>
 
