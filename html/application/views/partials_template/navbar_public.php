@@ -11,7 +11,7 @@
                     
                     
                     <div class='container'>
-                        <a class='navbar-brand text-gray-800' href='<?=base_url('/')?>'>Hidden brand</a>
+                        <a class='navbar-brand text-gray-800' href='<?=base_url('/')?>'>Website Desa</a>
 
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -48,19 +48,19 @@
                                     </div>
                                 </li>
 
-                                <?php if (!$this->session->userdata()) :?>
+                                <?php if (!$this->session->userdata('id')) :?>
                                 <!-- Nav Item  -->
                                 <li class="nav-item mx-1">
-                                    <a href="<?= base_url('index') ?>" class="nav-link text-gray-800">
+                                    <a href="<?= base_url('login') ?>" class="nav-link text-gray-800">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw text-gray-400"></i>
                                     Login</a>
                                 </li>
                                 <?php else : ?>
                                 <!-- Nav Item  -->
                                 <li class="nav-item mx-1">
-                                    <a href="<?= base_url('user/profile') ?>" class="nav-link text-gray-800">
-                                    <i class="fas fa-user fa-sm fa-fw text-gray-400"></i>
-                                    Profile</a>
+                                    <a href="<?= base_url('dashboard') ?>" class="nav-link text-gray-800">
+                                    <i class="fas fa-tachometer-alt fa-sm fa-fw text-gray-400"></i>
+                                    Dashboard</a>
                                 </li>
                                 <?php endif; ?>
 
