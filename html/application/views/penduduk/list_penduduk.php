@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>List of Penduduk</h2>
+    <h2>Data Penduduk</h2>
 
     <?php if ($pendudukData): ?>
         <table class="table">
