@@ -20,7 +20,7 @@
                                     <div class="carousel-item">
                                         <img class="d-block w-100" src="<?= base_url('assets/img/carousel-2.jpg') ?>" alt="Second slide">
                                         <div class="carousel-caption d-none d-md-block">
-                                            <h1 class="mb-5 pb-5 font-weight-bolder" style="font-size: 46px;">Gunung</h1>
+                                            <h1 class="mb-5 pb-5 font-weight-bolder" style="font-size: 46px;">Sawah</h1>
                                         </div>
                                     </div>
                                     <div class="carousel-item">
@@ -59,7 +59,7 @@
                                                     <div class="card-body">
                                                         <h5 class="card-title"><?= $a->title ?></h5>
                                                         <p class="card-text"><?= substr($a->content, 0, 100) ?>...</p>
-                                                        <a href="<?= base_url('home/artikel/') . $a->slug ?>" class="btn btn-primary">Read More</a>
+                                                        <a href="<?= base_url('home/artikel/') . $a->slug ?>" class="btn btn-primary">Baca</a>
                                                     </div>
                                                 </div>
                                             </div>

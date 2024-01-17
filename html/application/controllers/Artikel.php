@@ -10,13 +10,17 @@ class Artikel extends CI_Controller
 		parent::__construct();
 		$this->load->library('auth');
 		$this->load->model('martikel');
+		$this->auth->must_admin();
 	}
 
 	public function index()
 	{
-		$this->auth->must_admin();
-
 		$this->form_validation->set_rules('title', 'Title', 'required');
+
+		if (!$this->input->post('id')) {
+			$this->form_validation->set_rules('title', 'Title', 'required|is_unique[artikel.title]');
+		}
+		
 		$this->form_validation->set_rules('content', 'Content', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
@@ -44,7 +48,7 @@ class Artikel extends CI_Controller
 	{
 		$payload['id'] = uniqid($this->session->userdata('id'));
 
-		if (!$this->_uploadImage()) {
+		if (!$this->_uploadImage($payload['slug'])) {
 			$error = $this->upload->display_errors('<p class="m-0 p-0">', '</p>');
 			$this->session->set_flashdata('error', $error);
 			return;
@@ -52,9 +56,9 @@ class Artikel extends CI_Controller
 
 		$payload['image_url'] = $this->upload->data()['file_name'];
 		if ($this->martikel->createArtikel($payload)) {
-			$this->session->set_flashdata('message', 'Article added successfully.');
+			$this->session->set_flashdata('message', 'Artikel berhasil ditambahkan.');
 		} else {
-			$this->session->set_flashdata('error', 'Failed to add the article.');
+			$this->session->set_flashdata('error', 'Artikel gagal berhasil ditambahkan.');
 		}
 	}
 
@@ -63,7 +67,7 @@ class Artikel extends CI_Controller
 		$id = $this->input->post('id');
 
 		if ($_FILES['image']['name']) {
-			if ($this->_uploadImage()) {
+			if ($this->_uploadImage($payload['slug'])) {
 				$artikel = $this->martikel->getArtikelWhere(['id' => $id])->row_array();
 				$oldImage = $artikel['image_url'];
 				unlink(FCPATH . './uploads/artikel/' . $oldImage);
@@ -76,19 +80,23 @@ class Artikel extends CI_Controller
 			}
 		}
 
-
 		if ($this->martikel->updateArtikel($id, $payload)) {
-			$this->session->set_flashdata('message', 'Article updated successfully.');
+			$this->session->set_flashdata('message', 'Artikel berhasil diedit.');
 		} else {
-			$this->session->set_flashdata('error', 'Failed to update the article.');
+			$this->session->set_flashdata('error', 'Artikel gagal diedit.');
 		}
 	}
 
-	private function _uploadImage()
+	private function _uploadImage($slug)
 	{
+		$extractFile = pathinfo($_FILES['image']['name']);	
+		$ekst = $extractFile['extension'];
+		$newName = $slug.".".$ekst; 
+
 		$config['upload_path'] = './uploads/artikel';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 		$config['max_size'] = 2000;
+		$config['file_name'] = $newName;
 		// $config['max_width'] = 1024;
 		// $config['max_height'] = 768;
 
@@ -106,33 +114,15 @@ class Artikel extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 	}
 
-	public function detail($slug)
-	{
-		$article = $this->martikel->getArtikelWhere(['slug' => $slug])->row();
-		if ($article) {
-			$data['article'] = $article;
-			$data['title'] = $article->title;
-
-			$this->load->view('partials_template/header', $data);
-			$this->load->view('partials_template/sidebar_template');
-			$this->load->view('partials_template/navbar_template');
-			$this->load->view('artikel/detail', $data);
-			$this->load->view('partials_template/footer');
-		} else {
-			$this->session->set_flashdata('error', 'Article not found.');
-			redirect('artikel/add');
-		}
-	}
-
 	public function delete($id)
 	{
 		$artikel = $this->martikel->getArtikelWhere(['id' => $id])->row_array();
 		unlink(FCPATH . './uploads/artikel/' . $artikel['image_url']);
 
 		if ($this->martikel->deleteArtikel($id)) {
-			$this->session->set_flashdata('message', 'Article deleted successfully.');
+			$this->session->set_flashdata('message', 'Artikel berhasil dihapus.');
 		} else {
-			$this->session->set_flashdata('error', 'Failed to delete the article.');
+			$this->session->set_flashdata('error', 'Artikel gagal dihapus.');
 		}
 
 		redirect('artikel');
