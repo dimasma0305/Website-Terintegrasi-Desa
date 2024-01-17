@@ -6,9 +6,9 @@
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
-            <div class="col-xl-7">
+            <div class="col-xl-7 my-5">
 
-                <div class="card o-hidden border-0 shadow-lg my-auto">
+                <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
 
                         <!-- Nested Row within Card Body -->
@@ -38,9 +38,6 @@
 
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
                                     <div class="text-center">
                                         <a class="small" href="<?= base_url('index/register') ?>">Create an Account!</a>
                                     </div>

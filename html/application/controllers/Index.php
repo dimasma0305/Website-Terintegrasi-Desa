@@ -30,7 +30,7 @@ class Index  extends CI_Controller
 		if ($this->form_validation->run() == FALSE) {
 			$data['title'] = 'Login';
 			$this->load->view('partials_template/auth_header', $data);
-			$this->load->view('partials_template/navbar_template', $data);
+			$this->load->view('partials_template/navbar_public', $data);
 			$this->load->view('login_template');
 			$this->load->view('partials_template/auth_footer');
 		} else {
@@ -48,7 +48,7 @@ class Index  extends CI_Controller
 		if ($this->form_validation->run() == FALSE) {
 			$data['title'] = 'Register';
 			$this->load->view('partials_template/auth_header', $data);
-			$this->load->view('partials_template/navbar_template', $data);
+			$this->load->view('partials_template/navbar_public', $data);
 			$this->load->view('register_template');
 			$this->load->view('partials_template/auth_footer');
 		} else {
@@ -86,7 +86,7 @@ class Index  extends CI_Controller
 			if ($r = $this->input->post('redirect')) {
 				redirect(base_url($r));
 			}else {
-				redirect(base_url('/'));
+				redirect(base_url('dashboard'));
 			}
 		} catch (Throwable $err) {
 			$this->session->set_flashdata('error', $err->getMessage());

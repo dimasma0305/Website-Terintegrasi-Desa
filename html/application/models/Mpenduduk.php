@@ -63,4 +63,9 @@ class Mpenduduk extends CI_Model
         $this->db->where('nik', $nik);
         return $this->db->delete('penduduk');
     }
+
+    public function getPendudukWhere($where=[])
+    {
+		return $this->db->get_where('penduduk', $where);
+    }
 }
