@@ -33,7 +33,7 @@ Class Home extends CI_Controller{
 			$this->load->view('home/detail', $data); 
 			$this->load->view('partials_template/footer');
 		} else {
-			redirect('listartikel'); 
+			redirect('home/listartikel'); 
 		}
 	}
 
