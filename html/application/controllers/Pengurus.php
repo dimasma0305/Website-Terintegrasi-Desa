@@ -11,23 +11,9 @@ class Pengurus extends CI_Controller
         $this->load->model('mpengurus');
     }
 
-    // public function index()
-    // {
-    //     $this->auth->must_admin();
-
-    //     $this->form_validation->set_rules('nip', 'Nip', 'required');
-    //     $this->form_validation->set_rules('nik', 'Nik', 'required');
-
-    //     $data['title'] = 'Form Pengurus';
-    //     $data['pengurusData'] = $this->mpengurus->getAllPengurusWithDetails();
-
-    //     $this->load->view('partials_template/header', $data);
-    //     $this->load->view('partials_template/sidebar_template');
-    //     $this->load->view('partials_template/navbar_template');
-    //     $this->load->view('pengurus/form_pengurus', $data);
-    //     $this->load->view('partials_template/footer');
-    // }
-
+   
+    // Menangani proses penambahan atau pengeditan data pengurus. 
+    // Melibatkan validasi form, upload gambar, dan pemanggilan model untuk menambah atau mengupdate data.
     public function tambah()
     {
         $this->auth->must_admin();
@@ -64,36 +50,6 @@ class Pengurus extends CI_Controller
     }
 
 
-//     public function edit($nip)
-// {
-//     $data = array(
-//         'title' => 'Edit Pengurus',
-//         'pengurus' => $this->mpengurus->getPengurusById($nip)
-//         // ... tambahkan item lain ke $data sesuai kebutuhan
-//     );
-//     // Validasi data formulir
-//     $this->form_validation->set_rules('nip', 'NIP', 'required');
-
-//     if ($this->form_validation->run() == FALSE) {
-//         // Jika validasi gagal, muat ulang formulir pengeditan dengan pesan kesalahan
-//         $this->loadViewWithFooterAndHeader('pengurus/edit_pengurus', $data);
-//     } else {
-//         // Jika validasi berhasil, perbarui data pengurus
-//         $updateData = array(
-//             'nip' => $this->input->post('nip'),
-//             'jabatan' => $this->input->post('jabatan'),
-//             // Tambahkan kolom lain sesuai kebutuhan
-//         );
-
-//         if ($this->mpengurus->updatePengurus($nip, $updateData)) {
-//             // Update berhasil
-//             redirect('pengurus/list_pengurus');
-//         } else {
-//             // Update gagal
-//             echo "Update gagal.";
-//         }
-//     }
-// }
 
 public function edit ()
 {
@@ -141,7 +97,7 @@ public function edit ()
     {
         $config['upload_path'] = './uploads/pengurus';
         $config['allowed_types'] = 'jpg|png|jpeg';
-        $config['max_size'] = 2000;
+        $config['max_size'] = 2048;
         // $config['max_width'] = 1024;
         // $config['max_height'] = 768;
 
@@ -185,9 +141,9 @@ public function edit ()
 
 
         if ($this->mpengurus->updatePengurus($id, $pengurusData)) {
-            $this->session->set_flashdata('message', 'Article updated successfully.');
+            $this->session->set_flashdata('message', 'Data Berhasil Diupdate.');
         } else {
-            $this->session->set_flashdata('error', 'Failed to update the article.');
+            $this->session->set_flashdata('error', 'Gagal menambahkan Data.');
         }
     }
 }

@@ -20,7 +20,7 @@ function activeLink($menu)
 		<div class="sidebar-brand-icon rotate-n-15">
 			<i class="fas fa-laugh-wink"></i>
 		</div>
-		<div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+		<div class="sidebar-brand-text mx-3"> Admin <sup>2</sup></div>
 	</a>
 
 	<!-- Divider -->
@@ -151,12 +151,6 @@ function activeLink($menu)
 				<span>Form Pengurus</span></a>
 		</li>
 
-		<!-- Nav Item - Dashboard -->
-		<li class="nav-item <?= activeLink('pengurus/list_pengurus') ?>">
-			<a class="nav-link" href="<?= base_url('pengurus/list_pengurus') ?>">
-				<i class="fas fa-fw fa-mail-bulk"></i>
-				<span>Daftar Pengurus</span></a>
-		</li>
 		<?php
 	}
 	?>

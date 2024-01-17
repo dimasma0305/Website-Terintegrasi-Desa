@@ -20,8 +20,8 @@
 					<div class="col-xl-2 mt-2">
 						<div class="row">
 							<div class="col-sm-2 mb-1">
-								<img id="image-placeholder" class="rounded" src="https://placehold.co/280x330"
-									width="280" height="330">
+								<img id="image-placeholder" class="rounded" src="https://placehold.co/200x300"
+									width="200" height="300">
 							</div>
 						</div>
 					</div>
@@ -70,7 +70,7 @@
 
 	<div class="card-body">
         	<div class="table-responsive">
-				<table id="artikelTable" class="table table-bordered" width="100%" cellspacing="0">
+				<table id="pengurustable" class="table table-bordered" width="100%" cellspacing="0">
 					<thead>
 						<tr>
 						<tr>
@@ -125,8 +125,7 @@
 						$('#image-label').html(response.fotoprofil); 
 						$('#image-placeholder').attr('src', '<?= base_url() ?>'+'uploads/pengurus/'+response.fotoprofil); 
 
-						 // Make the 'nik' field readonly
-						 $('#nik').prop('disabled', true);
+						 
 					},
 					error: function(xhr, status, error) {
 						console.error('Error:', error);
@@ -150,7 +149,7 @@
 	
 	$(document).ready(function() {
 		// Call the dataTables jQuery plugin
-		$('#artikelTable').DataTable();
+		$('#pengurustable').DataTable();
 	});
 
 	// Function to handle file input change event
