@@ -85,13 +85,6 @@ public function edit ()
         $this->load->view('partials_template/footer');
     }
 
-    function list_pengurus()
-    {
-        $pengurusData = $this->mpengurus->getAllPengurusWithDetails();
-        $data = ['title' => 'List pengurus', 'pengurusData' => $pengurusData];
-        $this->loadViewWithFooterAndHeader('pengurus/list_pengurus', $data);
-    }
-
     // Gambar
     private function _uploadImage()
     {

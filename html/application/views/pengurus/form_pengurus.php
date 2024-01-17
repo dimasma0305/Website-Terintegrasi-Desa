@@ -58,7 +58,7 @@
 						</div>
 						<div class="form-group row">
 							<div class="col d-flex justify-content-end">
-								<button class="btn btn-primary px-5" type="submit">Submit</button>
+								<button class="btn btn-primary px-5" type="submit">Kirim</button>
 							</div>
 						</div>
 					</div>
@@ -168,7 +168,7 @@
 			// Read the uploaded file as a data URL and display it as an image
 			reader.readAsDataURL(file);
 		} else {
-			alert('Please select an image file.');
+			alert('Mohon pilih file gambar.');
 			// Clear the file input if the selected file is not an image
 			$('#image').val('');
 			$('#image-label').append('Image');

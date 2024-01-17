@@ -18,6 +18,7 @@
                                                 <h5 class="card-title"><?= $p['nama'] ?></h5>
                                                 <p class="card-text">NIP : <?= $p['nip'] ?></p>
                                                 <p class="card-text">Jabatan : <?= $p['jabatan'] ?></p>
+                                                <p class="card-text">Pendidikan: <?= $p['pendidikan'] ?></p>
                                             </div>
                                         </div>
                                     </div>
