@@ -15,9 +15,11 @@
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="card-body">
-                                                <h5 class="card-title"><?= $a->title ?></h5>
+                                                <a href="<?= base_url('home/artikel/').$a->slug ?>">
+                                                    <h5 class="card-title"><?= $a->title ?></h5>
+                                                </a>
                                                 <p class="card-text"><?= substr($a->content, 0, 100) ?>...</p>
-                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                <p class="card-text"><small class="text-muted"><?= date("d F Y", strtotime($a->created_at)) ?></small></p>
                                             </div>
                                         </div>
                                     </div>

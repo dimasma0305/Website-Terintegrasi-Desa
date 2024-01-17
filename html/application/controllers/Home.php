@@ -20,25 +20,20 @@ Class Home extends CI_Controller{
         $this->load->view('partials_template/footer');
     }
 
-    public function artikel($slug)
+    public function artikel($slug='')
 	{
-		// Load the article details from the model based on the $slug
-		$article = $this->martikel->getArtikelWhere(['slug' => $slug])->row();
+		$artikel = $this->martikel->getArtikelWhere(['slug' => $slug])->row();
 
-		// Check if the article exists
-		if ($article) {
-			$data['article'] = $article;
-			$data['title'] = $article->title;
+		if ($artikel) {
+			$data['artikel'] = $artikel;
+			$data['title'] = $artikel->title;
 
-			// Load your views
 			$this->load->view('partials_template/header', $data);
-			$this->load->view('partials_template/navbar_template');
-			$this->load->view('home/detail', $data); // Create a new view file (e.g., detail.php)
+			$this->load->view('partials_template/navbar_public');
+			$this->load->view('home/detail', $data); 
 			$this->load->view('partials_template/footer');
 		} else {
-			// Article not found, handle appropriately (e.g., show an error message)
-			$this->session->set_flashdata('error', 'Article not found.');
-			redirect('home'); // Redirect to a default page or handle as needed
+			redirect('listartikel'); 
 		}
 	}
 
