@@ -67,9 +67,9 @@ public function edit ()
 		unlink(FCPATH . './uploads/pengurus/' . $pengurus['fotoprofil']);
 
 		if ($this->mpengurus->hapusPengurus($id)) {
-			$this->session->set_flashdata('message', 'Article deleted successfully.');
+			$this->session->set_flashdata('message', 'Data Berhasil Dihapus.');
 		} else {
-			$this->session->set_flashdata('error', 'Failed to delete the article.');
+			$this->session->set_flashdata('error', 'Data Gagal Dihapus.');
 		}
 
         // Redirect ke halaman index
