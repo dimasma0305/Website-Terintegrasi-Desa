@@ -68,4 +68,9 @@ class Msurat extends CI_Model
 	{
 		return $this->db->get_where('surat', ['status' => $status]);
 	}
+
+	public function getSuratByStatusAndOwnerId($status, $ownerId)
+	{
+		return $this->db->get_where('surat', ['status' => $status, 'owner' => $ownerId]);
+	}
 }

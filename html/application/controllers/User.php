@@ -17,11 +17,26 @@ class User extends CI_Controller
 	public function dashboard()
 	{
 		$data['title'] = 'Dashboard';
-		$data['surat'] = [
-			'diterima'=> $this->msurat->getSuratByStatus('diterima')->num_rows(),
-			'pending' => $this->msurat->getSuratByStatus('pending')->num_rows(),
-			'ditolak' => $this->msurat->getSuratByStatus('ditolak')->num_rows()
-		];
+
+		$role = $this->session->userdata('role');
+		
+		if ($role == 'admin') 
+		{
+			$data['surat'] = [
+				'diterima'=> $this->msurat->getSuratByStatus('diterima')->num_rows(),
+				'pending' => $this->msurat->getSuratByStatus('pending')->num_rows(),
+				'ditolak' => $this->msurat->getSuratByStatus('ditolak')->num_rows()
+			];
+		} 
+		else
+		{
+			$ownerId = $this->session->userdata('id');
+			$data['surat'] = [
+				'diterima'=> $this->msurat->getSuratByStatusAndOwnerId('diterima', $ownerId)->num_rows(),
+				'pending' => $this->msurat->getSuratByStatusAndOwnerId('pending', $ownerId)->num_rows(),
+				'ditolak' => $this->msurat->getSuratByStatusAndOwnerId('ditolak', $ownerId)->num_rows()
+			];
+		}
 
 		$this->load->view('partials_template/header', $data);
 		$this->load->view('partials_template/sidebar_template');
@@ -94,14 +109,28 @@ class User extends CI_Controller
 		redirect('user/profile');
 	}
 
-	// Fungsi Chat gpt dibawah
 	public function pieChart()
 	{
-		$data = [
-			'Diterima'=> $this->msurat->getSuratByStatus('diterima')->num_rows(),
-			'Pending' => $this->msurat->getSuratByStatus('pending')->num_rows(),
-			'Ditolak' => $this->msurat->getSuratByStatus('ditolak')->num_rows()
-		];
+		$role = $this->session->userdata('role');
+		
+		if ($role == 'admin') 
+		{
+			$data = [
+				'Diterima'=> $this->msurat->getSuratByStatus('diterima')->num_rows(),
+				'Pending' => $this->msurat->getSuratByStatus('pending')->num_rows(),
+				'Ditolak' => $this->msurat->getSuratByStatus('ditolak')->num_rows()
+			];
+		} 
+		else
+		{
+			$ownerId = $this->session->userdata('id');
+			$data = [
+				'Diterima'=> $this->msurat->getSuratByStatusAndOwnerId('diterima', $ownerId)->num_rows(),
+				'Pending' => $this->msurat->getSuratByStatusAndOwnerId('pending', $ownerId)->num_rows(),
+				'Ditolak' => $this->msurat->getSuratByStatusAndOwnerId('ditolak', $ownerId)->num_rows()
+			];
+		}
+
 		header('Content-Type: application/json');
 		echo json_encode($data);
 	}
@@ -109,9 +138,9 @@ class User extends CI_Controller
 	public function barChart()
 	{
 		$data = [
-			'-'=> $this->_getPendudukByPekerjaan(1)->num_rows(),
-			'PNS' => $this->_getPendudukByPekerjaan(2)->num_rows(),
-			'Swasta' => $this->_getPendudukByPekerjaan(3)->num_rows()
+			'PNS' => $this->_getPendudukByPekerjaan(1)->num_rows(),
+			'Swasta' => $this->_getPendudukByPekerjaan(2)->num_rows(),
+			'-'=> $this->_getPendudukByPekerjaan(3)->num_rows()
 		];
 		header('Content-Type: application/json');
 		echo json_encode($data);

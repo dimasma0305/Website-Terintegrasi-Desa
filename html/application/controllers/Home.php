@@ -13,7 +13,7 @@ Class Home extends CI_Controller{
     {
         $data['title'] = "Home"; 
         $data['artikel'] = $this->martikel->getAllArtikel(6);
-				$data['pengurus'] = $this->mpengurus->getAllPengurusWithDetails();
+		$data['pengurus'] = $this->mpengurus->getAllPengurusWithDetails();
         $this->load->view('partials_template/header', $data);
         $this->load->view('partials_template/navbar_public');
         $this->load->view('home/home', $data);
@@ -95,9 +95,9 @@ Class Home extends CI_Controller{
 	public function chartPekerjaan()
 	{
 		$data = [
-			'-'=> $this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 1])->num_rows(),
-			'PNS'=> $this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 2])->num_rows(),
-			'Swasta'=>$this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 3])->num_rows(),
+			'PNS'=> $this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 1])->num_rows(),
+			'Swasta'=>$this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 2])->num_rows(),
+			'-'=> $this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 3])->num_rows(),
 		];
 
 		header('Content-Type: application/json');
