@@ -141,6 +141,18 @@ function activeLink($menu)
 					<i class="fas fa-fw fa-mail-bulk"></i>
 					<span>Daftar Penduduk</span></a>
 			</li>
+
+		<!-- Heading -->
+		<div class="sidebar-heading">
+			Pengurus
+		</div>
+
+		<!-- Nav Item - Dashboard -->
+		<li class="nav-item <?= activeLink('pengurus/tambah') ?>">
+			<a class="nav-link" href="<?= base_url('pengurus/tambah') ?>">
+				<i class="fas fas-fw fa-envelope-open-text"></i>
+				<span>Pengurus Desa</span></a>
+		</li>
 			<?php
 			}
 			?>
