@@ -2,6 +2,9 @@
 
 class Mpengurus extends CI_Model
 {
+
+    // Mengambil data pengurus berdasarkan ID dengan melakukan JOIN antara tabel pengurus dan penduduk. 
+    // Hasilnya berupa array yang mencakup informasi pengurus dan nama penduduk.
     public function getPengurusById($id)
 {
     $this->db->select('pengurus.*, penduduk.nama');
@@ -17,14 +20,15 @@ class Mpengurus extends CI_Model
     }
 }
 
-
+    //  Mengambil data NIK dan nama penduduk dari tabel penduduk untuk digunakan pada dropdown di form.
     public function getNik()
     {
         $query = $this->db->get('penduduk');
         return $query->result_array();
     }
 
-
+    // Mengambil semua data pengurus dengan informasi terkait, seperti nama, tanggal lahir, pendidikan, dll. 
+    // Ini melibatkan JOIN antara tabel pengurus, penduduk, dan pendidikan.
     public function getAllPengurusWithDetails()
     {
         $this->db->select('pengurus.*,penduduk.nama, penduduk.tanggal_lahir, penduduk.pendidikan_id,pendidikan.pendidikan');
@@ -37,11 +41,13 @@ class Mpengurus extends CI_Model
         return $query->result_array();
     }
 
+    // Menambahkan data pengurus ke tabel 
     public function tambahPengurus($pengurusData)
     {
         return $this->db->insert('pengurus', $pengurusData);
     }
 
+    // Mengupdate data pengurus berdasarkan ID
         public function updatePengurus($id, $formData)
     {
         $this->db->where('id', $id);
@@ -56,7 +62,7 @@ class Mpengurus extends CI_Model
     }
 
     
-
+    // Menghapus data pengurus berdasarkan ID.
     public function hapusPengurus($id)
     {
         $this->db->where('id', $id);

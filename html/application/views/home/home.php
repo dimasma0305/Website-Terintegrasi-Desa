@@ -82,12 +82,13 @@
                                     <div class="row">
                                         <?php foreach ($pengurus as $p) : ?>
                                             <div class="col-md-4 mb-4">
-                                                <div class="card">
-                                                    <img src="<?= base_url('uploads/pengurus/') . $p['fotoprofil'] ?>" class="card-img-top" height="200" alt="...">
+                                                <div  class="card text-dark bg-light mb-3">
+                                                    <img src="<?= base_url('uploads/pengurus/') . $p['fotoprofil'] ?>" class="card-img-top" height="300" width="200" alt="...">
                                                     <div class="card-body">
-                                                        <h5 class="card-title"><?= $p['nama'] ?></h5>
-                                                        <p class="card-text"><?= $p['jabatan'] ?></p>
-                                                        <p class="card-text"><?= $p['nip'] ?></p>
+                                                        <h6 class="card-title"><strong>Nama    :</strong> <?= $p['nama'] ?></h6> 
+                                                        <p class="card-text"><strong>Jabatan   :</strong> <?= $p['jabatan'] ?></p> 
+                                                        <p class="card-text"><strong>NIP       :</strong> <?= $p['nip'] ?></p>
+                                                        <p class="card-text"><strong>Pendidikan:</strong> <?= $p['pendidikan'] ?></p>
                                                     </div>
                                                 </div>
                                             </div>
