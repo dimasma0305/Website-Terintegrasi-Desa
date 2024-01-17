@@ -4,7 +4,7 @@
                     <!-- Page Heading -->
                     <!-- <h1 class="h3 mb-4 text-gray-800">Blank Page</h1> -->
 
-                    <div class="row">
+                    <div class="row mt-5">
                         
                         <!-- Carrousel -->
                         <div class="col-12 mb-3">
@@ -13,12 +13,21 @@
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img class="d-block w-100" src="<?= base_url('assets/img/carousel-4.jpg') ?>" alt="First slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h1 class="mb-5 pb-5 font-weight-bolder" style="font-size: 46px;">Pesona Keindahan Alam Desa</h1>
+                                        </div>
                                     </div>
                                     <div class="carousel-item">
                                         <img class="d-block w-100" src="<?= base_url('assets/img/carousel-2.jpg') ?>" alt="Second slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h1 class="mb-5 pb-5 font-weight-bolder" style="font-size: 46px;">Gunung</h1>
+                                        </div>
                                     </div>
                                     <div class="carousel-item">
                                         <img class="d-block w-100" src="<?= base_url('assets/img/carousel-3.jpg') ?>" alt="Third slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h1 class="mb-5 pb-5 font-weight-bolder" style="font-size: 46px;">Pura </h1>
+                                        </div>
                                     </div>
                                 </div>
                                 <a class="carousel-control-prev" href="#img-carousel" role="button" data-slide="prev">
@@ -35,7 +44,7 @@
                         <!--  -->
                         
                         <!-- Artikel -->
-                        <div class="col-12 mb-3">
+                        <div class="col-12">
                             
                             <div class="card shadow mb-4">
                                 <!-- Card body -->
@@ -56,6 +65,7 @@
                                             </div>
                                         <?php endforeach ?>
                                     </div>
+                                    
                                 </div>
                             </div>
 
