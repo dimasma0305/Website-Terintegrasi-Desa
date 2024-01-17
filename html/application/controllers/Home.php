@@ -95,9 +95,9 @@ Class Home extends CI_Controller{
 	public function chartPekerjaan()
 	{
 		$data = [
-			'-'=> $this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 1])->num_rows(),
-			'PNS'=> $this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 2])->num_rows(),
-			'Swasta'=>$this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 3])->num_rows(),
+			'PNS'=> $this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 1])->num_rows(),
+			'Swasta'=>$this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 2])->num_rows(),
+			'-'=> $this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 3])->num_rows(),
 		];
 
 		header('Content-Type: application/json');

@@ -37,11 +37,11 @@
                                 </li>
 
                                 <!-- Nav Item  -->
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown no-arrow">
                                     <a class="nav-link dropdown-toggle text-gray-800" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-database fa-sm fa-fw text-gray-400"></i>
                                     Data Desa</a>
-                                    <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
+                                    <div class="dropdown-menu shadow animated--grow-in" aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item" href="<?= base_url('home/datapenduduk') ?>">Data Penduduk</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="<?= base_url('home/datapengurus') ?>">Data Pengurus Desa</a>

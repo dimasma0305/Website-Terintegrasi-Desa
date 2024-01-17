@@ -138,9 +138,9 @@ class User extends CI_Controller
 	public function barChart()
 	{
 		$data = [
-			'-'=> $this->_getPendudukByPekerjaan(1)->num_rows(),
-			'PNS' => $this->_getPendudukByPekerjaan(2)->num_rows(),
-			'Swasta' => $this->_getPendudukByPekerjaan(3)->num_rows()
+			'PNS' => $this->_getPendudukByPekerjaan(1)->num_rows(),
+			'Swasta' => $this->_getPendudukByPekerjaan(2)->num_rows(),
+			'-'=> $this->_getPendudukByPekerjaan(3)->num_rows()
 		];
 		header('Content-Type: application/json');
 		echo json_encode($data);

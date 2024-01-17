@@ -135,12 +135,15 @@ function activeLink($menu)
 				<span>Form Penduduk</span></a>
 		</li>
 
-			<!-- Nav Item - Dashboard -->
-			<li class="nav-item <?= activeLink('penduduk/list_penduduk') ?>">
-				<a class="nav-link" href="<?= base_url('penduduk/list_penduduk') ?>">
-					<i class="fas fa-fw fa-mail-bulk"></i>
-					<span>Daftar Penduduk</span></a>
-			</li>
+		<!-- Nav Item - Dashboard -->
+		<li class="nav-item <?= activeLink('penduduk/list_penduduk') ?>">
+			<a class="nav-link" href="<?= base_url('penduduk/list_penduduk') ?>">
+				<i class="fas fa-fw fa-mail-bulk"></i>
+				<span>Daftar Penduduk</span></a>
+		</li>
+
+		<!-- Divider -->
+		<hr class="sidebar-divider">
 
 		<!-- Heading -->
 		<div class="sidebar-heading">
