@@ -17,10 +17,10 @@ function activeLink($menu)
 
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-				<div class="sidebar-brand-icon rotate-n-15">
-					<i class="fas fa-laugh-wink"></i>
+				<div class="sidebar-brand-icon ">
+					<i class="fas fa-user"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3">Admin <sup>2</sup></div>
+				<div class="sidebar-brand-text mx-3">Admin</div>
 			</a>
 
 	<!-- Divider -->
@@ -139,7 +139,7 @@ function activeLink($menu)
 		<li class="nav-item <?= activeLink('penduduk/list_penduduk') ?>">
 			<a class="nav-link" href="<?= base_url('penduduk/list_penduduk') ?>">
 				<i class="fas fa-fw fa-mail-bulk"></i>
-				<span>Daftar Penduduk</span></a>
+				<span>Data Penduduk</span></a>
 		</li>
 
 		<!-- Divider -->

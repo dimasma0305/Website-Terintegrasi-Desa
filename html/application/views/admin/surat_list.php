@@ -4,7 +4,7 @@
 		<?php if (empty($suratData)) : ?>
 			<p>No surat found.</p>
 		<?php else : ?>
-			<table class="table">
+			<table class="table" id="tabelSurat">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -40,8 +40,12 @@
 							</td>
 							<td>
 								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal-<?= html_escape($surat->id) ?>">
-									View
+									<i class="fas fas-fw fa-eye"></i>
 								</button>
+								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete-<?= html_escape($surat->id) ?>">
+			<i class="fas fas-fw fa-trash"></i>
+      
+    </button>
 
 								<!-- Modal -->
 								<div class="modal fade" id="confirmModal-<?= html_escape($surat->id) ?>" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
@@ -71,6 +75,26 @@
 										</div>
 									</div>
 								</div>
+
+								<div class="modal fade" id="confirmDelete-<?= html_escape($surat->id) ?>" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteLabel">Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this surat?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a href="<?= base_url('admin/surat_delete/' . $surat->id) ?>" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
 							</td>
 						</tr>
 					<?php
@@ -115,6 +139,8 @@
 	<script src="<?= base_url('static/js/jspdf.plugin.autotable.min.js') ?>"></script>
 	<script>
 		$(document).ready(function() {
+			$('#tabelSurat').DataTable();
+
 			renderPDF()
 			$('select[id^="status-"]').change(function() {
 				var selectedValue = $(this).val();

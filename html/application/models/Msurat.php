@@ -73,4 +73,12 @@ class Msurat extends CI_Model
 	{
 		return $this->db->get_where('surat', ['status' => $status, 'owner' => $ownerId]);
 	}
+	public function deleteSurat($id)
+	{
+			// Assume your surat table has a column named 'id'
+			$this->db->where('id', $id);
+			$result = $this->db->delete('surat');
+
+			return $result;
+	}
 }

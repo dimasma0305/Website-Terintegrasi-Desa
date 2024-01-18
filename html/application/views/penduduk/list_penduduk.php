@@ -2,7 +2,7 @@
     <h2>Data Penduduk</h2>
 
     <?php if ($pendudukData): ?>
-        <table class="table">
+        <table class="table" id="tabelPenduduk">
             <thead>
                 <tr>
                     <th>NIK</th>
@@ -27,10 +27,10 @@
                             <td><?= html_escape($penduduk['alamat']) ?></td>
                             <td>
                                 <button class="btn btn-sm btn-warning" onclick="editPenduduk('<?= $penduduk['nik']; ?>')">
-                                    <i class="fas fa-fw fa-pen"></i> Edit
+                                    <i class="fas fa-fw fa-pen"></i> 
                                 </button>
                                 <button class="btn btn-sm btn-danger" onclick="deletePenduduk('<?= $penduduk['nik']; ?>')">
-                                    <i class="fas fa-fw fa-trash"></i> Hapus
+                                    <i class="fas fa-fw fa-trash"></i> 
                                 </button>
                             </td>
                         </tr>
@@ -43,6 +43,10 @@
 </div>
 
 <script>
+    $(document).ready(function() {
+			$('#tabelPenduduk').DataTable();
+    });
+
     function editPenduduk(nik) {
         // Tambahkan logika pengeditan penduduk di sini
         // Contoh: Redirect ke halaman edit dengan parameter nik

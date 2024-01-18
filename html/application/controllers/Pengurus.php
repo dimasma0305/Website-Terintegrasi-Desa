@@ -106,6 +106,7 @@ public function edit ()
             $this->session->set_flashdata('error', $error);
             return;
         }
+        
         $pengurusData['fotoprofil'] = $this->upload->data()['file_name'];
         if ($this->mpengurus->tambahPengurus($pengurusData)) {
             $this->session->set_flashdata('message', 'Data Berhasil Ditambahkan.');
