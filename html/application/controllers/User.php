@@ -12,6 +12,7 @@ class User extends CI_Controller
 		$this->auth->must_login();
 		$this->load->model('muser');
 		$this->load->model('msurat');
+		$this->load->model('mpenduduk');
 	}
 
 	public function dashboard()
@@ -22,14 +23,17 @@ class User extends CI_Controller
 		
 		if ($role == 'admin') 
 		{
-			$data['surat'] = [
-				'diterima'=> $this->msurat->getSuratByStatus('diterima')->num_rows(),
-				'pending' => $this->msurat->getSuratByStatus('pending')->num_rows(),
-				'ditolak' => $this->msurat->getSuratByStatus('ditolak')->num_rows()
+			$dashboard = "user/dashboard_admin";
+			$data['data'] = [
+				'surat'=> $this->db->get('surat')->num_rows(),
+				'penduduk' => $this->db->get('penduduk')->num_rows(),
+				'pengurus' => $this->db->get('pengurus')->num_rows(),
+				'artikel' => $this->db->get('artikel')->num_rows()
 			];
 		} 
 		else
 		{
+			$dashboard = "user/dashboard_user";
 			$ownerId = $this->session->userdata('id');
 			$data['surat'] = [
 				'diterima'=> $this->msurat->getSuratByStatusAndOwnerId('diterima', $ownerId)->num_rows(),
@@ -41,7 +45,7 @@ class User extends CI_Controller
 		$this->load->view('partials_template/header', $data);
 		$this->load->view('partials_template/sidebar_template');
 		$this->load->view('partials_template/navbar_template');
-		$this->load->view('dashboard_template', $data);
+		$this->load->view($dashboard, $data);
 		$this->load->view('partials_template/footer', $data);
 	}
 
@@ -109,22 +113,40 @@ class User extends CI_Controller
 		redirect('user/profile');
 	}
 
-	public function pieChart()
+	public function chart()
 	{
 		$role = $this->session->userdata('role');
 		
 		if ($role == 'admin') 
 		{
-			$data = [
+			$data['surat'] = [
 				'Diterima'=> $this->msurat->getSuratByStatus('diterima')->num_rows(),
 				'Pending' => $this->msurat->getSuratByStatus('pending')->num_rows(),
 				'Ditolak' => $this->msurat->getSuratByStatus('ditolak')->num_rows()
 			];
+
+			$data['pendidikan'] = [
+				'SD'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 1])->num_rows(),
+				'SMP'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 2])->num_rows(),
+				'SMA'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 3])->num_rows(),
+				'S1'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 4])->num_rows()
+			];
+	
+			$data['jenisKelamin'] = [
+				'Laki-laki'=> $this->mpenduduk->getPendudukWhere(['jenis_kelamin' => 'Laki-laki'])->num_rows(),
+				'Perempuan'=> $this->mpenduduk->getPendudukWhere(['jenis_kelamin' => 'Perempuan'])->num_rows()
+			];
+
+			$data['pekerjaan'] = [
+				'PNS' => $this->_getPendudukByPekerjaan(1)->num_rows(),
+				'Swasta' => $this->_getPendudukByPekerjaan(2)->num_rows(),
+				'-'=> $this->_getPendudukByPekerjaan(3)->num_rows()
+			];	
 		} 
 		else
 		{
 			$ownerId = $this->session->userdata('id');
-			$data = [
+			$data['surat'] = [
 				'Diterima'=> $this->msurat->getSuratByStatusAndOwnerId('diterima', $ownerId)->num_rows(),
 				'Pending' => $this->msurat->getSuratByStatusAndOwnerId('pending', $ownerId)->num_rows(),
 				'Ditolak' => $this->msurat->getSuratByStatusAndOwnerId('ditolak', $ownerId)->num_rows()
@@ -135,16 +157,16 @@ class User extends CI_Controller
 		echo json_encode($data);
 	}
 
-	public function barChart()
-	{
-		$data = [
-			'PNS' => $this->_getPendudukByPekerjaan(1)->num_rows(),
-			'Swasta' => $this->_getPendudukByPekerjaan(2)->num_rows(),
-			'-'=> $this->_getPendudukByPekerjaan(3)->num_rows()
-		];
-		header('Content-Type: application/json');
-		echo json_encode($data);
-	}
+	// public function barChart()
+	// {
+	// 	$data = [
+	// 		'PNS' => $this->_getPendudukByPekerjaan(1)->num_rows(),
+	// 		'Swasta' => $this->_getPendudukByPekerjaan(2)->num_rows(),
+	// 		'-'=> $this->_getPendudukByPekerjaan(3)->num_rows()
+	// 	];
+	// 	header('Content-Type: application/json');
+	// 	echo json_encode($data);
+	// }
 
 	// Taro dimodel nanti
 	private function _getPendudukByPekerjaan($pekerjaan) {
