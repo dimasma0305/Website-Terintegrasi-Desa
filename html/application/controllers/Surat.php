@@ -24,24 +24,52 @@ class Surat extends CI_Controller
 		$this->load->view('partials_template/footer');
 	}
 
-	private function createFile($files, $filename)
-	{
-		$tmpname = $files["tmp_name"];
-		$finfo = new finfo(FILEINFO_MIME_TYPE);
-		$fileMimeType = $finfo->file($tmpname);
-		if ($fileMimeType !== 'application/pdf') {
-			$this->session->set_flashdata('error', 'Invalid file format. Please upload a PDF file.');
-			return false;
-		}
-		$uploadDir = './uploads/surat/';
-		$uploadPath = $uploadDir . $filename;
-		if (!move_uploaded_file($tmpname, $uploadPath)) {
-			$this->session->set_flashdata('error', 'Surat gagal disimpan');
-			return false;
-		}
-		return true;
-	}
+	// private function createFile($files, $filename)
+	// {
+	// 	$tmpname = $files["tmp_name"];
+	// 	$finfo = new finfo(FILEINFO_MIME_TYPE);
+	// 	$fileMimeType = $finfo->file($tmpname);
+	// 	if ($fileMimeType !== 'application/pdf') {
+	// 		$this->session->set_flashdata('error', 'Invalid file format. Please upload a PDF file.');
+	// 		return false;
+	// 	}
+	// 	$uploadDir = './uploads/surat/';
+	// 	$uploadPath = $uploadDir . $filename;
+	// 	if (!move_uploaded_file($tmpname, $uploadPath)) {
+	// 		$this->session->set_flashdata('error', 'Surat gagal disimpan');
+	// 		return false;
+	// 	}
+	// 	return true;
+	// }
 
+	private function createFile($files, $filename)
+{
+    $config['upload_path']   = './uploads/surat/';
+    $config['allowed_types'] = 'pdf';
+    $config['file_name']     = $filename;
+    $config['overwrite']     = true;
+
+    $this->load->library('upload', $config);
+
+    if (!$this->upload->do_upload($files)) {
+        $this->session->set_flashdata('error', $this->upload->display_errors());
+        return false;
+    }
+
+    // Check if the uploaded file is a PDF
+    $uploadedData = $this->upload->data();
+    $fileMimeType = $uploadedData['file_type'];
+    if ($fileMimeType !== 'application/pdf') {
+        // Delete the incorrectly uploaded file
+        unlink($uploadedData['full_path']);
+
+        $this->session->set_flashdata('error', 'Invalid file format. Please upload a PDF file.');
+        return false;
+    }
+
+    return true;
+}
+	 
 	function list()
 	{
 		switch ($this->input->method()) {
@@ -65,7 +93,7 @@ class Surat extends CI_Controller
 				$deskripsi = $this->input->post('deskripsi');
 				$keperluan = $this->input->post('keperluan');
 				$filename = $this->generateRandomPdfFilename();
-				if (!$this->createFile($files, $filename)) {
+				if (!$this->createFile('surat', $filename)) {
 					redirect(base_url('surat'), 'refresh');
 					return;
 				}
@@ -121,7 +149,7 @@ class Surat extends CI_Controller
 					$title = pathinfo($files['name'])['filename'];
 
 					$filename = $this->generateRandomPdfFilename();
-					if (!$this->createFile($files, $filename)) {
+					if (!$this->createFile('surat', $filename)) {
 						redirect(base_url('surat/edit/' . $id), 'refresh');
 						return;
 					}

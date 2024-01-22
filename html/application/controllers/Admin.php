@@ -42,6 +42,20 @@ class Admin extends CI_Controller
         $this->output->set_content_type('application/json')->set_output(json_encode($response));
     }
 
+    function surat_delete($id)
+{
+    $result = $this->msurat->deleteSurat($id);
+
+    if ($result) {
+        $this->session->set_flashdata('message', 'Surat deleted successfully.');
+    } else {
+        $this->session->set_flashdata('error', 'Error deleting surat.');
+    }
+
+    redirect('admin/surat_list');
+}
+
+
     function penduduk_list()
     {
         $pendudukData = $this->mpenduduk->getAllPendudukWithDetails();

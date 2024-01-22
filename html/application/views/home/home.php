@@ -44,7 +44,7 @@
                         <!--  -->
                         
                         <!-- Artikel -->
-                        <div class="col-12">
+                        <div class="col-12 mb-3">
                             
                             <div class="card shadow mb-4">
                                 <!-- Card body -->
@@ -54,22 +54,24 @@
                                     <div class="row">
                                         <?php foreach ($artikel as $a) : ?>
                                             <div class="col-md-4 mb-4">
-                                                <div class="card">
-                                                    <img src="<?= base_url('uploads/artikel/') . $a->image_url ?>" class="card-img-top" height="200" alt="...">
+                                                <div  class="card text-dark bg-light mb-3">
+                                                <img src="<?= base_url('uploads/artikel/') . $a->image_url ?>" class="card-img-top" height="200" alt="..."/>
+
                                                     <div class="card-body">
-                                                        <h5 class="card-title"><?= $a->title ?></h5>
-                                                        <p class="card-text"><?= substr($a->content, 0, 100) ?>...</p>
+                                                        <p class="card-title"><?= $a->title ?></p>
                                                         <a href="<?= base_url('home/artikel/') . $a->slug ?>" class="btn btn-primary">Baca</a>
+
                                                     </div>
+
                                                 </div>
                                             </div>
                                         <?php endforeach ?>
                                     </div>
-                                    
                                 </div>
                             </div>
 
                         </div>
+                       
 
                          <!-- Pengurus -->
                          <div class="col-12 mb-3">
@@ -103,3 +105,5 @@
 
                 </div>
                 <!-- /.container-fluid -->
+
+                
