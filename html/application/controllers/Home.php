@@ -70,31 +70,21 @@ Class Home extends CI_Controller{
 		$this->load->view('partials_template/footer');
 	}
 
-	public function chartPendidikan()
+	public function chart()
 	{
-		$data = [
+		$data['pendidikan'] = [
 			'SD'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 1])->num_rows(),
 			'SMP'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 2])->num_rows(),
 			'SMA'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 3])->num_rows(),
 			'S1'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 4])->num_rows()
 		];
-		header('Content-Type: application/json');
-		echo json_encode($data);
-	}
 
-	public function chartJK()
-	{
-		$data = [
+		$data['jenisKelamin'] = [
 			'Laki-laki'=> $this->mpenduduk->getPendudukWhere(['jenis_kelamin' => 'Laki-laki'])->num_rows(),
 			'Perempuan'=> $this->mpenduduk->getPendudukWhere(['jenis_kelamin' => 'Perempuan'])->num_rows()
 		];
-		header('Content-Type: application/json');
-		echo json_encode($data);
-	}
 
-	public function chartPekerjaan()
-	{
-		$data = [
+		$data['pekerjaan'] = [
 			'PNS'=> $this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 1])->num_rows(),
 			'Swasta'=>$this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 2])->num_rows(),
 			'-'=> $this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 3])->num_rows(),
@@ -103,5 +93,4 @@ Class Home extends CI_Controller{
 		header('Content-Type: application/json');
 		echo json_encode($data);
 	}
-
 }
