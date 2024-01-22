@@ -46,7 +46,7 @@
                         <!-- Artikel -->
                         <div class="col-12 mb-3">
                             
-                            <div class="card shadow mb-4">
+                            <div class="card shadow">
                                 <!-- Card body -->
                                 <div class="card-body">
                                     <h1 class="h3 mb-4 text-gray-800">Informasi Terbaru</h1>
@@ -58,9 +58,11 @@
                                                 <img src="<?= base_url('uploads/artikel/') . $a->image_url ?>" class="card-img-top" height="200" alt="..."/>
 
                                                     <div class="card-body">
-                                                        <p class="card-title"><?= $a->title ?></p>
-                                                        <a href="<?= base_url('home/artikel/') . $a->slug ?>" class="btn btn-primary">Baca</a>
-
+                                                        <p class="card-title">
+                                                            <a href="<?= base_url('home/artikel/') . $a->slug ?>" class="text-dark" ><?= $a->title ?></a>
+                                                        </p>
+                                                        <p class="card-text"><small class="text-muted"><?= date("d F Y", strtotime($a->created_at)) ?></small></p>
+                                                        <!-- <a href="<?= base_url('home/artikel/') . $a->slug ?>" class="btn btn-primary">Baca</a> -->
                                                     </div>
 
                                                 </div>

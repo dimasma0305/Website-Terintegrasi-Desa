@@ -12,7 +12,7 @@ Class Home extends CI_Controller{
     public function index()
     {
         $data['title'] = "Home"; 
-        $data['artikel'] = $this->martikel->getAllArtikel(6);
+        $data['artikel'] = $this->martikel->getAllArtikel(3);
 		$data['pengurus'] = $this->mpengurus->getAllPengurusWithDetails();
         $this->load->view('partials_template/header', $data);
         $this->load->view('partials_template/navbar_public');
