@@ -72,68 +72,73 @@
 
 	</div>
 
-	<div class="card-body">
+	<!--Artikel Table -->
+	<div class="card shadow mb-4">
+		<!-- Card title -->
+		<div class="card-header py-3 d-flex align-items-center justify-content-between">
+			<h6 class="my-auto font-weight-bold text-primary">Daftar Pengurus</h6>
+		</div>
+		<!-- Card body -->
+        <div class="card-body">
         	<div class="table-responsive">
+
 				<table id="pengurustable" class="table table-bordered" width="100%" cellspacing="0">
 					<thead>
-						<tr>
 						<tr align="center">
-                    <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>Nip</th>
-                    <th>Pendidikan</th>
-                    <th>Alamat</th>
-                    <th class="text-center">Aksi</th>
-                </tr>
+							<th>Nama</th>
+							<th>Jabatan</th>
+							<th>Nip</th>
+							<th>Pendidikan</th>
+							<th>Alamat</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
-					<?php 
-						foreach ($pengurus as $pengurus) : ?>
-							<tr align="center">
-								<td><?= $pengurus['nama'] ?></td>
-								<td><?= $pengurus['jabatan'] ?></td>
-								<td><?= $pengurus['nip'] ?></td>
-								<td><?= $pengurus['pendidikan'] ?></td>
-								<td><?= $pengurus['alamat'] ?></td>
-								
-								<td align="center">
-									<button class="btn btn-sm btn-warning" onclick="editPengurus('<?= $pengurus['id'] ?>')"><i class="fas fa-fw fa-pen"></i></button>
-									<button class="btn btn-sm btn-danger" onclick="deletePengurus('<?= $pengurus['id'] ?>', '<?= $pengurus['nip'] ?>')"><i class="fas fa-fw fa-trash"></i></button>
-								</td>
-							</tr>
-						<?php 
-						endforeach; ?>
+					<?php foreach ($pengurus as $pengurus) : ?>
+						<tr align="center">
+							<td><?= $pengurus['nama'] ?></td>
+							<td><?= $pengurus['jabatan'] ?></td>
+							<td><?= $pengurus['nip'] ?></td>
+							<td><?= $pengurus['pendidikan'] ?></td>
+							<td><?= $pengurus['alamat'] ?></td>
+							
+							<td align="center">
+								<button class="btn btn-sm btn-warning" onclick="editPengurus('<?= $pengurus['id'] ?>')"><i class="fas fa-fw fa-pen"></i></button>
+								<button class="btn btn-sm btn-danger" onclick="deletePengurus('<?= $pengurus['id'] ?>', '<?= $pengurus['nip'] ?>')"><i class="fas fa-fw fa-trash"></i></button>
+							</td>
+						</tr>
+					<?php endforeach; ?>
 					</tbody>
 				</table>
+
 			</div>
-    	</div>
+		</div>
+	</div>
 </div>
 
 <script>
     function editPengurus(id) {
-			
-				$.ajax({
-					type: "post",
-					url: "<?= base_url() ?>"+"pengurus/edit/",
-					data: {id : id},
-					dataType: 'json', // Assuming the response is in JSON format
-					success: function(response) {
-						console.log(response);
-						// Assuming the response has a 'data' field you want to populate in the input
-						$('#id').val(response.id); 
-						$('#nik').val(response.nik); 
-						$('#nip').val(response.nip); 
-						$('#jabatan').val(response.jabatan); 
-						$('#image-label').html(response.fotoprofil); 
-						$('#image-placeholder').attr('src', '<?= base_url() ?>'+'uploads/pengurus/'+response.fotoprofil); 
+		$.ajax({
+			type: "post",
+			url: "<?= base_url() ?>"+"pengurus/edit/",
+			data: {id : id},
+			dataType: 'json', // Assuming the response is in JSON format
+			success: function(response) {
+				console.log(response);
+				// Assuming the response has a 'data' field you want to populate in the input
+				$('#id').val(response.id); 
+				$('#nik').val(response.nik); 
+				$('#nip').val(response.nip); 
+				$('#jabatan').val(response.jabatan); 
+				$('#image-label').html(response.fotoprofil); 
+				$('#image-placeholder').attr('src', '<?= base_url() ?>'+'uploads/pengurus/'+response.fotoprofil); 
 
-						 
-					},
-					error: function(xhr, status, error) {
-						console.error('Error:', error);
-					}
-			});
+					
+			},
+			error: function(xhr, status, error) {
+				console.error('Error:', error);
+			}
+		});
 
     }
     function deletePengurus(id, nip) {
