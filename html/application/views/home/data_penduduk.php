@@ -93,47 +93,17 @@
 <script>
     $(document).ready(function() {
 
-        // Fetch data pendidikan
+        // Fetch chart data
         $.ajax({
-            url: "<?php echo base_url('home/chartpendidikan'); ?>",
+            url: "<?php echo base_url('home/chart'); ?>",
             type: "GET",
             dataType: "json",
             success: function(response) {
                 // Update Chart.js data with fetched data
                 console.log(response);
-                chartPendidikan(response);
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-                // Handle error if needed
-            }
-        });
-
-        // Fetch data jenis kelamin
-        $.ajax({
-            url: "<?php echo base_url('home/chartjk'); ?>",
-            type: "GET",
-            dataType: "json",
-            success: function(response) {
-                // Update Chart.js data with fetched data
-                console.log(response);
-                chartJK(response);
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-                // Handle error if needed
-            }
-        });
-
-         // Fetch data pekerjaan
-         $.ajax({
-            url: "<?php echo base_url('home/chartpekerjaan'); ?>",
-            type: "GET",
-            dataType: "json",
-            success: function(response) {
-                // Update Chart.js data with fetched data
-                console.log(response);
-                chartPekerjaan(response);
+                chartPendidikan(response.pendidikan);
+                chartJK(response.jenisKelamin);
+                chartPekerjaan(response.pekerjaan);
             },
             error: function(xhr, status, error) {
                 console.error(error);

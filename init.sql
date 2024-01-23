@@ -34,11 +34,13 @@ CREATE TABLE IF NOT EXISTS penduduk (
     FOREIGN KEY (pekerjaan_id) REFERENCES pekerjaan(id)
 );
 
-INSERT INTO penduduk (nik, nama)
-VALUES ("1111111111111111", "Dimas Maulana"),
-    ("2222222222222222", "Patrick"),
-    ("3333333333333333", "Spongebob"),
-    ("4444444444444444", "Yujin");
+INSERT INTO penduduk (nik, nama, pekerjaan_id, pendidikan_id, tanggal_lahir, jenis_kelamin, alamat)
+VALUES 
+    ("1111111111111111", "Dimas Maulana", 1, 4, '1990-01-01', 'Laki-laki', 'Alamat1'),
+    ("2222222222222222", "Patrick", 1, 4, '1985-02-15', 'Laki-laki', 'Alamat2'),
+    ("3333333333333333", "Spongebob", 1, 4, '1992-07-30', 'Laki-laki', 'Alamat3'),
+    ("4444444444444444", "Yujin", 1, 4, '1988-11-22', 'Perempuan', 'Alamat4');
+
     
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,

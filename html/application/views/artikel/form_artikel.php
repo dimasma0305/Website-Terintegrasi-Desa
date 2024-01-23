@@ -85,15 +85,6 @@
 							<th>Action</th>
 						</tr>
 					</thead>
-					<tfoot>
-                        <tr>
-                            <th>#</th>
-							<th>Title</th>
-							<th>Author</th>
-							<th>Created at</th>
-							<th>Action</th>
-                        </tr>
-                    </tfoot>
 					<tbody>
 						<?php 
 						$i=1;
@@ -191,7 +182,11 @@
 	}
 
 	function deleteArtikel(id) {
+<<<<<<< HEAD
 		if (confirm('Apakah anda yakin?')) {
+=======
+		if (confirm('Apakah anda yakin ingin menghapus data ini?')) {
+>>>>>>> 123eb86721d79dda0a957999ae8b8094530062db
 			window.open("<?= base_url('artikel/delete/') ?>"+id,"_self");
 		}
 	}
