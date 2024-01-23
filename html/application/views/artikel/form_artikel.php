@@ -191,7 +191,7 @@
 	}
 
 	function deleteArtikel(id) {
-		if (confirm('Are you sure?')) {
+		if (confirm('Apakah anda yakin?')) {
 			window.open("<?= base_url('artikel/delete/') ?>"+id,"_self");
 		}
 	}

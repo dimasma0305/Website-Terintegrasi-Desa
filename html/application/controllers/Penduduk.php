@@ -57,8 +57,10 @@ class Penduduk extends CI_Controller
 
             $this->mpenduduk->tambahPenduduk($data_penduduk);
 
+			$this->session->set_flashdata('message', 'Data berhasil ditambahkan');
+
             // Redirect ke halaman index
-            redirect('penduduk');
+            redirect('penduduk/tambah');
         }
     }
 
@@ -95,6 +97,8 @@ class Penduduk extends CI_Controller
         } else {
             // Jika validasi sukses, update data ke database
             $this->mpenduduk->updatePenduduk($nik, $formData);
+
+			$this->session->set_flashdata('message', 'Data berhasil diedit');
 
             // Redirect ke halaman index
             redirect('penduduk/list_penduduk');

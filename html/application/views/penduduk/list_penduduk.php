@@ -1,5 +1,6 @@
 <div class="container">
     <h2>Data Penduduk</h2>
+	<?php $this->load->view('partials/flash_block') ?>
 
     <?php if ($pendudukData): ?>
         <table class="table" id="tabelPenduduk">

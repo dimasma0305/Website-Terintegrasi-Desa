@@ -4,8 +4,10 @@
 	<h1 class="h3 mb-4 text-gray-800">
 		<?= $title ?>
 	</h1>
-
-	<div class="card shadow mb-4">
+	
+	
+	
+<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">
 				<?= $title ?>
@@ -25,10 +27,12 @@
 							</div>
 						</div>
 					</div>
+
+	
 					<div class="col-xl-10">
 						<div class="form-group row">
 							<label class=" col-form-label" for='nik'>Nama</label>
-							<select class="mx-2 form-control" id='nik' name='nik' required>
+							<select  class="mx-2 form-control " id='nik' name='nik' required>
 								<?php foreach ($data as $data): ?>
 									<option value="<?= $data['nik'] ?>">
 										<?= $data['nama'] ?>
@@ -36,7 +40,7 @@
 								<?php endforeach; ?>
 							</select>
 						</div>
-						<div class="form-group row">
+						<div class="form-group row">`
 							<label class="col-sm-2 col-form-label" for='nip'>NIP</label>
 							<input type="text" class="mx-2 form-control" id='nip' name='nip' required>
 						</div>
@@ -73,12 +77,12 @@
 				<table id="pengurustable" class="table table-bordered" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-						<tr>
+						<tr align="center">
                     <th>Nama</th>
                     <th>Jabatan</th>
                     <th>Nip</th>
                     <th>Pendidikan</th>
-                    <th>Tanggal Lahir</th>
+                    <th>Alamat</th>
                     <th class="text-center">Aksi</th>
                 </tr>
 						</tr>
@@ -86,12 +90,12 @@
 					<tbody>
 					<?php 
 						foreach ($pengurus as $pengurus) : ?>
-							<tr>
+							<tr align="center">
 								<td><?= $pengurus['nama'] ?></td>
 								<td><?= $pengurus['jabatan'] ?></td>
 								<td><?= $pengurus['nip'] ?></td>
 								<td><?= $pengurus['pendidikan'] ?></td>
-								<td><?= $pengurus['tanggal_lahir'] ?></td>
+								<td><?= $pengurus['alamat'] ?></td>
 								
 								<td align="center">
 									<button class="btn btn-sm btn-warning" onclick="editPengurus('<?= $pengurus['id'] ?>')"><i class="fas fa-fw fa-pen"></i></button>
@@ -108,8 +112,7 @@
 
 <script>
     function editPengurus(id) {
-			// alert(id);
-        // window.location.href = '<?= base_url('pengurus/edit/') ?>' + id;
+			
 				$.ajax({
 					type: "post",
 					url: "<?= base_url() ?>"+"pengurus/edit/",
@@ -150,6 +153,7 @@
 	$(document).ready(function() {
 		// Call the dataTables jQuery plugin
 		$('#pengurustable').DataTable();
+		
 	});
 
 	// Function to handle file input change event
