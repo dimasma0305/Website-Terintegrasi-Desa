@@ -20,13 +20,13 @@
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label" for='nama'>Nama</label>
+					<label class="col-sm-2 col-form-label" for='nama'>Nama Lengkap</label>
 					<input type="text" class="mx-2 form-control" id='nama' name='nama' required>
 					<?= form_error('nama', '<small class="text-danger">', '</small>'); ?>
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label" for='pendidikan_id'>Pendidikan</label>
+					<label class="col-sm-2 col-form-label" for='pendidikan_id'>Pendidikan Terakhir</label>
 					<select class="mx-2 form-control" id='pendidikan_id' name='pendidikan_id' required>
 						<?php foreach ($pendidikan as $pendidikan) : ?>
 							<option value="<?= $pendidikan['id'] ?>"><?= $pendidikan['pendidikan'] ?></option>
@@ -36,7 +36,7 @@
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label" for='pekerjaan_id'>Pekerjaan</label>
+					<label class="col-sm-2 col-form-label" for='pekerjaan_id'>Pekerjaan Terakhir</label>
 					<select class="mx-2 form-control" id='pekerjaan_id' name='pekerjaan_id' required>
 						<?php foreach ($pekerjaan as $pekerjaan) : ?>
 							<option value="<?= $pekerjaan['id'] ?>"><?= $pekerjaan['pekerjaan'] ?></option>
