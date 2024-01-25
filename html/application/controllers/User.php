@@ -13,10 +13,13 @@ class User extends CI_Controller
 		$this->load->model('muser');
 		$this->load->model('msurat');
 		$this->load->model('mpenduduk');
+		$this->load->model('mpengurus');
+		$this->load->model('martikel');
 	}
 
 	public function dashboard()
 	{
+		$data['title'] = 'Dashboard';
 		$data['title'] = 'Dashboard';
 
 		$role = $this->session->userdata('role');
@@ -25,10 +28,10 @@ class User extends CI_Controller
 		{
 			$dashboard = "user/dashboard_admin";
 			$data['data'] = [
-				'surat'=> $this->db->get('surat')->num_rows(),
-				'penduduk' => $this->db->get('penduduk')->num_rows(),
-				'pengurus' => $this->db->get('pengurus')->num_rows(),
-				'artikel' => $this->db->get('artikel')->num_rows()
+				'surat'=> $this->msurat->count(),
+				'penduduk' => $this->mpenduduk->count(),
+				'pengurus' => $this->mpengurus->count(),
+				'artikel' => $this->martikel->count()
 			];
 		} 
 		else
@@ -120,36 +123,36 @@ class User extends CI_Controller
 		if ($role == 'admin') 
 		{
 			$data['surat'] = [
-				'Diterima'=> $this->msurat->getSuratByStatus('diterima')->num_rows(),
-				'Pending' => $this->msurat->getSuratByStatus('pending')->num_rows(),
-				'Ditolak' => $this->msurat->getSuratByStatus('ditolak')->num_rows()
+				'Diterima'=> $this->msurat->count(['status' => 'diterima']),
+				'Pending'=> $this->msurat->count(['status' => 'pending']),
+				'Ditolak'=> $this->msurat->count(['status' => 'ditolak'])
 			];
 
 			$data['pendidikan'] = [
-				'SD'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 1])->num_rows(),
-				'SMP'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 2])->num_rows(),
-				'SMA'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 3])->num_rows(),
-				'S1'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 4])->num_rows()
+				'SD'=> $this->mpenduduk->count(['pendidikan_id' => 1]),
+				'SMP'=> $this->mpenduduk->count(['pendidikan_id' => 2]),
+				'SMA'=> $this->mpenduduk->count(['pendidikan_id' => 3]),
+				'S1'=> $this->mpenduduk->count(['pendidikan_id' => 4])
 			];
 	
 			$data['jenisKelamin'] = [
-				'Laki-laki'=> $this->mpenduduk->getPendudukWhere(['jenis_kelamin' => 'Laki-laki'])->num_rows(),
-				'Perempuan'=> $this->mpenduduk->getPendudukWhere(['jenis_kelamin' => 'Perempuan'])->num_rows()
+				'Laki-laki'=> $this->mpenduduk->count(['jenis_kelamin' => 'Laki-laki']),
+				'Perempuan'=> $this->mpenduduk->count(['jenis_kelamin' => 'Perempuan'])
 			];
 
 			$data['pekerjaan'] = [
-				'PNS' => $this->_getPendudukByPekerjaan(1)->num_rows(),
-				'Swasta' => $this->_getPendudukByPekerjaan(2)->num_rows(),
-				'-'=> $this->_getPendudukByPekerjaan(3)->num_rows()
+				'PNS' => $this->mpenduduk->count(['pekerjaan_id' => 1]),
+				'Swasta' => $this->mpenduduk->count(['pekerjaan_id' => 2]),
+				'-'=> $this->mpenduduk->count(['pekerjaan_id' => 3])
 			];	
 		} 
 		else
 		{
 			$ownerId = $this->session->userdata('id');
 			$data['surat'] = [
-				'Diterima'=> $this->msurat->getSuratByStatusAndOwnerId('diterima', $ownerId)->num_rows(),
-				'Pending' => $this->msurat->getSuratByStatusAndOwnerId('pending', $ownerId)->num_rows(),
-				'Ditolak' => $this->msurat->getSuratByStatusAndOwnerId('ditolak', $ownerId)->num_rows()
+				'Diterima'=> $this->msurat->count(['status' => 'diterima', 'owner' => $ownerId]),
+				'Pending'=> $this->msurat->count(['status' => 'pending', 'owner' => $ownerId]),
+				'Ditolak'=> $this->msurat->count(['status' => 'ditolak', 'owner' => $ownerId])
 			];
 		}
 
@@ -157,19 +160,4 @@ class User extends CI_Controller
 		echo json_encode($data);
 	}
 
-	// public function barChart()
-	// {
-	// 	$data = [
-	// 		'PNS' => $this->_getPendudukByPekerjaan(1)->num_rows(),
-	// 		'Swasta' => $this->_getPendudukByPekerjaan(2)->num_rows(),
-	// 		'-'=> $this->_getPendudukByPekerjaan(3)->num_rows()
-	// 	];
-	// 	header('Content-Type: application/json');
-	// 	echo json_encode($data);
-	// }
-
-	// Taro dimodel nanti
-	private function _getPendudukByPekerjaan($pekerjaan) {
-		return $this->db->get_where('penduduk', ['pekerjaan_id' => $pekerjaan]);
-    }
 }

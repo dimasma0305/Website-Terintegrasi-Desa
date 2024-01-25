@@ -3,13 +3,10 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800"><?= $title?></h1>
+	<?php $this->load->view('partials/flash_block') ?>
 
 	<div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary"><?= $title ?></h6>
-        </div>
         <div class="card-body">
-			<?php $this->load->view('partials/flash_block') ?>
 			<form action='<?= base_url('surat/list') ?>' method='post' class='d-flex flex-column gap-2'
 					enctype='multipart/form-data'>
 

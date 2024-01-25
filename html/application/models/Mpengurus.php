@@ -31,9 +31,8 @@ class Mpengurus extends CI_Model
     // Ini melibatkan JOIN antara tabel pengurus, penduduk, dan pendidikan.
     public function getAllPengurusWithDetails()
     {
-        $this->db->select('pengurus.*,penduduk.nama, penduduk.tanggal_lahir, penduduk.pendidikan_id,pendidikan.pendidikan');
+        $this->db->select('pengurus.*,penduduk.nama, penduduk.alamat, penduduk.pendidikan_id,pendidikan.pendidikan');
         $this->db->from('pengurus');
-        // cari data nama dan tanggal lahir
         $this->db->join('penduduk', 'pengurus.nik = penduduk.nik');
         //cari data pendidikan
         $this->db->join('pendidikan', 'penduduk.pendidikan_id = pendidikan.id');
@@ -67,5 +66,16 @@ class Mpengurus extends CI_Model
     {
         $this->db->where('id', $id);
         return $this->db->delete('pengurus');
+    }
+
+    // Untuk dashboard, hitung jumlah data
+    public function count($where = []) {
+        $this->db->from('pengurus');
+
+        if (!empty($where)) {
+            $this->db->where($where);
+        }
+
+        return $this->db->count_all_results();
     }
 }
