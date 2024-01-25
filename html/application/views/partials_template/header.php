@@ -31,6 +31,13 @@
 	<!-- Custom styles for this template-->
 	<link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
 
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+
 </head>
 
 <body id="page-top">

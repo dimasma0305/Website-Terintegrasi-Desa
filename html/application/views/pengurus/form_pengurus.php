@@ -31,10 +31,11 @@
 	
 					<div class="col-xl-10">
 						<div class="form-group row">
-							<label class=" col-form-label" for='nik'>Nama</label>
-							<select  class="mx-2 form-control " id='nik' name='nik' required>
+							<label class="col-form-label" for='nik'>Nama</label>
+							<select  class="mx-2 form-control border" id='nik' name='nik' data-live-search="true" required>
+							<option selected disabled>Pilih</option>
 								<?php foreach ($data as $data): ?>
-									<option value="<?= $data['nik'] ?>">
+									<option data-tokens="<?= $data['nama'] ?>" value="<?= $data['nik'] ?>">
 										<?= $data['nama'] ?>
 									</option>
 								<?php endforeach; ?>
@@ -46,8 +47,8 @@
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label" for='jabatan'>Jabatan</label>
-							<select class="mx-2 form-control" id='jabatan' name='jabatan' required>
-								<option selected>Pilih</option>
+							<select class="mx-2 form-control border" id='jabatan' name='jabatan' required>
+								<option selected disabled>Pilih</option>
 								<option value="Kepala Desa">Kepala Desa</option>
 								<option value="Sekretaris Desa">Sekretaris Desa</option>
 								<option value="Bendahara Desa">Bendahara Desa</option>
@@ -72,7 +73,7 @@
 
 	</div>
 
-	<!--Artikel Table -->
+	<!--Table -->
 	<div class="card shadow mb-4">
 		<!-- Card title -->
 		<div class="card-header py-3 d-flex align-items-center justify-content-between">
@@ -158,6 +159,7 @@
 	$(document).ready(function() {
 		// Call the dataTables jQuery plugin
 		$('#pengurustable').DataTable();
+		$('select').selectpicker();
 		
 	});
 
