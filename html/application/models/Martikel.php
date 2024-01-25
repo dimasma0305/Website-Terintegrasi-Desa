@@ -35,4 +35,14 @@ class Martikel extends CI_Model
 		$this->db->where('id', $artikelId);
 		return $this->db->delete('artikel');
 	}
+
+	public function count($where = []) {
+        $this->db->from('artikel');
+
+        if (!empty($where)) {
+            $this->db->where($where);
+        }
+
+        return $this->db->count_all_results();
+    }
 }

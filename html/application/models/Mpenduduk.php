@@ -68,4 +68,14 @@ class Mpenduduk extends CI_Model
     {
 		return $this->db->get_where('penduduk', $where);
     }
+
+    public function count($where = []) {
+        $this->db->from('penduduk');
+
+        if (!empty($where)) {
+            $this->db->where($where);
+        }
+
+        return $this->db->count_all_results();
+    }
 }

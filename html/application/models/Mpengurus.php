@@ -67,4 +67,15 @@ class Mpengurus extends CI_Model
         $this->db->where('id', $id);
         return $this->db->delete('pengurus');
     }
+
+    // Untuk dashboard, hitung jumlah data
+    public function count($where = []) {
+        $this->db->from('pengurus');
+
+        if (!empty($where)) {
+            $this->db->where($where);
+        }
+
+        return $this->db->count_all_results();
+    }
 }
