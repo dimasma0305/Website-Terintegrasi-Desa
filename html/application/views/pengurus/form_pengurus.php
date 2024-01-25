@@ -31,7 +31,7 @@
 	
 					<div class="col-xl-10">
 						<div class="form-group row">
-							<label class="col-form-label" for='nik'>Nama</label>
+							<label class="col-sm-2 col-form-label" for='nik'>Nama</label>
 							<select  class="mx-2 form-control border" id='nik' name='nik' data-live-search="true" required>
 							<option selected disabled>Pilih</option>
 								<?php foreach ($data as $data): ?>
@@ -40,10 +40,12 @@
 									</option>
 								<?php endforeach; ?>
 							</select>
+							<?= form_error('nik', '<small class="mx-2 text-danger">', '</small>'); ?>
 						</div>
 						<div class="form-group row">`
 							<label class="col-sm-2 col-form-label" for='nip'>NIP</label>
 							<input type="text" class="mx-2 form-control" id='nip' name='nip' required>
+							<?= form_error('nip', '<small class="mx-2 text-danger">', '</small>'); ?>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label" for='jabatan'>Jabatan</label>
@@ -53,6 +55,7 @@
 								<option value="Sekretaris Desa">Sekretaris Desa</option>
 								<option value="Bendahara Desa">Bendahara Desa</option>
 							</select>
+							<?= form_error('jabatan', '<small class="mx-2 text-danger">', '</small>'); ?>
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-2 mb-1">Image</div>
@@ -128,9 +131,10 @@
 				console.log(response);
 				// Assuming the response has a 'data' field you want to populate in the input
 				$('#id').val(response.id); 
-				$('#nik').val(response.nik); 
+				$('#nik').selectpicker('val', response.nik); 
+				// $('button[data-id="nik"]').attr('title', response.nik); 
 				$('#nip').val(response.nip); 
-				$('#jabatan').val(response.jabatan); 
+				$('#jabatan').selectpicker('val', response.jabatan); ; 
 				$('#image-label').html(response.fotoprofil); 
 				$('#image-placeholder').attr('src', '<?= base_url() ?>'+'uploads/pengurus/'+response.fotoprofil); 
 
