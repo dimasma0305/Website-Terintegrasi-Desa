@@ -22,6 +22,11 @@
                                             placeholder="Email Address" value="<?= set_value('email') ?>">
                                             <?= form_error('email', '<small class="p-3 text-danger">', '</small>') ?>
                                     </div>
+                                    <div class="form-group">
+                                        <input name="nik" type="nik" class="form-control form-control-user" id="exampleInputnik"
+                                            placeholder="NIK" value="<?= set_value('nik') ?>">
+                                            <?= form_error('nik', '<small class="p-3 text-danger">', '</small>') ?>
+                                    </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <input name="password1" type="password" class="form-control form-control-user"

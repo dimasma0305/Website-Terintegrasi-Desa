@@ -2,17 +2,23 @@
 
 class Muser extends CI_Model
 {
-	public function createUser($username, $email, $password)
+	public function createUser($username, $email, $password, $nik)
 	{
 		$user = $this->getUserByUsername($username);
 		if ($user) {
 			throw new Error("Username already exist");
 		}
+
+		if (!$this->checkNikExist($nik)) {
+			throw new Error("NIK doesnt exist");
+		}
+		
 		$encryptedPassword = password_hash($password, PASSWORD_BCRYPT);
 		$data = array(
 			'username' => $username,
 			'password' => $encryptedPassword,
-			'email' => $email
+			'email' => $email,
+			'nik' => $nik
 		);
 		$this->db->insert('users', $data);
 		return $this->getUserByUsername($username);

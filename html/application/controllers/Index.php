@@ -42,7 +42,12 @@ class Index  extends CI_Controller
 	{
 		$this->form_validation->set_rules('username', 'Username', 'required|trim');
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
-		$this->form_validation->set_rules('password1', 'Password', 'required|trim|matches[password2]');
+		$this->form_validation->set_rules('nik', 'NIK', 'required|trim|numeric|is_unique[users.nik]', [
+											'is_unique' => 'NIK already registered'
+										]);
+		$this->form_validation->set_rules('password1', 'Password', 'required|trim|matches[password2]', [
+											'matches' => 'Password doesnt match'
+										]);
 		$this->form_validation->set_rules('password2', 'Repeat Password', 'required|trim|matches[password1]'); //edit nanti
 
 		if ($this->form_validation->run() == FALSE) {
@@ -99,10 +104,11 @@ class Index  extends CI_Controller
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 		$email = $this->input->post('email');
+		$nik = $this->input->post('nik');
 		try {
-			$user = $this->muser->createUser($username, $email, $password);
+			$user = $this->muser->createUser($username, $email, $password, $nik);
 			$this->session->set_userdata($user);
-			redirect(base_url('/'), 'refresh');
+			redirect(base_url('dashboard'), 'refresh');
 		} catch (Throwable $err) {
 			$this->session->set_flashdata('error', $err->getMessage());
 			redirect(base_url('index/register'), 'refresh');
