@@ -57,7 +57,7 @@ function activeLink($menu)
 	<!-- Nav Item - Dashboard -->
 	<li class="nav-item <?= activeLink('form_surat') ?>">
 		<a class="nav-link" href="<?= base_url('form_surat') ?>">
-			<i class="fas fas-fw fa-envelope-open-text"></i>
+			<i class="fas fas-fw fa-envelope"></i>
 			<span>Form Surat</span></a>
 	</li>
 
@@ -116,8 +116,8 @@ function activeLink($menu)
 
 		<li class="nav-item <?= activeLink('admin/surat_list') ?>">
 			<a class="nav-link" href="<?= base_url('admin/surat_list') ?>">
-				<i class="fas fa-fw fa-user-edit"></i>
-				<span>Admin list surat</span></a>
+				<i class="fas fa-fw fa-envelope-open-text"></i>
+				<span>Data Surat</span></a>
 		</li>
 
 		<!-- Divider -->
@@ -131,14 +131,14 @@ function activeLink($menu)
 		<!-- Nav Item - Dashboard -->
 		<li class="nav-item <?= activeLink('penduduk/tambah') ?>">
 			<a class="nav-link" href="<?= base_url('penduduk/tambah') ?>">
-				<i class="fas fas-fw fa-envelope-open-text"></i>
+				<i class="fas fas-fw fa-users-cog"></i>
 				<span>Form Penduduk</span></a>
 		</li>
 
 		<!-- Nav Item - Dashboard -->
 		<li class="nav-item <?= activeLink('penduduk/list_penduduk') ?>">
 			<a class="nav-link" href="<?= base_url('penduduk/list_penduduk') ?>">
-				<i class="fas fa-fw fa-mail-bulk"></i>
+				<i class="fas fa-fw fa-users"></i>
 				<span>Data Penduduk</span></a>
 		</li>
 
@@ -153,7 +153,7 @@ function activeLink($menu)
 		<!-- Nav Item - Dashboard -->
 		<li class="nav-item <?= activeLink('pengurus/tambah') ?>">
 			<a class="nav-link" href="<?= base_url('pengurus/tambah') ?>">
-				<i class="fas fas-fw fa-envelope-open-text"></i>
+				<i class="fas fas-fw fa-user-tie"></i>
 				<span>Pengurus Desa</span></a>
 		</li>
 			<?php

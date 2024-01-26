@@ -27,7 +27,7 @@ class Admin extends CI_Controller
     function surat_list()
     {
         $suratData = $this->msurat->getSuratAndOwner();
-        $this->loadViewWithFooterAndHeader('admin/surat_list', ['title'=>'List Surat','suratData' => $suratData]);
+        $this->loadViewWithFooterAndHeader('admin/surat_list', ['title'=>'Data Surat','suratData' => $suratData]);
     }
 
     function surat_update_status($id)
