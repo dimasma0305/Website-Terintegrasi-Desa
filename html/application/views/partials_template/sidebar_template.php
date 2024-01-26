@@ -18,9 +18,9 @@ function activeLink($menu)
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
 				<div class="sidebar-brand-icon ">
-					<i class="fas fa-user"></i>
+					<i class="fas fa-home"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3">Admin</div>
+				<div class="sidebar-brand-text mx-3">Website Desa</div>
 			</a>
 
 	<!-- Divider -->
