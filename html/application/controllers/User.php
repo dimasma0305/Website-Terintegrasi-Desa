@@ -20,7 +20,6 @@ class User extends CI_Controller
 	public function dashboard()
 	{
 		$data['title'] = 'Dashboard';
-		$data['title'] = 'Dashboard';
 
 		$role = $this->session->userdata('role');
 		
@@ -39,9 +38,9 @@ class User extends CI_Controller
 			$dashboard = "user/dashboard_user";
 			$ownerId = $this->session->userdata('id');
 			$data['surat'] = [
-				'diterima'=> $this->msurat->getSuratByStatusAndOwnerId('diterima', $ownerId)->num_rows(),
-				'pending' => $this->msurat->getSuratByStatusAndOwnerId('pending', $ownerId)->num_rows(),
-				'ditolak' => $this->msurat->getSuratByStatusAndOwnerId('ditolak', $ownerId)->num_rows()
+				'diterima'=> $this->msurat->count(['status' => 'diterima', 'owner' => $ownerId]),
+				'pending' => $this->msurat->count(['status' => 'pending', 'owner' => $ownerId]),
+				'ditolak' => $this->msurat->count(['status' => 'ditolak', 'owner' => $ownerId])
 			];
 		}
 
