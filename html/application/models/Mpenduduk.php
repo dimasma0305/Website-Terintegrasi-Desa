@@ -70,7 +70,10 @@ class Mpenduduk extends CI_Model
     }
 
     public function count($where = []) {
+        $this->db->select('penduduk.*, pendidikan.pendidikan AS pendidikan, pekerjaan.pekerjaan AS pekerjaan');
         $this->db->from('penduduk');
+        $this->db->join('pendidikan', 'penduduk.pendidikan_id = pendidikan.id');
+        $this->db->join('pekerjaan', 'penduduk.pekerjaan_id = pekerjaan.id');
 
         if (!empty($where)) {
             $this->db->where($where);

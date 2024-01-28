@@ -128,10 +128,10 @@ class User extends CI_Controller
 			];
 
 			$data['pendidikan'] = [
-				'SD'=> $this->mpenduduk->count(['pendidikan_id' => 1]),
-				'SMP'=> $this->mpenduduk->count(['pendidikan_id' => 2]),
-				'SMA'=> $this->mpenduduk->count(['pendidikan_id' => 3]),
-				'S1'=> $this->mpenduduk->count(['pendidikan_id' => 4])
+				'SD'=> $this->mpenduduk->count(['pendidikan' => 'SD']),
+				'SMP'=> $this->mpenduduk->count(['pendidikan' => 'SMP']),
+				'SMA'=> $this->mpenduduk->count(['pendidikan' => 'SMA']),
+				'S1'=> $this->mpenduduk->count(['pendidikan' => 'S1'])
 			];
 	
 			$data['jenisKelamin'] = [
@@ -140,9 +140,11 @@ class User extends CI_Controller
 			];
 
 			$data['pekerjaan'] = [
-				'PNS' => $this->mpenduduk->count(['pekerjaan_id' => 1]),
-				'Swasta' => $this->mpenduduk->count(['pekerjaan_id' => 2]),
-				'-'=> $this->mpenduduk->count(['pekerjaan_id' => 3])
+				'PNS' => $this->mpenduduk->count(['pekerjaan' => 'PNS']),
+				'Swasta' => $this->mpenduduk->count(['pekerjaan' => 'Swasta']),
+				'Belum Bekerja'=> $this->mpenduduk->count(['pekerjaan' => 'Belum Bekerja']),
+				'Siswa'=> $this->mpenduduk->count(['pekerjaan' => 'Siswa']),
+				'Mahasiswa'=> $this->mpenduduk->count(['pekerjaan' => 'Mahasiswa'])
 			];	
 		} 
 		else

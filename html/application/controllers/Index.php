@@ -9,19 +9,6 @@ class Index  extends CI_Controller
 		$this->load->model("muser");
 	}
 
-	// private function loadViewWithFooterAndHeader($name, $vars = [])
-	// {
-	// 	$this->load->view('includes/header');
-	// 	$this->load->view('partials/navbar');
-	// 	$this->load->view($name, $vars);
-	// 	$this->load->view('includes/footer');
-	// }
-
-	// function index()
-	// {
-	// 	$this->loadViewWithFooterAndHeader('index');
-	// }
-
 	function login()
 	{
 		$this->form_validation->set_rules('username', 'Username', 'required|trim');
@@ -60,26 +47,6 @@ class Index  extends CI_Controller
 			$this->_register();
 		}
 	}
-
-	// public function dashboard_template()
-	// {
-	// 	$data['title'] = 'Dashboard';
-	// 	$this->load->view('partials_template/header', $data);
-	// 	$this->load->view('partials_template/sidebar_template');
-	// 	$this->load->view('partials_template/navbar_template');
-	// 	$this->load->view('dashboard_template');
-	// 	$this->load->view('partials_template/footer');
-	// }
-
-	// public function formsurat_template()
-	// {
-	// 	$data['title'] = 'Dashboard';
-	// 	$this->load->view('partials_template/header', $data);
-	// 	$this->load->view('partials_template/sidebar_template');
-	// 	$this->load->view('partials_template/navbar_template');
-	// 	$this->load->view('surat/form');
-	// 	$this->load->view('partials_template/footer');
-	// }
 
 	private function _login()
 	{

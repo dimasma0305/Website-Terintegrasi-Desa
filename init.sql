@@ -20,7 +20,9 @@ CREATE TABLE IF NOT EXISTS pekerjaan (
 INSERT INTO pekerjaan (pekerjaan)
 VALUES ('PNS'),
     ('Swasta'),
-    ('-');
+    ('Belum Bekerja'),
+    ('Siswa'),
+    ('Mahasiswa');
 
 CREATE TABLE IF NOT EXISTS penduduk (
     nik CHAR(16) PRIMARY KEY UNIQUE,
