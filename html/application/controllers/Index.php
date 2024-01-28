@@ -69,7 +69,7 @@ class Index  extends CI_Controller
 	private function _register()
 	{
 		$username = $this->input->post('username');
-		$password = $this->input->post('password');
+		$password = $this->input->post('password1');
 		$email = $this->input->post('email');
 		$nik = $this->input->post('nik');
 		try {
