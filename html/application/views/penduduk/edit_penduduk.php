@@ -11,12 +11,12 @@
             <form action="<?= base_url('penduduk/edit/' . $penduduk ['nik']) ?>" method="post" class="d-flex flex-column gap-2">
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="nama">Nama</label>
+                    <label class="col-sm-2 col-form-label" for="nama">Nama Lengkap</label>
                     <input type="text" class="mx-2 form-control" id="nama" name="nama" value="<?= html_escape($penduduk ['nama']) ?>" required>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="pendidikan_id">Pendidikan</label>
+                    <label class="col-sm-2 col-form-label" for="pendidikan_id">Pendidikan Terakhir</label>
                     <select class="mx-2 form-control" id="pendidikan_id" name="pendidikan_id" required>
                         <?php foreach ($pendidikan as $pendidikan_item) : ?>
                             <option value="<?= $pendidikan_item['id'] ?>" <?= ($pendidikan_item['id'] == $penduduk ['pendidikan_id']) ? 'selected' : '' ?>>
@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="pekerjaan_id">Pekerjaan</label>
+                    <label class="col-sm-2 col-form-label" for="pekerjaan_id">Pekerjaan Terakhir</label>
                     <select class="mx-2 form-control" id="pekerjaan_id" name="pekerjaan_id" required>
                         <?php foreach ($pekerjaan as $pekerjaan_item) : ?>
                             <option value="<?= $pekerjaan_item['id'] ?>" <?= ($pekerjaan_item['id'] == $penduduk ['pekerjaan_id']) ? 'selected' : '' ?>>

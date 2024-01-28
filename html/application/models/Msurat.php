@@ -64,21 +64,22 @@ class Msurat extends CI_Model
 	}
 
 	// Nyoba buat dasbod
-	public function getSuratByStatus($status)
-	{
-		return $this->db->get_where('surat', ['status' => $status]);
-	}
+	public function count($where = []) {
+        $this->db->from('surat');
 
-	public function getSuratByStatusAndOwnerId($status, $ownerId)
-	{
-		return $this->db->get_where('surat', ['status' => $status, 'owner' => $ownerId]);
-	}
+        if (!empty($where)) {
+            $this->db->where($where);
+        }
+
+        return $this->db->count_all_results();
+    }
+
 	public function deleteSurat($id)
 	{
-			// Assume your surat table has a column named 'id'
-			$this->db->where('id', $id);
-			$result = $this->db->delete('surat');
+		// Assume your surat table has a column named 'id'
+		$this->db->where('id', $id);
+		$result = $this->db->delete('surat');
 
-			return $result;
+		return $result;
 	}
 }

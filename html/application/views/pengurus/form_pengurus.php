@@ -31,27 +31,31 @@
 	
 					<div class="col-xl-10">
 						<div class="form-group row">
-							<label class=" col-form-label" for='nik'>Nama</label>
-							<select  class="mx-2 form-control " id='nik' name='nik' required>
+							<label class="col-sm-2 col-form-label" for='nik'>Nama</label>
+							<select  class="mx-2 form-control border" id='nik' name='nik' data-live-search="true" required>
+							<option selected disabled>Pilih</option>
 								<?php foreach ($data as $data): ?>
-									<option value="<?= $data['nik'] ?>">
+									<option data-tokens="<?= $data['nama'] ?>" value="<?= $data['nik'] ?>">
 										<?= $data['nama'] ?>
 									</option>
 								<?php endforeach; ?>
 							</select>
+							<?= form_error('nik', '<small class="mx-2 text-danger">', '</small>'); ?>
 						</div>
 						<div class="form-group row">`
 							<label class="col-sm-2 col-form-label" for='nip'>NIP</label>
 							<input type="text" class="mx-2 form-control" id='nip' name='nip' required>
+							<?= form_error('nip', '<small class="mx-2 text-danger">', '</small>'); ?>
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label" for='jabatan'>Jabatan</label>
-							<select class="mx-2 form-control" id='jabatan' name='jabatan' required>
-								<option selected>Pilih</option>
+							<select class="mx-2 form-control border" id='jabatan' name='jabatan' required>
+								<option selected disabled>Pilih</option>
 								<option value="Kepala Desa">Kepala Desa</option>
 								<option value="Sekretaris Desa">Sekretaris Desa</option>
 								<option value="Bendahara Desa">Bendahara Desa</option>
 							</select>
+							<?= form_error('jabatan', '<small class="mx-2 text-danger">', '</small>'); ?>
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-2 mb-1">Image</div>
@@ -72,68 +76,74 @@
 
 	</div>
 
-	<div class="card-body">
+	<!--Table -->
+	<div class="card shadow mb-4">
+		<!-- Card title -->
+		<div class="card-header py-3 d-flex align-items-center justify-content-between">
+			<h6 class="my-auto font-weight-bold text-primary">Daftar Pengurus</h6>
+		</div>
+		<!-- Card body -->
+        <div class="card-body">
         	<div class="table-responsive">
+
 				<table id="pengurustable" class="table table-bordered" width="100%" cellspacing="0">
 					<thead>
-						<tr>
 						<tr align="center">
-                    <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>Nip</th>
-                    <th>Pendidikan</th>
-                    <th>Alamat</th>
-                    <th class="text-center">Aksi</th>
-                </tr>
+							<th>Nama</th>
+							<th>Jabatan</th>
+							<th>Nip</th>
+							<th>Pendidikan</th>
+							<th>Alamat</th>
+							<th class="text-center">Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
-					<?php 
-						foreach ($pengurus as $pengurus) : ?>
-							<tr align="center">
-								<td><?= $pengurus['nama'] ?></td>
-								<td><?= $pengurus['jabatan'] ?></td>
-								<td><?= $pengurus['nip'] ?></td>
-								<td><?= $pengurus['pendidikan'] ?></td>
-								<td><?= $pengurus['alamat'] ?></td>
-								
-								<td align="center">
-									<button class="btn btn-sm btn-warning" onclick="editPengurus('<?= $pengurus['id'] ?>')"><i class="fas fa-fw fa-pen"></i></button>
-									<button class="btn btn-sm btn-danger" onclick="deletePengurus('<?= $pengurus['id'] ?>', '<?= $pengurus['nip'] ?>')"><i class="fas fa-fw fa-trash"></i></button>
-								</td>
-							</tr>
-						<?php 
-						endforeach; ?>
+					<?php foreach ($pengurus as $pengurus) : ?>
+						<tr align="center">
+							<td><?= $pengurus['nama'] ?></td>
+							<td><?= $pengurus['jabatan'] ?></td>
+							<td><?= $pengurus['nip'] ?></td>
+							<td><?= $pengurus['pendidikan'] ?></td>
+							<td><?= $pengurus['alamat'] ?></td>
+							
+							<td align="center">
+								<button class="btn btn-sm btn-warning" onclick="editPengurus('<?= $pengurus['id'] ?>')"><i class="fas fa-fw fa-pen"></i></button>
+								<button class="btn btn-sm btn-danger" onclick="deletePengurus('<?= $pengurus['id'] ?>', '<?= $pengurus['nip'] ?>')"><i class="fas fa-fw fa-trash"></i></button>
+							</td>
+						</tr>
+					<?php endforeach; ?>
 					</tbody>
 				</table>
+
 			</div>
-    	</div>
+		</div>
+	</div>
 </div>
 
 <script>
     function editPengurus(id) {
-			
-				$.ajax({
-					type: "post",
-					url: "<?= base_url() ?>"+"pengurus/edit/",
-					data: {id : id},
-					dataType: 'json', // Assuming the response is in JSON format
-					success: function(response) {
-						console.log(response);
-						// Assuming the response has a 'data' field you want to populate in the input
-						$('#id').val(response.id); 
-						$('#nik').val(response.nik); 
-						$('#nip').val(response.nip); 
-						$('#jabatan').val(response.jabatan); 
-						$('#image-label').html(response.fotoprofil); 
-						$('#image-placeholder').attr('src', '<?= base_url() ?>'+'uploads/pengurus/'+response.fotoprofil); 
+		$.ajax({
+			type: "post",
+			url: "<?= base_url() ?>"+"pengurus/edit/",
+			data: {id : id},
+			dataType: 'json', // Assuming the response is in JSON format
+			success: function(response) {
+				console.log(response);
+				// Assuming the response has a 'data' field you want to populate in the input
+				$('#id').val(response.id); 
+				$('#nik').selectpicker('val', response.nik); 
+				// $('button[data-id="nik"]').attr('title', response.nik); 
+				$('#nip').val(response.nip); 
+				$('#jabatan').selectpicker('val', response.jabatan); ; 
+				$('#image-label').html(response.fotoprofil); 
+				$('#image-placeholder').attr('src', '<?= base_url() ?>'+'uploads/pengurus/'+response.fotoprofil); 
 
-						 
-					},
-					error: function(xhr, status, error) {
-						console.error('Error:', error);
-					}
-			});
+					
+			},
+			error: function(xhr, status, error) {
+				console.error('Error:', error);
+			}
+		});
 
     }
     function deletePengurus(id, nip) {
@@ -153,6 +163,7 @@
 	$(document).ready(function() {
 		// Call the dataTables jQuery plugin
 		$('#pengurustable').DataTable();
+		$('select').selectpicker();
 		
 	});
 

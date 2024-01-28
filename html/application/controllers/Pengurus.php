@@ -20,7 +20,8 @@ class Pengurus extends CI_Controller
 
         // Validasi Form
         $this->form_validation->set_rules('nip', 'Nip', 'required');
-        $this->form_validation->set_rules('nik', 'Nik', 'required');
+        $this->form_validation->set_rules('nik', 'Nik', 'required|numeric');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
 
         // Tambahkan validasi untuk kolom lain sesuai kebutuhan
 

@@ -62,7 +62,6 @@ Class Home extends CI_Controller{
 	public function dataPenduduk()
 	{
 		$data['title'] = 'Data Penduduk';
-		$data['pengurus'] = $this->mpengurus->getAllPengurusWithDetails();
 
 		$this->load->view('partials_template/header', $data);
 		$this->load->view('partials_template/navbar_public');
@@ -73,21 +72,21 @@ Class Home extends CI_Controller{
 	public function chart()
 	{
 		$data['pendidikan'] = [
-			'SD'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 1])->num_rows(),
-			'SMP'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 2])->num_rows(),
-			'SMA'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 3])->num_rows(),
-			'S1'=> $this->mpenduduk->getPendudukWhere(['pendidikan_id' => 4])->num_rows()
+			'SD'=> $this->mpenduduk->count(['pendidikan_id' => 1]),
+			'SMP'=> $this->mpenduduk->count(['pendidikan_id' => 2]),
+			'SMA'=> $this->mpenduduk->count(['pendidikan_id' => 3]),
+			'S1'=> $this->mpenduduk->count(['pendidikan_id' => 4])
 		];
 
 		$data['jenisKelamin'] = [
-			'Laki-laki'=> $this->mpenduduk->getPendudukWhere(['jenis_kelamin' => 'Laki-laki'])->num_rows(),
-			'Perempuan'=> $this->mpenduduk->getPendudukWhere(['jenis_kelamin' => 'Perempuan'])->num_rows()
+			'Laki-laki'=> $this->mpenduduk->count(['jenis_kelamin' => 'Laki-laki']),
+			'Perempuan'=> $this->mpenduduk->count(['jenis_kelamin' => 'Perempuan'])
 		];
 
 		$data['pekerjaan'] = [
-			'PNS'=> $this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 1])->num_rows(),
-			'Swasta'=>$this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 2])->num_rows(),
-			'-'=> $this->mpenduduk->getPendudukWhere(['pekerjaan_id' => 3])->num_rows(),
+			'PNS'=> $this->mpenduduk->count(['pekerjaan_id' => 1]),
+			'Swasta'=>$this->mpenduduk->count(['pekerjaan_id' => 2]),
+			'-'=> $this->mpenduduk->count(['pekerjaan_id' => 3])
 		];
 
 		header('Content-Type: application/json');
