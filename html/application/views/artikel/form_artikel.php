@@ -182,11 +182,7 @@
 	}
 
 	function deleteArtikel(id) {
-<<<<<<< HEAD
-		if (confirm('Apakah anda yakin?')) {
-=======
 		if (confirm('Apakah anda yakin ingin menghapus data ini?')) {
->>>>>>> 123eb86721d79dda0a957999ae8b8094530062db
 			window.open("<?= base_url('artikel/delete/') ?>"+id,"_self");
 		}
 	}
