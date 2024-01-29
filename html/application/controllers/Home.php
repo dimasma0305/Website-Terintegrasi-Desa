@@ -72,10 +72,10 @@ Class Home extends CI_Controller{
 	public function chart()
 	{
 		$data['pendidikan'] = [
-			'SD'=> $this->mpenduduk->count(['pendidian' => 'SD']),
-			'SMP'=> $this->mpenduduk->count(['pendidian' => 'SMP']),
-			'SMA'=> $this->mpenduduk->count(['pendidian' => 'SMA']),
-			'S1'=> $this->mpenduduk->count(['pendidian' => 'S1'])
+			'SD'=> $this->mpenduduk->count(['pendidikan' => 'SD']),
+			'SMP'=> $this->mpenduduk->count(['pendidikan' => 'SMP']),
+			'SMA'=> $this->mpenduduk->count(['pendidikan' => 'SMA']),
+			'S1'=> $this->mpenduduk->count(['pendidikan' => 'S1'])
 		];
 
 		$data['jenisKelamin'] = [
@@ -84,11 +84,11 @@ Class Home extends CI_Controller{
 		];
 
 		$data['pekerjaan'] = [
-			'PNS' => $this->mpenduduk->count(['pendidikan' => 'PNS']),
-			'Swasta' => $this->mpenduduk->count(['pendidikan' => 'Swasta']),
-			'Belum Bekerja'=> $this->mpenduduk->count(['pendidikan' => 'Belum Bekerja']),
-			'Siswa'=> $this->mpenduduk->count(['pendidikan' => 'Siswa']),
-			'Mahasiswa'=> $this->mpenduduk->count(['pendidikan' => 'Mahasiswa'])
+			'PNS' => $this->mpenduduk->count(['pekerjaan' => 'PNS']),
+			'Swasta' => $this->mpenduduk->count(['pekerjaan' => 'Swasta']),
+			'Belum Bekerja'=> $this->mpenduduk->count(['pekerjaan' => 'Belum Bekerja']),
+			'Siswa'=> $this->mpenduduk->count(['pekerjaan' => 'Siswa']),
+			'Mahasiswa'=> $this->mpenduduk->count(['pekerjaan' => 'Mahasiswa'])
 		];
 
 		header('Content-Type: application/json');
