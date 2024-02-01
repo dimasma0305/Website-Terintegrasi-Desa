@@ -11,13 +11,11 @@
 		</div>
 
         <div class="card-body">
-			<!-- Loader overlay -->
 			<!-- Loader -->
 			<div id="loader" class="spinner-border text-primary" role="status" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
 				<span class="sr-only">Loading...</span>
 			</div>
 
-			
 			<!-- Artikel Form -->
 			<form method="post" action="<?= base_url('artikel'); ?>"  enctype="multipart/form-data">
 				<input type="hidden" name="id" id="id" value="">
@@ -39,7 +37,7 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-6 col-12 mb-1">
-								<img id="image-placeholder" class=" rounded img-fluid" src="https://placehold.co/300x200" width="300" height="200">
+								<img id="image-placeholder" class="rounded img-fluid" src="https://placehold.co/300x200" width="300" height="200">
 							</div>
 						</div>
 

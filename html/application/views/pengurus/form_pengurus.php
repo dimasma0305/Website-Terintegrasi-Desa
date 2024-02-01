@@ -5,6 +5,7 @@
 		<?= $title ?>
 	</h1>
 	
+	<?php $this->load->view('partials/flash_block') ?>
 	
 	
 <div class="card shadow mb-4">
@@ -14,15 +15,20 @@
 			</h6>
 		</div>
 		<div class="card-body">
-			<?php $this->load->view('partials/flash_block') ?>
+
+			<!-- Loader -->
+			<div id="loader" class="spinner-border text-primary" role="status" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
+				<span class="sr-only">Loading...</span>
+			</div>
+
 			<form action='<?= base_url('pengurus/tambah') ?>' method='post' class='d-flex flex-column gap-2'
 				enctype="multipart/form-data">
 				<input type="hidden" name="id" id="id">
 				<div class="row">
 					<div class="col-xl-2 mt-2">
 						<div class="row">
-							<div class="col-sm-2 mb-1">
-								<img id="image-placeholder" class="rounded" src="https://placehold.co/200x300"
+							<div class="col-12 mb-1">
+								<img id="image-placeholder" class="rounded img-fluid" src="https://placehold.co/200x300"
 									width="200" height="300">
 							</div>
 						</div>
@@ -100,11 +106,11 @@
 					<tbody>
 					<?php foreach ($pengurus as $pengurus) : ?>
 						<tr align="center">
-							<td><?= $pengurus['nama'] ?></td>
-							<td><?= $pengurus['jabatan'] ?></td>
-							<td><?= $pengurus['nip'] ?></td>
-							<td><?= $pengurus['pendidikan'] ?></td>
-							<td><?= $pengurus['alamat'] ?></td>
+							<td><?= html_escape($pengurus['nama']) ?></td>
+							<td><?= html_escape($pengurus['jabatan']) ?></td>
+							<td><?= html_escape($pengurus['nip']) ?></td>
+							<td><?= html_escape($pengurus['pendidikan']) ?></td>
+							<td><?= html_escape($pengurus['alamat']) ?></td>
 							
 							<td align="center">
 								<button class="btn btn-sm btn-warning" onclick="editPengurus('<?= $pengurus['id'] ?>')"><i class="fas fa-fw fa-pen"></i></button>
@@ -122,6 +128,9 @@
 
 <script>
     function editPengurus(id) {
+		// Show loader
+		$('#loader').show();
+		
 		$.ajax({
 			type: "post",
 			url: "<?= base_url() ?>"+"pengurus/edit/",
@@ -137,11 +146,13 @@
 				$('#jabatan').selectpicker('val', response.jabatan); ; 
 				$('#image-label').html(response.fotoprofil); 
 				$('#image-placeholder').attr('src', '<?= base_url() ?>'+'uploads/pengurus/'+response.fotoprofil); 
-
-					
 			},
 			error: function(xhr, status, error) {
 				console.error('Error:', error);
+			},
+			complete: function () {
+				// Hide loader regardless of success or error
+				$('#loader').hide();
 			}
 		});
 
