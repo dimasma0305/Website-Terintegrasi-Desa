@@ -11,8 +11,8 @@
 
                         <div class="col-12 mt-5">
                             <!-- Page Heading -->
-                            <h1 class="h3 mb-2 text-gray-800"><?= $title ?></h1>      
-                            <h1 class="h6 mb-4 text-gray-800"><?= date("d F Y", strtotime($artikel->created_at)) ?></h1>      
+                            <h1 class="h3 mb-2 text-gray-800"><?= html_escape($title) ?></h1>      
+                            <h1 class="h6 mb-4 text-gray-800"><?= html_escape(date("d F Y", strtotime($artikel->created_at))) ?></h1>      
                                 
                                 <div class="card shadow mb-4">
                                     <!-- Card body -->

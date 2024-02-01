@@ -11,6 +11,11 @@
 		</div>
 
         <div class="card-body">
+			<!-- Loader overlay -->
+			<!-- Loader -->
+			<div id="loader" class="spinner-border text-primary" role="status" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
+				<span class="sr-only">Loading...</span>
+			</div>
 
 			
 			<!-- Artikel Form -->
@@ -33,8 +38,8 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-2 mb-1">
-								<img id="image-placeholder" class=" rounded mx-auto d-block" src="https://placehold.co/300x200" width="300" height="200">
+							<div class="col-sm-6 col-12 mb-1">
+								<img id="image-placeholder" class=" rounded img-fluid" src="https://placehold.co/300x200" width="300" height="200">
 							</div>
 						</div>
 
@@ -91,9 +96,9 @@
 						foreach ($artikel as $artikel) : ?>
 							<tr>
 								<th><?= $i ?></th>
-								<td><?= $artikel->title; ?></td>
-								<td><?= $artikel->username; ?></td>
-								<td><?= $artikel->created_at; ?></td>
+								<td><?= html_escape($artikel->title); ?></td>
+								<td><?= html_escape($artikel->username); ?></td>
+								<td><?= html_escape(date("d F Y", strtotime($artikel->created_at))) ?></td>
 								<td>
 									<button class="btn btn-sm btn-primary" onclick="detailArtikel('<?= $artikel->slug; ?>')"><i class="fas fa-fw fa-eye"></i></button>
 									<button class="btn btn-sm btn-warning" onclick="editArtikel('<?= $artikel->id; ?>')"><i class="fas fa-fw fa-pen"></i></button>
@@ -110,6 +115,8 @@
 	</div>
 
 </div>
+
+
 
 <!-- TinyMCE Script -->
 <script src="<?=base_url("/static/js/tinymce/tinymce.min.js")?>"></script>
@@ -160,26 +167,34 @@
 	}
 
 	function editArtikel(idArtikel) {
+		// Show loader
+		$('#loader').show();
+
 		console.log(idArtikel);
 		$.ajax({
 			type: "post",
-			url: baseUrl+"artikel/edit/",
-			data: {id : idArtikel},
+			url: baseUrl + "artikel/edit/",
+			data: { id: idArtikel },
 			dataType: 'json', // Assuming the response is in JSON format
-			success: function(response) {
+			success: function (response) {
 				console.log(response);
 				// Assuming the response has a 'data' field you want to populate in the input
-				$('#id').val(response[0].id); 
-				$('#title').val(response[0].title); 
-				$('#image-label').html(response[0].image_url); 
+				$('#id').val(response[0].id);
+				$('#title').val(response[0].title);
+				$('#image-label').html(response[0].image_url);
 				tinymce.get('content').setContent(response[0].content);
-				$('#image-placeholder').attr('src', baseUrl+'uploads/artikel/'+response[0].image_url); 
+				$('#image-placeholder').attr('src', baseUrl + 'uploads/artikel/' + response[0].image_url);
 			},
-			error: function(xhr, status, error) {
+			error: function (xhr, status, error) {
 				console.error('Error:', error);
+			},
+			complete: function () {
+				// Hide loader regardless of success or error
+				$('#loader').hide();
 			}
 		});
 	}
+
 
 	function deleteArtikel(id) {
 		if (confirm('Apakah anda yakin ingin menghapus data ini?')) {
