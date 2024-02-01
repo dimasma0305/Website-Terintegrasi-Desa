@@ -26,6 +26,10 @@
                                 </div>
                             <?php endforeach ?>
 
+                            <div class="d-flex justify-content-center">
+                                <?= $pagination_links; ?>
+                            </div>
+
                         </div>
 
                     </div>

@@ -39,13 +39,49 @@ Class Home extends CI_Controller{
 
 	public function listArtikel()
 	{
+		
 		$data['title'] = 'Artikel';
-		$data['artikel'] = $this->martikel->getAllArtikel();
+
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		$data['artikel'] = $this->martikel->getAllArtikel(10, $page);
+		
+		$data['pagination_links'] = $this->_createPagination(base_url('home/listartikel'), $this->martikel->count(), 10);
 
 		$this->load->view('partials_template/header', $data);
 		$this->load->view('partials_template/navbar_public');
 		$this->load->view('home/list_artikel', $data); 
 		$this->load->view('partials_template/footer');
+	}
+
+	private function _createPagination($baseUrl, $totalRows, $perPage)
+	{
+		$this->load->library('pagination');
+		$config['base_url'] = $baseUrl;
+		$config['total_rows'] = $totalRows; // Replace with the total number of rows you have.
+		$config['per_page'] = $perPage; // Number of records per page.
+
+		$config['full_tag_open'] = '<ul class="pagination">';        
+		$config['full_tag_close'] = '</ul>';        
+		$config['first_link'] = 'First';        
+		$config['last_link'] = 'Last';        
+		$config['first_tag_open'] = '<li class="page-item"><span class="page-link">';        
+		$config['first_tag_close'] = '</span></li>';        
+		$config['prev_link'] = '&laquo';        
+		$config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';        
+		$config['prev_tag_close'] = '</span></li>';        
+		$config['next_link'] = '&raquo';        
+		$config['next_tag_open'] = '<li class="page-item"><span class="page-link">';        
+		$config['next_tag_close'] = '</span></li>';        
+		$config['last_tag_open'] = '<li class="page-item"><span class="page-link">';        
+		$config['last_tag_close'] = '</span></li>';        
+		$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';        
+		$config['cur_tag_close'] = '</a></li>';        
+		$config['num_tag_open'] = '<li class="page-item"><span class="page-link">';        
+		$config['num_tag_close'] = '</span></li>';
+
+		$this->pagination->initialize($config);
+
+		return $this->pagination->create_links();
 	}
 
 	public function dataPengurus()

@@ -7,14 +7,14 @@ class Martikel extends CI_Model
 		return $this->db->get_where('artikel', $where);
 	}
 
-	public function getAllArtikel($limit=null)
+	public function getAllArtikel($limit=null, $offset=null)
 	{
 		$this->db->select('artikel.*, users.username AS username');
 		$this->db->from('artikel');
 		$this->db->join('users', 'artikel.author_id = users.id');
 
-		if ($limit !== null) {
-			$this->db->limit($limit);
+		if (($limit !== null) && ($offset !== null)) {
+			$this->db->limit($limit, $offset);
 		}
 
 		return $this->db->get()->result();
