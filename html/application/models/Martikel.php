@@ -13,6 +13,10 @@ class Martikel extends CI_Model
 		$this->db->from('artikel');
 		$this->db->join('users', 'artikel.author_id = users.id');
 
+		if ($limit !== null) {
+			$this->db->limit($limit);
+		}
+		
 		if (($limit !== null) && ($offset !== null)) {
 			$this->db->limit($limit, $offset);
 		}

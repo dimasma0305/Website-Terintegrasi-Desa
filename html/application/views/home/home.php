@@ -59,7 +59,7 @@
 
                                                     <div class="card-body">
                                                         <p class="card-title">
-                                                            <a href="<?= base_url('home/artikel/') . $a->slug ?>" class="text-dark" ><?= $a->title ?></a>
+                                                            <a href="<?= base_url('home/artikel/') . $a->slug ?>" class="text-dark stretched-link" ><?= html_escape($a->title) ?></a>
                                                         </p>
                                                         <p class="card-text"><small class="text-muted"><?= date("d F Y", strtotime($a->created_at)) ?></small></p>
                                                         <!-- <a href="<?= base_url('home/artikel/') . $a->slug ?>" class="btn btn-primary">Baca</a> -->
